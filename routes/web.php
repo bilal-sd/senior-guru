@@ -33,9 +33,11 @@ Route::prefix('admin')->group(function () {
     Route::get('/categories/delete/{id}','CategoryController@destroy')->name('admin.categories.destroy');
     Route::get('/categories/status/{id}','CategoryController@status')->name('admin.categories.status');
     Route::post('/submit-categories','CategoryController@store')->name('Submit-Categories');
-    Route::get('/listing',function(){
-        return view('admin.listing');
-    })->name('admin.listiing');
+    //...............listing..................//
+    Route::get('/listing','ListingController@view')->name('admin.listiing');
+    Route::get('/listing/show','ListingController@index')->name('admin.listiing.show');
+    Route::get('listing/delete/{id}','ListingController@destroy')->name('admin.listing.delete');
+
     Route::get('/listing-create',function(){
         return view('admin.create-list');
     })->name('admin.listiing.create');
