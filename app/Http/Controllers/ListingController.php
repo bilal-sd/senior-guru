@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\listing;
+use App\Listing;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -12,9 +12,14 @@ class ListingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function view()
+    {
+       return view('admin.listing');
+    }
     public function index()
     {
-        //
+        $listing = Listing::get();
+        return response()->json($listing);
     }
 
     /**
@@ -41,10 +46,10 @@ class ListingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\listing  $listing
+     * @param  \App\Listing  $listing
      * @return \Illuminate\Http\Response
      */
-    public function show(listing $listing)
+    public function show(Listing $listing)
     {
         //
     }
@@ -52,10 +57,10 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\listing  $listing
+     * @param  \App\Listing  $listing
      * @return \Illuminate\Http\Response
      */
-    public function edit(listing $listing)
+    public function edit(Listing $listing)
     {
         //
     }
@@ -64,10 +69,10 @@ class ListingController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\listing  $listing
+     * @param  \App\Listing  $listing
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, listing $listing)
+    public function update(Request $request, Listing $listing)
     {
         //
     }
@@ -75,11 +80,18 @@ class ListingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\listing  $listing
+     * @param  \App\Listing  $listing
      * @return \Illuminate\Http\Response
      */
-    public function destroy(listing $listing)
+    public function destroy($id)
     {
-        //
+       
+        try {
+            $category = Listing::find($id);
+            $category->delete();
+            return response()->json("['status' => 'success']");
+        } catch (\Throwable $th) {
+            return response()->json("['status' => 'error']");
+        }
     }
 }
