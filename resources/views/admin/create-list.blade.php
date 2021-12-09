@@ -7,101 +7,46 @@
         <div class="content-body">
 
             <div class="container-fluid">
-
                 <div class="row justify-content-center align-items-center">
-                    <div class="col-xl-3 col-xxl-4  col-md-4 col-sm-6">
-                        <a href="{{ route('senior_housing') }}">
-                            <div class="card">
-                                <div class="jobs2 card-body">
-                                    <div class="text-center">
-                                        <span>
-                                            <svg class="mb-2" xmlns="http://www.w3.org/2000/svg" width="71"
-                                                height="71" viewBox="0 0 71 71">
-                                                <g transform="translate(-457 -443)">
-                                                    <rect width="71" height="71" rx="12" transform="translate(457 443)"
-                                                        fill="#c5c5c5"></rect>
-                                                    <g transform="translate(457 443)">
-                                                        <rect data-name="placeholder" width="71" height="71" rx="12"
-                                                            fill="#2769ee"></rect>
-                                                        <circle data-name="Ellipse 12" cx="18" cy="18" r="18"
-                                                            transform="translate(15 20)" fill="#fff"></circle>
-                                                        <circle data-name="Ellipse 11" cx="11" cy="11" r="11"
-                                                            transform="translate(36 15)" fill="#ffe70c"
-                                                            style="mix-blend-mode: multiply;isolation: isolate"></circle>
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </span>
-                                        <h4 class="fs-20 mb-0">Senior Housing </h4>
-                                        <span class="text-primary mb-3 d-block">Create Listing </span>
+                    <div class="col-12">
+                        <div class="row">
+                            @foreach($childCat as $parents)
+                            <div class="col-xl-3 col-xxl-4  col-md-4 col-sm-6">
+                                <a href="{{ route('admin.listing-form',$parents["id"]) }}">
+                                    <div class="card">
+                                        <div class="jobs2 card-body">
+                                            <div class="text-center">
+                                                <span>
+                                                    <svg class="mb-2" xmlns="http://www.w3.org/2000/svg" width="71"
+                                                        height="71" viewBox="0 0 71 71">
+                                                        <g transform="translate(-457 -443)">
+                                                            <rect width="71" height="71" rx="12"
+                                                                transform="translate(457 443)" fill="#c5c5c5"></rect>
+                                                            <g transform="translate(457 443)">
+                                                                <rect data-name="placeholder" width="71" height="71" rx="12"
+                                                                    fill="#2769ee"></rect>
+                                                                <circle data-name="Ellipse 12" cx="18" cy="18" r="18"
+                                                                    transform="translate(15 20)" fill="#fff"></circle>
+                                                                <circle data-name="Ellipse 11" cx="11" cy="11" r="11"
+                                                                    transform="translate(36 15)" fill="#ffe70c"
+                                                                    style="mix-blend-mode: multiply;isolation: isolate">
+                                                                </circle>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                                <h4 class="fs-20 mb-0">{{$parents["name"]}}</h4>
+                                                <span class="text-primary mb-3 d-block">Create Listing</span>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-
-                    <div class="col-xl-3 col-xxl-4  col-md-4 col-sm-6">
-                        <a href="{{ route('admin.form-hhh') }}">
-                            <div class="card">
-                                <div class="jobs2 card-body">
-                                    <div class="text-center">
-                                        <span>
-                                            <svg class="mb-2" xmlns="http://www.w3.org/2000/svg" width="71"
-                                                height="71" viewBox="0 0 71 71">
-                                                <g transform="translate(-0.332)">
-                                                    <rect width="71" height="71" rx="12" transform="translate(0.332)"
-                                                        fill="#c5c5c5"></rect>
-                                                    <g transform="translate(0.332)">
-                                                        <rect data-name="placeholder" width="71" height="71" rx="12"
-                                                            fill="#ee27c0"></rect>
-                                                        <ellipse data-name="Ellipse 12" cx="17.987" cy="18" rx="17.987"
-                                                            ry="18" transform="translate(15.147 20)" fill="#fff"></ellipse>
-                                                        <ellipse data-name="Ellipse 11" cx="10.887" cy="11" rx="10.887"
-                                                            ry="11" transform="translate(35.973 15)" fill="#ffe70c"
-                                                            style="mix-blend-mode: multiply;isolation: isolate"></ellipse>
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </span>
-
-                                        <h4 class="fs-20 mb-0">Home, Health & Hospice</h4>
-                                        <span class="text-primary mb-3 d-block">Create Listing </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-xl-3 col-xxl-4  col-md-4 col-sm-6">
-                        <div class="card" data-bs-toggle="modal" data-bs-target="#sendMessageModal">
-                            <div class="jobs2 card-body">
-                                <div class="text-center">
-                                    <span>
-                                        <svg class="mb-2" xmlns="http://www.w3.org/2000/svg" width="71"
-                                            height="71" viewBox="0 0 71 71">
-                                            <g transform="translate(0.093)">
-                                                <rect width="71" height="71" rx="12" transform="translate(-0.093)"
-                                                    fill="#c5c5c5"></rect>
-                                                <g transform="translate(-0.093)">
-                                                    <rect data-name="placeholder" width="71" height="71" rx="12"
-                                                        fill="#27beee"></rect>
-                                                    <ellipse data-name="Ellipse 12" cx="17.75" cy="18" rx="17.75" ry="18"
-                                                        transform="translate(14.947 20)" fill="#fff"></ellipse>
-                                                    <ellipse data-name="Ellipse 11" cx="11.211" cy="11" rx="11.211" ry="11"
-                                                        transform="translate(35.5 15)" fill="#ffe70c"
-                                                        style="mix-blend-mode: multiply;isolation: isolate"></ellipse>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </span>
-                                    <h4 class="fs-20 mb-0">Resources & Services</h4>
-                                    <span class="text-primary mb-3 d-block">Create Listing </span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="modal fade" id="sendMessageModal" aria-modal="false" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">

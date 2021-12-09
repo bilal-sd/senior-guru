@@ -30,6 +30,7 @@ class CategoryController extends Controller
             $contact->status = 1;       
             $contact->parent_id = $request->parent_id;
             $contact->save();
+            
         }
         return response()->json("['status' => 'success']");
     }
@@ -49,6 +50,11 @@ class CategoryController extends Controller
             ];
         }
         return response()->json($arr);  
+    }
+
+    public function catChildAll($parent_id=0){
+        $categories = Category::where('parent_id',$parent_id)->get();
+        return view('admin.create-list',['childCat'=>$categories]);
     }
 
     public function edit(Category $category)

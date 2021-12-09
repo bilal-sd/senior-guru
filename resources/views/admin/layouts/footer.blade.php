@@ -57,55 +57,17 @@
  <script src="{{ asset('assets/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
  <script src="{{ asset('assets/js/custom.min.js') }}"></script>
  {{-- <script src="{{ asset('assets/js/dlabnav-init.js') }}"></script> --}}
- <script src="{{ asset('assets/js/demo.js') }}"></script>
+ {{-- <script src="{{ asset('assets/js/demo.js') }}"></script> --}}
  <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  {{-- <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script> --}}
 
- {{-- <script>
-     function JobickCarousel() {
-
-         /*  testimonial one function by = owl.carousel.js */
-         jQuery('.front-view-slider').owlCarousel({
-             loop: false,
-             margin: 30,
-             nav: true,
-             autoplaySpeed: 3000,
-             navSpeed: 3000,
-             autoWidth: true,
-             paginationSpeed: 3000,
-             slideSpeed: 3000,
-             smartSpeed: 3000,
-             autoplay: false,
-             animateOut: 'fadeOut',
-             dots: true,
-             navText: ['', ''],
-             responsive: {
-                 0: {
-                     items: 1
-                 },
-
-                 480: {
-                     items: 1
-                 },
-
-                 767: {
-                     items: 3
-                 },
-                 1750: {
-                     items: 3
-                 }
-             }
-         })
-     }
-
-     jQuery(window).on('load', function() {
-         setTimeout(function() {
-             JobickCarousel();
-         }, 1000);
-     });
- </script> --}}
-
+<script>
+    $(document).ready(function(){
+        // SmartWizard initialize
+        $('#smartwizard').smartWizard(); 
+    });
+</script>
  
  </body>
 

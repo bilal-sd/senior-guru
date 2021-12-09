@@ -80,25 +80,19 @@
         @include('admin.layouts.bottom-footer')
     </div>
 @endsection
-
 @section('section-script')
 <script>
     function setVal(pId) {
         $("#Inputparent_id").val(pId);
     }
-    
     function childmaker(child, html = "", status = "") {
         child = child.original;
         if (child.length > 0) {
             $.each(child, function(index, value) {
                 if (value['status'] == 1) {
-                    status =
-                    '<span class="badge light badge-success status" data-id="' +
-                        value['id'] + '">Active</span>';
+                    status = '<span class="badge light badge-success status" data-id="' + value['id'] + '">Active</span>';
                 } else {
-                    status =
-                        '<span class="badge light badge-danger status" data-id="' +
-                        value['id'] + '">Inactive</span>';
+                    status = '<span class="badge light badge-danger status" data-id="' + value['id'] + '">Inactive</span>';
                 }
                 html += '<div class="accordion-item">' +
                     '<div class="accordion-header rounded-lg collapsed row">' +
@@ -150,14 +144,11 @@
                     '</div>' +
                     '</div>' +
                     '</div>';
-                //  console.log(value['id']);
+
             });
         }
         return html;
     }
-
-    
-
     function loaddata() {
         let html = "";
         let status = "";
@@ -234,7 +225,6 @@
         });
     }
     loaddata();
-    
     $(document).ready(function() {
         $(document).on('click', ".status", function() {
             let id = $(this).data("id");
