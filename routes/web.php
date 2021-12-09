@@ -45,15 +45,12 @@ Route::prefix('admin')->group(function () {
     })->name('admin.listiing.audit');
 
 
-    Route::get('/hospics',function(){
-        return view('admin.form-hhh');
-    })->name('admin.form-hhh');
+    Route::get('/listing-form',function(){
+        return view('admin.listing-form');
+    })->name('admin.listing-form');
 
 
     Route::get('/senior-housing',function(){
         return view('admin.form-sh');
     })->name('senior_housing');
 });
-
-
-

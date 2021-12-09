@@ -9,6 +9,7 @@
             <div class="container-fluid">
 
                 <div class="row justify-content-center align-items-center">
+                    {{-- senior housing --}}
                     <div class="col-xl-3 col-xxl-4  col-md-4 col-sm-6">
                         <a href="{{ route('senior_housing') }}">
                             <div class="card">
@@ -39,7 +40,7 @@
                             </div>
                         </a>
                     </div>
-
+                     {{-- home helth and hosoice --}}
                     <div class="col-xl-3 col-xxl-4  col-md-4 col-sm-6">
                         <a href="{{ route('admin.form-hhh') }}">
                             <div class="card">
@@ -71,6 +72,7 @@
                             </div>
                         </a>
                     </div>
+                     {{-- Resoure services --}}
                     <div class="col-xl-3 col-xxl-4  col-md-4 col-sm-6">
                         <div class="card" data-bs-toggle="modal" data-bs-target="#sendMessageModal">
                             <div class="jobs2 card-body">
@@ -103,6 +105,8 @@
             </div>
 
         </div>
+        {{-- ---------model fomr---------- --}}
+
         <div class="modal fade" id="sendMessageModal" aria-modal="false" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
