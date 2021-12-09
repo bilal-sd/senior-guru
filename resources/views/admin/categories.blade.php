@@ -144,7 +144,6 @@
                     '</div>' +
                     '</div>' +
                     '</div>';
-
             });
         }
         return html;
@@ -225,6 +224,7 @@
         });
     }
     loaddata();
+
     $(document).ready(function() {
         $(document).on('click', ".status", function() {
             let id = $(this).data("id");

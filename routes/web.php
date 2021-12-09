@@ -45,10 +45,11 @@ Route::prefix('admin')->group(function () {
         return view('admin.audit-listing');
     })->name('admin.listiing.audit');
 
+    Route::get('/listing-form',function(){
+        return view('admin.listing-form');
+    })->name('admin.listing-form');
+
     Route::get('/listing-form/{id?}',function($id){
         return view('admin.listing-form',['catId'=>$id]);
     })->name('admin.listing-form');
 });
-
-
-

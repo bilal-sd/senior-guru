@@ -62,13 +62,13 @@
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  {{-- <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script> --}}
 
-<script>
+ <script>
+
     $(document).ready(function(){
         // SmartWizard initialize
         $('#smartwizard').smartWizard(); 
     });
 </script>
- 
  </body>
 
  </html>

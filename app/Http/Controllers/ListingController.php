@@ -46,9 +46,7 @@ class ListingController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Listing  $listing
-     * @return \Illuminate\Http\Response
-     */
+
     public function show(Listing $listing)
     {
         //
@@ -57,6 +55,7 @@ class ListingController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
+
      * @param  \App\Listing  $listing
      * @return \Illuminate\Http\Response
      */
