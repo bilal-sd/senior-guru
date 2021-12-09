@@ -6,9 +6,13 @@
         @include('admin.layouts.side-bar')
 
         <div class="content-body">
-            <!-- row -->
             <div class="container-fluid">
-                <!-- row -->
+                <div class="row page-titles">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Components</a></li>
+                    </ol>
+                </div>
                 <div class="row">
                     <div class="col-xl-12 col-xxl-12">
                         <div class="card">
@@ -48,6 +52,16 @@
                                                         <label class="text-label form-label">Business Slug*</label>
                                                         <input type="text" name="lastName" class="form-control"
                                                             placeholder="Montana" required="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Category</label>
+                                                        <select id="cat-type" class="form-control form-control-lg wide mb-3">
+                                                            <option>Option 1</option>
+                                                            <option>Option 2</option>
+                                                            <option>Option 3</option>
+                                                        </select>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 mb-2">
@@ -697,10 +711,6 @@
                                             </div>
                                         </div>
 
-
-
-
-
                                     
                                         <div id="wizard_Details" class="tab-pane" role="tabpanel"
                                             style="display: block;">
@@ -828,9 +838,8 @@
                                             
                                         </div>
 
+                                        <div id="wizard_Payment" class="tab-pane" role="tabpanel">
 
-                                        <div id="wizard_Payment" class="tab-pane" role="tabpanel"
-                                            style="display: none;">
                                             <div class="row emial-setup">
                                                 <div class="col-lg-3 col-sm-6 col-6">
                                                     <div class="mb-3">
@@ -975,3 +984,48 @@
         @include('admin.layouts.bottom-footer')
     </div>
 @endsection
+        <input type="hidden" id="getId" value="{{ $catId }}">
+
+        @include('admin.layouts.bottom-footer')
+        {{-- </div> --}}
+    @endsection
+
+    @section('section-script')
+        <script>
+            function childmaker(child, level = 1, html = "") {
+                child = child.original;
+                let dash = '';
+                for(let i=1;i<=level;i++){
+                    dash += "-";
+                }
+                if (child.length > 0) {
+                    $.each(child, function(index, value) {
+                        html += '<option value=' + value['slug'] + '>' + dash + value['name'] + '</option>';
+                        html += childmaker(value['children'], level+1);
+                    });
+                }
+                return html;
+            }
+
+            function loaddata() {
+                let html = "";
+                let level = 1;
+                let id = $("#getId").val();
+                $.ajax({
+                    type: "GET",
+                    url: "{{ URL::to('admin/categories/show/') }}" + "/" + level + "/" + id,
+                    dataType: "JSON",
+                    success: function(response) {
+                        $.each(response, function(index, value) {
+                            html += '<option value=' + value['slug'] + '>' + value['name'] + '</option>';
+                            html += childmaker(value['children']);
+                            console.log(value['children'])
+                        });
+                        $("#cat-type").html(html);
+                    }
+                });
+            }
+            loaddata();
+        </script>
+    @endsection
+

@@ -57,12 +57,13 @@
  <script src="{{ asset('assets/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
  <script src="{{ asset('assets/js/custom.min.js') }}"></script>
  {{-- <script src="{{ asset('assets/js/dlabnav-init.js') }}"></script> --}}
- <script src="{{ asset('assets/js/demo.js') }}"></script>
+ {{-- <script src="{{ asset('assets/js/demo.js') }}"></script> --}}
  <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
  {{-- <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script> --}}
 
  <script>
+
     $(document).ready(function(){
         // SmartWizard initialize
         $('#smartwizard').smartWizard(); 

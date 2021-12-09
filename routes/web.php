@@ -29,28 +29,27 @@ Route::prefix('admin')->group(function () {
     Route::get('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
     Route::get('/', 'Auth\AdminController@index')->name('admin.dashboard');
     Route::get('/categories','CategoryController@index')->name('admin.categories');
-    Route::get('/categories/show','CategoryController@show')->name('admin.categories.show');
+    Route::get('/categories/show/{level?}/{parent_id?}','CategoryController@show')->name('admin.categories.show');
     Route::get('/categories/delete/{id}','CategoryController@destroy')->name('admin.categories.destroy');
     Route::get('/categories/status/{id}','CategoryController@status')->name('admin.categories.status');
     Route::post('/submit-categories','CategoryController@store')->name('Submit-Categories');
-    Route::get('/listing',function(){
-        return view('admin.listing');
-    })->name('admin.listiing');
-    Route::get('/listing-create',function(){
-        return view('admin.create-list');
-    })->name('admin.listiing.create');
+
+    //...............listing..................//
+    Route::get('/listing','ListingController@view')->name('admin.listiing');
+    Route::get('/listing/show','ListingController@index')->name('admin.listiing.show');
+    Route::get('listing/delete/{id}','ListingController@destroy')->name('admin.listing.delete');
+  
+    Route::get('/listing-create','CategoryController@catChildAll')->name('admin.listing.create');
 
     Route::get('/logs',function(){
         return view('admin.audit-listing');
     })->name('admin.listiing.audit');
 
-
     Route::get('/listing-form',function(){
         return view('admin.listing-form');
     })->name('admin.listing-form');
 
-
-    Route::get('/senior-housing',function(){
-        return view('admin.form-sh');
-    })->name('senior_housing');
+    Route::get('/listing-form/{id?}',function($id){
+        return view('admin.listing-form',['catId'=>$id]);
+    })->name('admin.listing-form');
 });
