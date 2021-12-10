@@ -35,19 +35,15 @@ Route::prefix('admin')->group(function () {
     Route::post('/submit-categories','CategoryController@store')->name('Submit-Categories');
 
     //...............listing..................//
-    Route::get('/listing','ListingController@view')->name('admin.listiing');
-    Route::get('/listing/show','ListingController@index')->name('admin.listiing.show');
+    Route::get('/listing','ListingController@view')->name('admin.listing');
+    Route::get('/listing/show','ListingController@index')->name('admin.listing.show');
     Route::get('listing/delete/{id}','ListingController@destroy')->name('admin.listing.delete');
   
     Route::get('/listing-create','CategoryController@catChildAll')->name('admin.listing.create');
 
     Route::get('/logs',function(){
         return view('admin.audit-listing');
-    })->name('admin.listiing.audit');
-
-    Route::get('/listing-form',function(){
-        return view('admin.listing-form');
-    })->name('admin.listing-form');
+    })->name('admin.listing.audit');
 
     Route::get('/listing-form/{id?}',function($id){
         return view('admin.listing-form',['catId'=>$id]);

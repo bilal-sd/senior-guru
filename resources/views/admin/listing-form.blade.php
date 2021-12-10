@@ -23,17 +23,21 @@
                                 <div id="smartwizard" class="form-wizard order-create sw sw-theme-default sw-justified">
                                     <ul class="nav nav-wizard">
                                         <li><a class="nav-link inactive done" href="#wizard_Service">
-                                                <span>1</span><p>General Information</p>
+                                                <span>1</span>
+                                                <p>General Information</p>
                                             </a></li>
 
                                         <li><a class="nav-link inactive done" href="#wizard_Time">
-                                                <span>2</span><p>Listing Detail</p>
+                                                <span>2</span>
+                                                <p>Listing Detail</p>
                                             </a></li>
                                         <li><a class="nav-link inactive active" href="#wizard_Details">
-                                                <span>3</span><p>General Property Features</p>
-                                            </a></li> 
-											<li><a class="nav-link inactive done" href="#wizard_Payment">
-                                                <span>4</span><p>Payment</p>
+                                                <span>3</span>
+                                                <p>General Property Features</p>
+                                            </a></li>
+                                        <li><a class="nav-link inactive done" href="#wizard_Payment">
+                                                <span>4</span>
+                                                <p>Payment</p>
                                             </a></li>
                                     </ul>
                                     <div class="tab-content" style="height: 315px;">
@@ -57,7 +61,8 @@
                                                 <div class="col-lg-4">
                                                     <div class="mb-3">
                                                         <label class="form-label">Category</label>
-                                                        <select id="cat-type" class="form-control form-control-lg wide mb-3">
+                                                        <select id="cat-type"
+                                                            class="form-control form-control-lg wide mb-3">
                                                             <option>Option 1</option>
                                                             <option>Option 2</option>
                                                             <option>Option 3</option>
@@ -711,131 +716,157 @@
                                             </div>
                                         </div>
 
-                                    
+
                                         <div id="wizard_Details" class="tab-pane" role="tabpanel"
                                             style="display: block;">
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12">
-													<div class="card">
-														<div class="card-header">
-															<h4 class="card-title">Property Features</h4>
-														</div>
-														<div class="card-body">
-															<div class="basic-form">
-																<form>
-																	<div class="mb-3 ">
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="" checked="">Age Restrictions
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Covered Parking
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Fitness Center
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Furnished Apts Available
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Property Features</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="basic-form">
+                                                                <form>
+                                                                    <div class="mb-3 ">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input" value=""
+                                                                                    checked="">Age Restrictions
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Covered Parking
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Fitness Center
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Furnished Apts Available
 
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Smoker Friendly
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Controlled Access
-																			</label>
-																		</div>
-																		
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div>
-												</div>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Smoker Friendly
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Controlled Access
+                                                                            </label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="row">
-                                               
-												<div class="col-xl-12 col-lg-12">
-													<div class="card">
-														<div class="card-header">
-															<h4 class="card-title">Property Services</h4>
-														</div>
-														<div class="card-body">
-															<div class="basic-form">
-																<form>
-																	<div class="mb-3 ">
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="" checked="">Activities
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Meals/Meal Options
-																			</label>
-																		</div>												
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div>
-												</div>
+
+                                                <div class="col-xl-12 col-lg-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Property Services</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="basic-form">
+                                                                <form>
+                                                                    <div class="mb-3 ">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input" value=""
+                                                                                    checked="">Activities
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Meals/Meal Options
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-xl-12 col-lg-12">
-													<div class="card">
-														<div class="card-header">
-															<h4 class="card-title">Levels of Housing Care Offered</h4>
-														</div>
-														<div class="card-body">
-															<div class="basic-form">
-																<form>
-																	<div class="mb-3 ">
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="" checked="">Assisted Living Community
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Secured Memory Care Uni
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Skilled Nursing Facility
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">Retirement Community
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h4 class="card-title">Levels of Housing Care Offered</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="basic-form">
+                                                                <form>
+                                                                    <div class="mb-3 ">
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input" value=""
+                                                                                    checked="">Assisted Living Community
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Secured Memory Care Uni
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Skilled Nursing Facility
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input"
+                                                                                    value="">Retirement Community
 
-																			</label>
-																		</div>
-																		<div class="form-check form-check-inline">
-																			<label class="form-check-label">
-																				<input type="checkbox" class="form-check-input" value="">CCRC Campus
-																			</label>
-																		</div>						
-																	</div>
-																</form>
-															</div>
-														</div>
-													</div>
-												</div>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="form-check form-check-inline">
+                                                                            <label class="form-check-label">
+                                                                                <input type="checkbox"
+                                                                                    class="form-check-input" value="">CCRC
+                                                                                Campus
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                           
-                                            
+
+
                                         </div>
 
                                         <div id="wizard_Payment" class="tab-pane" role="tabpanel">
@@ -981,51 +1012,46 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" id="getId" value="{{ $catId }}">
         @include('admin.layouts.bottom-footer')
     </div>
 @endsection
-        <input type="hidden" id="getId" value="{{ $catId }}">
 
-        @include('admin.layouts.bottom-footer')
-        {{-- </div> --}}
-    @endsection
-
-    @section('section-script')
-        <script>
-            function childmaker(child, level = 1, html = "") {
-                child = child.original;
-                let dash = '';
-                for(let i=1;i<=level;i++){
-                    dash += "-";
-                }
-                if (child.length > 0) {
-                    $.each(child, function(index, value) {
-                        html += '<option value=' + value['slug'] + '>' + dash + value['name'] + '</option>';
-                        html += childmaker(value['children'], level+1);
-                    });
-                }
-                return html;
+@section('section-script')
+    <script>
+        function childmaker(child, level = 1, html = "") {
+            child = child.original;
+            let dash = '';
+            for (let i = 1; i <= level; i++) {
+                dash += "-";
             }
-
-            function loaddata() {
-                let html = "";
-                let level = 1;
-                let id = $("#getId").val();
-                $.ajax({
-                    type: "GET",
-                    url: "{{ URL::to('admin/categories/show/') }}" + "/" + level + "/" + id,
-                    dataType: "JSON",
-                    success: function(response) {
-                        $.each(response, function(index, value) {
-                            html += '<option value=' + value['slug'] + '>' + value['name'] + '</option>';
-                            html += childmaker(value['children']);
-                            console.log(value['children'])
-                        });
-                        $("#cat-type").html(html);
-                    }
+            if (child.length > 0) {
+                $.each(child, function(index, value) {
+                    html += '<option value=' + value['slug'] + '>' + dash + value['name'] + '</option>';
+                    html += childmaker(value['children'], level + 1);
                 });
             }
-            loaddata();
-        </script>
-    @endsection
+            return html;
+        }
 
+        function loaddata() {
+            let html = "";
+            let level = 1;
+            let id = $("#getId").val();
+            $.ajax({
+                type: "GET",
+                url: "{{ URL::to('admin/categories/show/') }}" + "/" + level + "/" + id,
+                dataType: "JSON",
+                success: function(response) {
+                    $.each(response, function(index, value) {
+                        html += '<option value=' + value['slug'] + '>' + value['name'] + '</option>';
+                        html += childmaker(value['children']);
+                        console.log(value['children'])
+                    });
+                    $("#cat-type").html(html);
+                }
+            });
+        }
+        loaddata();
+    </script>
+@endsection
