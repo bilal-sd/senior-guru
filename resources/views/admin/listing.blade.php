@@ -56,7 +56,7 @@
                 var html = "";
                 $.ajax({
                     type: "GET",
-                    url: "{{ route('admin.listiing.show') }}",
+                    url: "{{ route('admin.listing.show') }}",
                     dataType: "JSON",
                     success: function(response) {
                         $.each(response, function(index, value) {
