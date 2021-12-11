@@ -81,9 +81,9 @@
                     <span class="nav-text">Listing</span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="{{ Route("admin.listiing") }}">Listing Show</a></li>
-                    <li><a href="{{ Route("admin.listiing.create") }}">Listing Create</a></li>
-                    <li><a href="{{ Route("admin.listiing.audit") }}">Audit Listing</a></li>
+                    <li><a href="{{ Route("admin.listing") }}">Listing Show</a></li>
+                    <li><a href="{{ Route("admin.listing.create") }}">Listing Create</a></li>
+                    <li><a href="{{ Route("admin.listing.audit") }}">Audit Listing</a></li>
                 </ul>
             </li>
         </ul>
