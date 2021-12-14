@@ -3,6 +3,8 @@
 use App\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
+use App\Http\Controllers\frontend\listingController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,9 +19,8 @@ use App\Http\Controllers;
 Route::get('/login', function () {
     return view('Auth.login');
 });
-Route::get('/listing-detail', function () {
-    return view('listing-detail');
-});
+Route::get('/listing-show','frontend\listingController@listingindex')->name('listingshow');
+Route::get('/listing-details/{id}','frontend\listingController@listingdetails')->name('listing.details');
 
 Auth::routes();
 Route::get('/', 'frontend\CategoryController@home');
