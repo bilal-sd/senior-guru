@@ -1,8 +1,7 @@
 @extends('layouts.main')
 @section('main-section')
     @include('layouts.top-navbar')
-    <main>
-        <!-- Hero Start-->
+    <main>  
         <div class="hero-area3 hero-overly2 d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
@@ -19,7 +18,9 @@
                                 <div class="select-itms">
                                     <select name="select" id="select1" style="display: none;">
                                         <option value="">Select Category</option>
-                                       
+                                        {{-- @foreach ($listing as  $listings)
+                                            <option value="{{$listings->id}}" {{$listings->name == $listings->id ? 'selected':''}}>{{ $listings->name }}</option>
+                                        @endforeach --}}
                                     </select>
                                   
                                 </div>
@@ -141,6 +142,8 @@
                         <div class="listing-details-area">
                             <div class="container">
                                 <div class="row">
+                                    @foreach ($listingshow as $item)
+                                        
                                     <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
@@ -148,19 +151,21 @@
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
+                                                <span>{{$item->category}}</span>
+                                                <h3><a href="{{route('listing.details',$item->slug)}}">{{$item->title}}</a></h3>
+                                                <p>{{$item->address}}</p>
                                                 <div class="list-footer">
                                                     <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
+                                                        <li>{{$item->phone}}</li>
+                                                        <li>{{$item->email}}</li>
                                                     </ul>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6 ">
+                                    @endforeach
+
+                                    {{-- <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
                                                 <img src="assets/frontend/img/gallery/list2.png" alt="">
@@ -254,7 +259,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
