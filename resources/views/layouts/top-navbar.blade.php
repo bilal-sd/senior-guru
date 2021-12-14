@@ -29,7 +29,16 @@
                                     <ul id="navigation">                                                                                                                                     
                                         <li><a href="{{url('/')}}">Home</a></li>
                                         <li><a href="#">About</a></li>
-                                        <li><a href="#">Catagories</a></li>
+                                        <li><a href="#">Categories</a>
+                                            <ul class="submenu">
+                                                <li><a href="{{url('Listing')}}" value="1">Senior Housing</a></li>
+                                                <li><a href="{{url('Listing')}}" value="2">Home, Health</a></li>
+                                                <li><a href="{{url('Listing')}}" value="3">Healthy Aging</a></li>
+                                                <li><a href="{{url('Listing')}}" value="4">Health at Home</a></li>
+                                                <li><a href="{{url('Listing')}}" value="5">Professional</a></li>
+                                                <li><a href="{{url('Listing')}}" value="6">Other Categories</a></li>
+                                            </ul>
+                                        </li>
                                         <li><a href="{{url('Listing')}}">Listing</a></li>
                                         <li><a href="{{url('listing-detail')}}">Listing Page</a></li>
                                         <li><a href="#">Page</a>

@@ -1,12 +1,7 @@
 @extends('layouts.main')
-
-
 @section('main-section')
     @include('layouts.top-navbar')
-
-
     <main>
-
         <!-- Hero Start-->
         <div class="hero-area3 hero-overly2 d-flex align-items-center ">
             <div class="container">
@@ -26,7 +21,6 @@
                                         <option value="">Select Category</option>
                                         @foreach ($listing as  $listings)
                                             <option value="{{$listings->id}}" {{$listings->name == $listings->id ? 'selected':''}}>{{ $listings->name }}</option>
-
                                         @endforeach
                                     </select>
                                   
@@ -305,8 +299,6 @@
             </div>
         </div>
         <!-- listing-area Area End -->
-
     </main>
-
     @include('layouts.bottom-footer')
 @endsection

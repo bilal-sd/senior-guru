@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Category;
 
 
-class ListingController extends Controller
+class CategoryController extends Controller
 {
     //
     public function listing(){

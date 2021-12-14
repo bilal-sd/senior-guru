@@ -22,8 +22,8 @@ Route::get('/listing-detail', function () {
 });
 
 Auth::routes();
-Route::get('/', 'frontend\ListingController@home');
-Route::get('/Listing', 'frontend\ListingController@listing');
+Route::get('/', 'frontend\CategoryController@home');
+Route::get('/Listing', 'frontend\CategoryController@listing');
    
 Route::prefix('user')->group(function(){
     Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
