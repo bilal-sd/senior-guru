@@ -37,7 +37,9 @@ Route::prefix('admin')->group(function () {
     //...............listing..................//
     Route::get('/listing','ListingController@view')->name('admin.listing');
     Route::get('/listing/show','ListingController@index')->name('admin.listing.show');
-    Route::get('listing/delete/{id}','ListingController@destroy')->name('admin.listing.delete');
+    Route::get('/listing/delete/{id}','ListingController@destroy')->name('admin.listing.delete');
+    Route::post('/listing/insert','ListingController@store')->name('admin.listing.insert');
+    Route::get('/listing/edit/{id}','ListingController@edit')->name('admin.listing.edit');
   
     Route::get('/listing-create','CategoryController@catChildAll')->name('admin.listing.create');
 

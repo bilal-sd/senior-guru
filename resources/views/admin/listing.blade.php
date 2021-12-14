@@ -71,10 +71,10 @@
                                 '<td>' + value['description'] + '</td>' +
                                 '<td>' + value['slug'] + '</td>' +
                                 '<td>' +
-                                '<div class="dropdown"><a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"> </circle><circle fill="#000000" cx="19" cy="12" r="2"> </circle></g></svg></a><ul class="dropdown-menu dropdown-menu-end" style="margin: 0px;"><li class="dropdown-item edit-cat" data-bs-toggle="modal" data-bs-target="#sendMessageModal" data-id="1"><i class="fa fa-plus text-primary me-2"></i>Edit</li><li class="dropdown-item del-cat" data-id="' +
+                                '<div class="dropdown"><a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown" aria-expanded="false"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect x="0" y="0" width="24" height="24"></rect><circle fill="#000000" cx="5" cy="12" r="2"></circle><circle fill="#000000" cx="12" cy="12" r="2"> </circle><circle fill="#000000" cx="19" cy="12" r="2"> </circle></g></svg></a><ul class="dropdown-menu dropdown-menu-end" style="margin: 0px;"><li class="dropdown-item edit-cat" style="cursor:pointer;" for="#edit" ><a href="listing/edit/'+value['id']+'" class="d-block" id="edit"><i class="fa fa-plus text-primary me-2"></i>Edit</a></li><li class="dropdown-item del-cat" data-id="' +
                                 value['id'] +
-                                '" data-p-id="0"><i class="fa fa-ban text-primary me-2"></i>Delete</li></ul></div>' +
-                                ' </td>' + ' </tr>';
+                                '" data-p-id="0"style="cursor:pointer;"><a href="javascript:void(0)"><i class="fa fa-ban text-primary me-2"></i>Delete</a></li></ul></div>' +
+                                '</td>' + ' </tr>';
                         });
                         $("#list-body").html(html);
                     }
