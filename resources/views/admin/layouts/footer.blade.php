@@ -1,17 +1,14 @@
- <!-- ******************************************
-             Scripts
- ****************************************** -->
  <script src="{{ asset('assets/vendor/global/global.min.js') }}"></script>
- <script src="{{ asset('assets/vendor/chart.js/Chart.bundle.min.js') }}"></script>
+ {{-- <script src="{{ asset('assets/vendor/chart.js/Chart.bundle.min.js') }}"></script> --}}
  <script src="{{ asset('assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js') }}"></script>
- <script src="{{ asset('assets/vendor/apexchart/apexchart.js') }}"></script>
+ {{-- <script src="{{ asset('assets/vendor/apexchart/apexchart.js') }}"></script> --}}
  <script src="{{ asset('assets/vendor/peity/jquery.peity.min.js') }}"></script>
- <script src="{{ asset('assets/js/dashboard/dashboard-1.js') }}"></script>
+ {{-- <script src="{{ asset('assets/js/dashboard/dashboard-1.js') }}"></script> --}}
  <script src="{{ asset('assets/vendor/owl-carousel/owl.carousel.js') }}"></script>
  <script src="{{ asset('assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
- <script src="{{ asset('assets/vendor/fullcalendar/js/main.min.js') }}"></script>
+ {{-- <script src="{{ asset('assets/vendor/fullcalendar/js/main.min.js') }}"></script> --}}
  <script src="{{ asset('assets/vendor/moment/moment.min.js') }}"></script>
- <script src="{{ asset('assets/js/plugins-init/fullcalendar-init.js') }}"></script>
+ {{-- <script src="{{ asset('assets/js/plugins-init/fullcalendar-init.js') }}"></script> --}}
  <script src="{{ asset('assets/vendor/lightgallery/js/lightgallery-all.min.js') }}"></script>
  <script src="{{ asset('assets/vendor/datatables/js/jquery.dataTables.min.js') }}"></script>
  <script src="{{ asset('assets/js/plugins-init/datatables.init.js') }}"></script>
@@ -41,8 +38,7 @@
  <script src="{{ asset('assets/vendor/jquery-asColor/jquery-asColor.min.js') }}"></script>
  <script src="{{ asset('assets/vendor/jquery-asGradient/jquery-asGradient.min.js') }}"></script>
  <script src="{{ asset('assets/vendor/jquery-asColorPicker/js/jquery-asColorPicker.min.js') }}"></script>
- <script src="{{ asset('assets/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}">
- </script>
+ <script src="{{ asset('assets/vendor/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js') }}"></script>
  <script src="{{ asset('assets/vendor/pickadate/picker.js') }}"></script>
  <script src="{{ asset('assets/vendor/pickadate/picker.time.js') }}"></script>
  <script src="{{ asset('assets/vendor/pickadate/picker.date.js') }}"></script>
@@ -55,20 +51,10 @@
  <script src="{{ asset('assets/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
  <script src="{{ asset('assets/js/plugins-init/jquery.validate-init.js') }}"></script>
  <script src="{{ asset('assets/vendor/jquery-smartwizard/dist/js/jquery.smartWizard.js') }}"></script>
- <script src="{{ asset('assets/js/custom.min.js') }}"></script>
- {{-- <script src="{{ asset('assets/js/dlabnav-init.js') }}"></script> --}}
- {{-- <script src="{{ asset('assets/js/demo.js') }}"></script> --}}
  <script src="bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
- {{-- <script src="{{ asset('assets/js/styleSwitcher.js') }}"></script> --}}
-
- <script>
-
-    $(document).ready(function(){
-        // SmartWizard initialize
-        $('#smartwizard').smartWizard(); 
-    });
-</script>
+ <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+ <script src="{{ asset('assets/js/dlabnav-init.js') }}"></script>
  </body>
 
  </html>
