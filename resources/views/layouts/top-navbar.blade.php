@@ -28,29 +28,14 @@
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
                                         <li><a href="{{url('/')}}">Home</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Categories</a>
-                                            <ul class="submenu">
-                                                <li><a href="{{url('Listing')}}" value="1">Senior Housing</a></li>
-                                                <li><a href="{{url('Listing')}}" value="2">Home, Health</a></li>
-                                                <li><a href="{{url('Listing')}}" value="3">Healthy Aging</a></li>
-                                                <li><a href="{{url('Listing')}}" value="4">Health at Home</a></li>
-                                                <li><a href="{{url('Listing')}}" value="5">Professional</a></li>
-                                                <li><a href="{{url('Listing')}}" value="6">Other Categories</a></li>
+                                        <li><a href="javascript:void(0)">About</a></li>
+                                        <li><a href="javascript:void(0)">Categories</a>
+                                            <ul class="submenu" id="category">
+                                                
                                             </ul>
                                         </li>
-                                        <li><a href="{{url('Listing')}}">Listing</a></li>
-                                        <li><a href="{{url('listing-detail')}}">Listing Page</a></li>
-                                        <li><a href="#">Page</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                                <li><a href="listing_details.html">Listing details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li class="add-list"><a href="listing_details.html"><i class="ti-plus"></i> add Listing</a></li>
+                                        <li><a href="javascript:void(0)">Contact</a></li>
+                                        <li class="add-list"><a href="javascript:void(0)"><i class="ti-plus"></i> add Listing</a></li>
                                         <li class="login"><a href="#">
                                             <i class="ti-user"></i> Sign in or Register</a>
                                         </li>
