@@ -17,18 +17,14 @@ use App\Http\Controllers;
 Route::get('/login', function () {
     return view('Auth.login');
 });
-Route::get('/', function () {
-    return view('home');
-});
-Route::get('/Listing', function () {
-    return view('listing');
-});
 Route::get('/listing-detail', function () {
     return view('listing-detail');
 });
 
 Auth::routes();
-
+Route::get('/', 'frontend\CategoryController@home');
+Route::get('/Listing', 'frontend\CategoryController@listing');
+   
 Route::prefix('user')->group(function(){
     Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
     Route::get('/home', 'HomeController@index')->name('home');

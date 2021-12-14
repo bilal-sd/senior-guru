@@ -22,12 +22,12 @@
                                 </div>
                                 <div class="select-form">
                                     <div class="select-itms">
-                                        <select name="select" id="cat-type" class="form-control form-control-lg wide mb-3">
-                                            <option value="">All Catagories</option>
-                                            <option value="">Catagories One</option>
-                                            <option value="">Catagories Two</option>
-                                            <option value="">Catagories Three</option>
-                                            <option value="">Catagories Four</option>
+                                        <select name="name" id="cat-type" class="form-control form-control-lg wide mb-3">
+                                            <option value="">Select Category</option>
+                                            @foreach ($home as  $homes)
+                                                <option value="{{$homes->id}}" {{$homes->name == $homes->id ? 'selected':''}}>{{ $homes->name }}</option>
+
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
