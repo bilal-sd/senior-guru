@@ -23,22 +23,13 @@
                             <div class="select-form">
                                 <div class="select-itms">
                                     <select name="select" id="select1" style="display: none;">
-                                        <option value="">All Catagories</option>
-                                        <option value="">Catagories One</option>
-                                        <option value="">Catagories Two</option>
-                                        <option value="">Catagories Three</option>
-                                        <option value="">Catagories Four</option>
+                                        <option value="">Select Category</option>
+                                        @foreach ($listing as  $listings)
+                                            <option value="{{$listings->id}}" {{$listings->name == $listings->id ? 'selected':''}}>{{ $listings->name }}</option>
+
+                                        @endforeach
                                     </select>
-                                    <div class="nice-select" tabindex="0"><span class="current">All
-                                            Catagories</span>
-                                        <ul class="list">
-                                            <li data-value="" class="option selected">All Catagories</li>
-                                            <li data-value="" class="option">Catagories One</li>
-                                            <li data-value="" class="option">Catagories Two</li>
-                                            <li data-value="" class="option">Catagories Three</li>
-                                            <li data-value="" class="option">Catagories Four</li>
-                                        </ul>
-                                    </div>
+                                  
                                 </div>
                             </div>
                             <!-- Search box -->
