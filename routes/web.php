@@ -5,17 +5,16 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers;
 
-
-Route::get('/listing-detail', function () {
-    return view('listing-detail');
-});
 Route::get('/', 'frontend\CategoryController@home');
-Route::get('/Listing', 'frontend\CategoryController@listing');
+Route::get('/Listingajax', 'frontend\CategoryController@listingajax');
+Route::get('/Listingcategory/{id}', 'frontend\CategoryController@Listincategory');
+
 //  ..................... Authentication Routes .....................
 Route::get('/login', function () {
     return view('Auth.login');
 });
 Auth::routes();
+
 Route::prefix('user')->group(function(){
     Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
     Route::get('/home', 'HomeController@index')->name('home');
