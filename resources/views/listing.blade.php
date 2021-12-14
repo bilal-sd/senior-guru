@@ -170,7 +170,7 @@
                                     <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
-                                                <img src="assets/img/gallery/list1.png" alt="">
+                                                <img src="assets/frontend/img/gallery/list1.png" alt="">
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
@@ -189,7 +189,7 @@
                                     <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
-                                                <img src="assets/img/gallery/list2.png" alt="">
+                                                <img src="assets/frontend/img/gallery/list2.png" alt="">
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
@@ -208,7 +208,7 @@
                                     <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
-                                                <img src="assets/img/gallery/list3.png" alt="">
+                                                <img src="assets/frontend/img/gallery/list3.png" alt="">
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
@@ -227,7 +227,7 @@
                                     <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
-                                                <img src="assets/img/gallery/list4.png" alt="">
+                                                <img src="assets/frontend/img/gallery/list4.png" alt="">
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
@@ -246,7 +246,7 @@
                                     <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
-                                                <img src="assets/img/gallery/list5.png" alt="">
+                                                <img src="assets/frontend/img/gallery/list5.png" alt="">
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">
@@ -265,7 +265,7 @@
                                     <div class="col-lg-6 ">
                                         <div class="single-listing mb-30">
                                             <div class="list-img">
-                                                <img src="assets/img/gallery/list6.png" alt="">
+                                                <img src="assets/frontend/img/gallery/list6.png" alt="">
                                                 <!-- <span>Open</span> -->
                                             </div>
                                             <div class="list-caption">

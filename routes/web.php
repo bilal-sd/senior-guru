@@ -51,6 +51,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/listing/insert','ListingController@store')->name('admin.listing.insert');
     Route::get('/listing/edit/{id}','ListingController@edit')->name('admin.listing.edit');
     Route::get('/listing-create','CategoryController@catChildAll')->name('admin.listing.create');
+    Route::get("/location/getcountry",'ListingController@getcountry')->name('getcountry');
+    Route::get("/location/getstates/{c_id}",'ListingController@getstates')->name('getstates');
+    Route::get("/location/getcities/{s_id}",'ListingController@getcities')->name('getcities');
+
     Route::get('/logs',function(){
         return view('admin.audit-listing');
     })->name('admin.listing.audit');

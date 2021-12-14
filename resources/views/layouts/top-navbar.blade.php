@@ -3,7 +3,7 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img src="assets/img/logo/loder.jpg" alt="">
+                <img src="assets/frontend/img/logo/loder.jpg" alt="">
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                              <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                              <a href="index.html"><img src="assets/frontend/img/logo/logo.png" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-8">

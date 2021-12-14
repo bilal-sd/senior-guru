@@ -110,13 +110,22 @@
                                                 <div class="row">
                                                     <div class="col-lg-4 mb-3">
                                                         <div class="mb-3"><br>
-                                                            <label class="text-label form-label">State*</label>
-                                                            <select class="form-select" name="state" required
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select State</option>
+                                                            <label class="text-label form-label">County*</label>
+                                                            <select class="form-select" required name="country"
+                                                                aria-label="Default select example" id="country">
+                                                                <option selected disabled>Select Country</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 mb-3">
+                                                        <div class="mb-3"><br>
+                                                            <label class="text-label form-label">State*</label>
+                                                            <select class="form-select" name="state" required
+                                                                aria-label="Default select example" id="state">
+                                                                <option selected disabled>Select State</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -124,23 +133,8 @@
                                                         <div class="mb-3"><br>
                                                             <label class="text-label form-label">City*</label>
                                                             <select class="form-select" name="city" required
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select City</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 mb-3">
-                                                        <div class="mb-3"><br>
-                                                            <label class="text-label form-label">County*</label>
-                                                            <select class="form-select" required name="country"
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select County</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                aria-label="Default select example" id="city">
+                                                                <option selected disabled>Select City</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -429,6 +423,52 @@
             });
         }
         loaddata();
+
+        function getcountry() {  
+            $.ajax({
+                type: "GET",
+                url: "{{ URL::to('admin/location/getcountry') }}",
+                dataType: "JSON",
+                success: function(response) {
+                    let html = "";
+                    $.each(response, function(index, value) {
+                        html += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
+                    });
+                    $("#country").html(html);
+                }
+            });
+        }
+        getcountry();
+        $(document).on("change","#country",function(){
+            let country_id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "{{ URL::to('admin/location/getstates/') }}" + "/" + country_id,
+                dataType: "JSON",
+                success: function(response) {
+                    let html = "";
+                    $.each(response, function(index, value) {
+                        html += '<option value=' + value['id'] + '>' + value['name'] + '</option>';
+                    });
+                    $("#state").html(html);
+                }
+            });
+        });
+        $(document).on("change","#state",function(){
+            let state_id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "{{ URL::to('admin/location/getcities/') }}" + "/" + state_id,
+                dataType: "JSON",
+                success: function(response) {
+                    let html = "";
+                    $.each(response, function(index, value) {
+                        html += '<option value=' + value['id'] + '>' + value['name'] + '</option>';
+                    });
+                    $("#city").html(html);
+                }
+            });
+        });
 
         $(document).ready(function() {
             // Smart Wizard        

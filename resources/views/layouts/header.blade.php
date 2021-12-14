@@ -11,17 +11,17 @@
 
 
 		<!-- CSS here -->
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/bootstrap.min.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/owl.carousel.min.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/slicknav.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/flaticon.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/animate.min.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/magnific-popup.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/fontawesome-all.min.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/themify-icons.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/slick.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/nice-select.css')}}">
-            <link rel="stylesheet" href="{{ URL::asset('assets/css/stylee.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/bootstrap.min.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/owl.carousel.min.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/slicknav.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/flaticon.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/animate.min.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/magnific-popup.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/fontawesome-all.min.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/themify-icons.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/slick.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/nice-select.css')}}">
+            <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/stylee.css')}}">
    </head>
 
    <body>

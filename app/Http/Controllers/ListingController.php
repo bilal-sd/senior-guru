@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Listing;
+use App\Countries;
+use App\States;
+use App\Cities;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -107,5 +110,19 @@ class ListingController extends Controller
         } catch (\Throwable $th) {
             return response()->json("['status' => 'error']");
         }
+    }
+
+    public function getcountry(){
+        $data = Countries::all();
+        return response()->json($data);
+    }
+
+    public function getstates($c_id){
+        $data = States::where('country_id',$c_id)->get();
+        return response()->json($data);
+    }
+    public function getcities($s_id){
+        $data = Cities::where('state_id',$s_id)->get();
+        return response()->json($data);
     }
 }
