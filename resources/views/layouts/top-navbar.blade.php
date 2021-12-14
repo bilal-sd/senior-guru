@@ -28,13 +28,12 @@
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
                                         <li><a href="{{url('/')}}">Home</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Categories</a>
-                                            <ul class="submenu">
+                                        <li><a href="javascript:void(0)">About</a></li>
+                                        <li><a href="javascript:void(0)">Categories</a>
+                                            <ul class="submenu" id="category">
                                                 
                                             </ul>
                                         </li>
-                                        <li><a href="{{url('listing-show')}}">Listing</a></li>
                                         <li><a href="javascript:void(0)">Contact</a></li>
                                         <li class="add-list"><a href="javascript:void(0)"><i class="ti-plus"></i> add Listing</a></li>
                                         <li class="login"><a href="#">

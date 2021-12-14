@@ -58,21 +58,12 @@
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items1">
-                                    <select name="select1" style="display: none;">
+                                    <select name="select1">
                                         <option value="">Choose categories</option>
-                                        <option value="">Category 1</option>
-                                        <option value="">Category 2</option>
-                                        <option value="">Category 3</option>
+                                        @foreach ($categories as $item)
+                                        <option value="{{$item['id']}}">{{$item['name']}}</option>
+                                        @endforeach
                                     </select>
-                                    <div class="nice-select" tabindex="0"><span class="current">Choose
-                                            categories</span>
-                                        <ul class="list">
-                                            <li data-value="" class="option selected">Choose categories</li>
-                                            <li data-value="" class="option">Category 1</li>
-                                            <li data-value="" class="option">Category 2</li>
-                                            <li data-value="" class="option">Category 3</li>
-                                        </ul>
-                                    </div>
                                 </div>
                                 <!--  Select job items End-->
                                 <!-- Select job items start -->
