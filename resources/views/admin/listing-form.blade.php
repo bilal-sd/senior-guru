@@ -47,14 +47,14 @@
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="mb-3">
                                                             <label class="text-label form-label">Business Name*</label>
-                                                            <input type="text" name="business" class="form-control"
+                                                            <input type="text" id="Input-title" name="business" class="form-control"
                                                                 required value="@if(isset($listing)){{$listing->title}}@endif">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="mb-3">
                                                             <label class="text-label form-label">Business Slug*</label>
-                                                            <input type="text" value="@if(isset($listing)){{$listing->slug}}@endif" name="slug" class="form-control" required>
+                                                            <input type="text" id="Input-slug" value="@if(isset($listing)){{$listing->slug}}@endif" name="slug" class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
@@ -390,6 +390,11 @@
 
 @section('section-script')
     <script>
+        $(document).on('keyup', '#Input-title', function() {
+            var name = $(this).val();
+            var slug = name.toLowerCase().trim().replace(/ /g, '-');
+            $("#Input-slug").val(slug);
+        });
         function childmaker(child, level = 1, html = "") {
             child = child.original;
             let dash = '';
