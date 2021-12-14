@@ -19,8 +19,18 @@ class CreateListingsTable extends Migration
             $table->string('type');
             $table->string('category');
             $table->string('address');
+            $table->string('state');
             $table->string('city');
+            $table->string('country');
+            $table->string('zip');
+            $table->string('lati');
+            $table->string('longi');
             $table->string('package');
+            $table->string('status');
+            $table->string('keywords');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('website');
             $table->string('description');
             $table->string('slug');
             $table->timestamps();
