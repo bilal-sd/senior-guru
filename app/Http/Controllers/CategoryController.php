@@ -52,9 +52,14 @@ class CategoryController extends Controller
         return response()->json($arr);  
     }
 
-    public function catChildAll($parent_id=0){
-        $categories = Category::where('parent_id',$parent_id)->get();
-        return view('admin.create-list',['childCat'=>$categories]);
+    public function catChildAll($parent_id=0,$check=false){
+        if($check==true){
+            $count = Category::where('parent_id',$parent_id)->count();
+            return $count;
+        }else{
+            $categories = Category::where('parent_id',$parent_id)->get();
+            return view('admin.create-list',['childCat'=>$categories]);
+        }
     }
 
     public function edit(Category $category)
@@ -68,13 +73,27 @@ class CategoryController extends Controller
     }
 
     public function destroy($id)
-    {
-        try {
-            $category = Category::find($id);
-            $category->delete();
-            return response()->json("['status' => 'success']");
-        } catch (\Throwable $th) {
-            return response()->json("['status' => 'error']");
+    {   
+        $check = $this->catChildAll($id,true);
+        if( $check > 0){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This category has child category, please delete child category first'
+            ]);
+        }else{
+            try {
+                $category = Category::find($id);
+                $category->delete();
+                return response()->json([
+                    'status' => 'success',
+                    'id' => $id
+                ]);
+            } catch (\Throwable $th) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => $th->getMessage()
+                ]);
+            }
         }
     }
 

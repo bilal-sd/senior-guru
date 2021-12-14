@@ -249,7 +249,7 @@
 
         $(document).on('keyup', '#InputCat_name', function() {
             var name = $(this).val();
-            var slug = name.toLowerCase().trim().replace(/ /g, '_');
+            var slug = name.toLowerCase().trim().replace(/ /g, '-');
             $("#InputSlug").val(slug);
         });
 
@@ -268,14 +268,15 @@
                         url: "{{ url('/admin/categories/delete') }}" + '/' + id,
                         type: "GET",
                         success: function(data) {
-                            swal("Poof! Your Data has been deleted!", {
-                                icon: "success",
-                            });
-                            loaddata();
-                        },
-                        error: function(data) {
-                            swal("Oops", "We couldn't connect to the server!",
-                                "error");
+                            if(data.status == "success"){
+                                swal("Poof! Your Data has been deleted!", {
+                                    icon: "success",
+                                });
+                                loaddata();
+                            }else{
+                                swal("Oops", "ERROR : "+data.message,
+                                    "error");
+                            }
                         }
                     });
                 }
