@@ -6,7 +6,8 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'frontend\CategoryController@home');
 Route::get('/Listingajax', 'frontend\CategoryController@listingajax');
-Route::get('/Listingcategory/{id}', 'frontend\CategoryController@Listincategory');
+Route::get('/directory/{cat}', 'frontend\CategoryController@index');
+Route::get('/showListing/{id}', 'frontend\CategoryController@Listincategory');
 
 //  ..................... Authentication Routes .....................
 Route::get('/login', function () {

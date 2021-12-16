@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('main-section')
     @include('layouts.top-navbar')
-    <main>  
+    <main>
         <div class="hero-area3 hero-overly2 d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
@@ -9,7 +9,6 @@
                         <div class="hero-cap text-center pt-50 pb-20">
                             <h2>Our Listing</h2>
                         </div>
-                        <!--Hero form -->
                         <form action="#" class="search-box search-box2">
                             <div class="input-form">
                                 <input type="text" placeholder="What are you looking for?">
@@ -18,14 +17,10 @@
                                 <div class="select-itms">
                                     <select name="select" id="select1" style="display: none;">
                                         <option value="">Select Category</option>
-                                        {{-- @foreach ($listing as  $listings)
-                                            <option value="{{$listings->id}}" {{$listings->name == $listings->id ? 'selected':''}}>{{ $listings->name }}</option>
-                                        @endforeach --}}
                                     </select>
-                                  
+
                                 </div>
                             </div>
-                            <!-- Search box -->
                             <div class="search-form">
                                 <a href="#">Search</a>
                             </div>
@@ -58,58 +53,11 @@
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items1">
-                                    <select name="select1">
-                                        <option value="">Choose categories</option>
-                                        @foreach ($categories as $item)
-                                        <option value="{{$item['id']}}">{{$item['name']}}</option>
-                                        @endforeach
+                                    <select name="select1" id="subcategory" style="display: none">
                                     </select>
-                                </div>
-                                <!--  Select job items End-->
-                                <!-- Select job items start -->
-                                <div class="select-job-items2">
-                                    <select name="select2" style="display: none;">
-                                        <option value="">Location</option>
-                                        <option value="">Dhaka</option>
-                                        <option value="">Mirpur</option>
-                                        <option value="">Dannondi</option>
-                                    </select>
-                                    <div class="nice-select" tabindex="0"><span class="current">Location</span>
-                                        <ul class="list">
-                                            <li data-value="" class="option selected">Location</li>
-                                            <li data-value="" class="option">Dhaka</li>
-                                            <li data-value="" class="option">Mirpur</li>
-                                            <li data-value="" class="option">Dannondi</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!--  Select job items End-->
-                                <!-- select-Categories start -->
-                                <div class="select-Categories pt-140 pb-20">
-                                    <label class="container">Full Time
-                                        <input type="checkbox">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                    <label class="container">Ratings
-                                        <input type="checkbox" checked="checked active">
-                                        <span class="checkmark"></span>
-                                    </label>
-                                </div>
-                                <!-- select-Categories End -->
-                                <!-- Select job items start -->
-                                <div class="select-job-items2">
-                                    <select name="select2" style="display: none;">
-                                        <option value="">Area (km)</option>
-                                        <option value="">Dhaka- 1km</option>
-                                        <option value="">Dinajpur- 2km</option>
-                                        <option value="">Chittagong - 3km</option>
-                                    </select>
-                                    <div class="nice-select" tabindex="0"><span class="current">Area (km)</span>
-                                        <ul class="list">
-                                            <li data-value="" class="option selected">Area (km)</li>
-                                            <li data-value="" class="option">Dhaka- 1km</li>
-                                            <li data-value="" class="option">Dinajpur- 2km</li>
-                                            <li data-value="" class="option">Chittagong - 3km</li>
+                                    <div class="nice-select" tabindex="0"><span class="current">All</span>
+                                        <ul class="list"id="parentSub">
+
                                         </ul>
                                     </div>
                                 </div>
@@ -127,42 +75,20 @@
                                 <a href="#" class="btn list-btn mt-20">Reset</a>
                             </div>
                         </div>
-                        <!-- Job Category Listing End -->
                     </div>
                     <!-- Right content -->
                     <div class="col-xl-8 col-lg-8 col-md-6">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="count mb-35">
-                                    <span>5432 Listings are available</span>
+                                    <span id="listCounts">5432 Listings are available</span>
                                 </div>
                             </div>
                         </div>
                         <!-- listing Details Stat-->
                         <div class="listing-details-area">
                             <div class="container">
-                                <div class="row">
-                                    @foreach ($listingshow as $item)
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="{{ asset('assets/frontend/img/gallery/list1.png')}}" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>{{$item->category}}</span>
-                                                <h3><a href="{{route('listing.details',$item->slug)}}">{{$item->title}}</a></h3>
-                                                <p>{{$item->address}}</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>{{$item->phone}}</li>
-                                                        <li>{{$item->email}}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                <div class="row" id="listingShow">
                                 </div>
                             </div>
                         </div>
@@ -193,7 +119,52 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" value="{{ $cat }}" id="parentSlug">
         <!-- listing-area Area End -->
     </main>
     @include('layouts.bottom-footer')
+@endsection
+@section('section-script')
+    <script>
+        function showGetResult() {
+            var catHtml = "";
+            var listHtml = "";
+            jQuery.ajax({
+                url: "{{ url('/showListing') }}/" + $('#parentSlug').val(),
+                type: 'GET',
+                dataType: 'JSON',
+                success: function(data) {
+                    catHtml += '<li data-value="all" class="option selected">All</li>';
+                    $.each(data.cats, function(index, value) {
+                        catHtml += '<li data-value="' + value['slug'] + '" class="option">' + value['name'] +
+                            '</li>';
+                    });
+                    $("#parentSub").html(catHtml);
+                    $.each(data.listing, function(index, value) {
+                       listHtml += '<div class="col-lg-6 ">'+
+                        '<div class="single-listing mb-30">'+
+                            '<div class="list-img">'+
+                                '<img src="{{ asset("assets/frontend/img/gallery/list1.png") }}" alt="">'+
+                            '</div>'+
+                            '<div class="list-caption">'+
+                                '<span style="font-size:12px">'+value['category'].replace("_"," ").toUpperCase()+'</span>'+
+                                '<h3><a href="{{ url("/listing-details/") }}/'+value['slug']+'">'+value['title']+'</a></h3>'+
+                                '<p>'+value['address']+'</p>'+
+                                '<div class="list-footer">'+
+                                    '<ul>'+
+                                        '<li>'+value['phone']+'</li>'+
+                                        '<li>'+value['email']+'</li>'+
+                                    '</ul>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                        '</div>';
+                    });
+                    $("#listCounts").html(data.listing.length + " Listings are available");
+                    $("#listingShow").html(listHtml);
+                }
+            });
+        }
+        showGetResult();
+    </script>
 @endsection
