@@ -27,8 +27,14 @@ class ListingController extends Controller
     }
 
     public function store(Request $request)
-    {
+    {   
         if ($request->step == '1') {
+            $country = Countries::find($request->country);
+            $state = States::find($request->state);
+            $city = Cities::find($request->city);
+            $country = $country->sortname;
+            $state = $state->name;
+            $city = $city->name;
             if (!isset($request->id)) {
                 $listing = new Listing();
                 $listing->title = $request->business;
@@ -39,9 +45,9 @@ class ListingController extends Controller
                 $listing->phone = $request->phone;
                 $listing->website = $request->website;
                 $listing->address = str_replace(",","",$request->address1) . ', ' . str_replace(",","",$request->address2);
-                $listing->state = $request->state;
-                $listing->city = $request->city;
-                $listing->country = $request->country;
+                $listing->state = $state;
+                $listing->city = $city;
+                $listing->country = $country;
                 $listing->zip = $request->zip;
                 $listing->lati = $request->lati;
                 $listing->longi = $request->longi;
@@ -58,9 +64,9 @@ class ListingController extends Controller
                 $listing->phone = $request->phone;
                 $listing->website = $request->website;
                 $listing->address = $request->address1 . ' ' . $request->address2;
-                $listing->state = $request->state;
-                $listing->city = $request->city;
-                $listing->country = $request->country;
+                $listing->state = $state;
+                $listing->city = $city;
+                $listing->country = $country;
                 $listing->zip = $request->zip;
                 $listing->lati = $request->lati;
                 $listing->longi = $request->longi;

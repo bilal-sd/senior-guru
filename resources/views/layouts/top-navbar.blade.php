@@ -3,7 +3,7 @@
         <div class="preloader-inner position-relative">
             <div class="preloader-circle"></div>
             <div class="preloader-img pere-text">
-                <img src="assets/frontend/img/logo/loder.jpg" alt="">
+                <img src="{{asset('assets/frontend/img/logo/loder.jpg')}}" alt="">
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                              <a href="index.html"><img src="assets/frontend/img/logo/logo.png" alt=""></a>
+                              <a href="/"><img src="{{asset('assets/frontend/img/logo/logo.png')}}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-8">
@@ -36,7 +36,7 @@
                                         </li>
                                         <li><a href="javascript:void(0)">Contact</a></li>
                                         <li class="add-list"><a href="javascript:void(0)"><i class="ti-plus"></i> add Listing</a></li>
-                                        <li class="login"><a href="#">
+                                        <li class="login"><a href="login">
                                             <i class="ti-user"></i> Sign in or Register</a>
                                         </li>
                                     </ul>

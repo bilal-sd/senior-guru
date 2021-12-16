@@ -2,7 +2,6 @@
 @section('main-section')
     @include('layouts.top-navbar')
     <main>
-        <!-- Hero Start-->
         <div class="hero-area3 hero-overly2 d-flex align-items-center ">
             <div class="container">
                 <div class="row justify-content-center">
@@ -10,7 +9,6 @@
                         <div class="hero-cap text-center pt-50 pb-20">
                             <h2>Our Listing</h2>
                         </div>
-                        <!--Hero form -->
                         <form action="#" class="search-box search-box2">
                             <div class="input-form">
                                 <input type="text" placeholder="What are you looking for?">
@@ -19,12 +17,10 @@
                                 <div class="select-itms">
                                     <select name="select" id="select1" style="display: none;">
                                         <option value="">Select Category</option>
-
                                     </select>
 
                                 </div>
                             </div>
-                            <!-- Search box -->
                             <div class="search-form">
                                 <a href="#">Search</a>
                             </div>
@@ -57,12 +53,13 @@
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items1">
-                                    <select id="subcategory" onChange="getData(this);" name="select1">
-                                        <option value="">All</option>
-                                        @foreach ($categories as $item)
-                                            <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
-                                        @endforeach
+                                    <select name="select1" id="subcategory" onChange="getData(this);" style="display: none">
                                     </select>
+                                    <div class="nice-select" tabindex="0"><span class="current">All</span>
+                                        <ul class="list"id="parentSub">
+
+                                        </ul>
+                                    </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="select-job-items2">
@@ -86,140 +83,23 @@
                                 <a href="#" class="btn list-btn mt-20">Reset</a>
                             </div>
                         </div>
-                        <!-- Job Category Listing End -->
                     </div>
                     <!-- Right content -->
                     <div class="col-xl-9 col-lg-9 col-md-6">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="count mb-35">
-                                    <span>5432 Listings are available</span>
+                                    <span id="listCounts">5432 Listings are available</span>
                                 </div>
                             </div>
                         </div>
                         <!-- listing Details Stat-->
                         <div class="listing-details-area">
                             <div class="container">
-                                <div class="row">
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/frontend/img/gallery/list1.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/frontend/img/gallery/list2.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/frontend/img/gallery/list3.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/frontend/img/gallery/list4.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/frontend/img/gallery/list5.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 ">
-                                        <div class="single-listing mb-30">
-                                            <div class="list-img">
-                                                <img src="assets/frontend/img/gallery/list6.png" alt="">
-                                                <!-- <span>Open</span> -->
-                                            </div>
-                                            <div class="list-caption">
-                                                <span>Open</span>
-                                                <h3><a href="listing_details.html">Saintmartine</a></h3>
-                                                <p>700/D, Kings road, Green lane, 85/ London</p>
-                                                <div class="list-footer">
-                                                    <ul>
-                                                        <li>+10 278 367 9823</li>
-                                                        <li>contact@midnight.com</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="row" id="listingShow">
                                 </div>
                             </div>
                         </div>
-                        <!-- listing Details End -->
-                        <!--Pagination Start  -->
                         <div class="pagination-area pt-70 text-center">
                             <div class="container">
                                 <div class="row">
@@ -247,6 +127,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" value="{{ $cat }}" id="parentSlug">
         <!-- listing-area Area End -->
     </main>
     @include('layouts.bottom-footer')
@@ -279,5 +160,45 @@
         }
 
         }
+        function showGetResult() {
+            var catHtml = "";
+            var listHtml = "";
+            jQuery.ajax({
+                url: "{{ url('/showListing') }}/" + $('#parentSlug').val(),
+                type: 'GET',
+                dataType: 'JSON',
+                success: function(data) {
+                    catHtml += '<li data-value="all" class="option selected">All</li>';
+                    $.each(data.cats, function(index, value) {
+                        catHtml += '<li data-value="' + value['slug'] + '" class="option">' + value['name'] +
+                            '</li>';
+                    });
+                    $("#parentSub").html(catHtml);
+                    $.each(data.listing, function(index, value) {
+                       listHtml += '<div class="col-lg-6 ">'+
+                        '<div class="single-listing mb-30">'+
+                            '<div class="list-img">'+
+                                '<img src="{{ asset("assets/frontend/img/gallery/list1.png") }}" alt="">'+
+                            '</div>'+
+                            '<div class="list-caption">'+
+                                '<span style="font-size:12px">'+value['category'].replace("_"," ").toUpperCase()+'</span>'+
+                                '<h3><a href="{{ url("/listing-details/") }}/'+value['slug']+'">'+value['title']+'</a></h3>'+
+                                '<p>'+value['address']+'</p>'+
+                                '<div class="list-footer">'+
+                                    '<ul>'+
+                                        '<li>'+value['phone']+'</li>'+
+                                        '<li>'+value['email']+'</li>'+
+                                    '</ul>'+
+                                '</div>'+
+                            '</div>'+
+                        '</div>'+
+                        '</div>';
+                    });
+                    $("#listCounts").html(data.listing.length + " Listings are available");
+                    $("#listingShow").html(listHtml);
+                }
+            });
+        }
+        showGetResult();
     </script>
 @endsection

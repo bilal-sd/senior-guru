@@ -101,9 +101,8 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-3">
                                                         <div class="mb-3"><br>
-                                                            <label class="text-label form-label">Address 2*</label>
-                                                            <input type="text" name="address2" class="form-control"
-                                                                required>
+                                                            <label class="text-label form-label">Address 2</label>
+                                                            <input type="text" name="address2" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -541,7 +540,7 @@
                     formData.append('id', $("#last_id").val());
                 }
                 $.ajax({
-                    url: "{{ URL::to('admin/listing/insert') }}",
+                    url: "{{ Route('admin.listing.insert') }}",
                     type: 'POST',
                     data: formData,
                     success: function(data) {

@@ -33,7 +33,7 @@
 <script src="{{ asset('assets/frontend/js/plugins.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 <script>
-    function showGetResult() {
+    function navCat() {
         var html = "";
         jQuery.ajax({
             url: '{{ url("/Listingajax") }}',
@@ -41,15 +41,11 @@
             dataType: 'JSON',
             success: function(data) {
                 $.each(data, function(index, value) {
-                    html += '<li><a href="{{url("/Listingcategory/")}}/'+value['slug']+'">'+value['name']+'</a></li>';
+                    html += '<li><a href="{{url("/directory/")}}/'+value['slug']+'">'+value['name']+'</a></li>';
                 });
                 $("#category").html(html);
             }
         });
     }
-     showGetResult();
+    navCat();
 </script>
-
-</body>
-
-</html>

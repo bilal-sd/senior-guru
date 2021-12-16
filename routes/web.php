@@ -3,11 +3,11 @@
 use App\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers;
 
 Route::get('/', 'frontend\CategoryController@home');
 Route::get('/Listingajax', 'frontend\CategoryController@listingajax');
-Route::get('/Listingcategory/{id}', 'frontend\CategoryController@Listincategory');
+Route::get('/directory/{cat}', 'frontend\CategoryController@index');
+Route::get('/showListing/{id}', 'frontend\CategoryController@Listincategory');
 
 //  ..................... Authentication Routes .....................
 Route::get('/login', function () {
@@ -15,6 +15,8 @@ Route::get('/login', function () {
 });
 Auth::routes();
 
+// Route::get('/listing-show','frontend\listingController@listingindex')->name('listingshow');
+Route::get('/listing-details/{id}','frontend\listingController@listingdetails')->name('listing.details');
 Route::prefix('user')->group(function(){
     Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
     Route::get('/home', 'HomeController@index')->name('home');
