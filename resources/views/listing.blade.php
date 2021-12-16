@@ -32,10 +32,10 @@
         <!--Hero End -->
         <!-- listing Area Start -->
         <div class="listing-area pt-120 pb-120">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <!-- Left content -->
-                    <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="col-xl-3 col-lg-3 col-md-6">
                         <div class="row">
                             <div class="col-12">
                                 <div class="small-section-tittle2 mb-45">
@@ -49,11 +49,11 @@
                             <div class="single-listing">
                                 <!-- input -->
                                 <div class="input-form">
-                                    <input type="text" placeholder="What are you finding?">
+                                    <input type="text" placeholder="Location">
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items1">
-                                    <select name="select1" id="subcategory" style="display: none">
+                                    <select name="select1" id="subcategory" onChange="getData(this);" style="display: none">
                                     </select>
                                     <div class="nice-select" tabindex="0"><span class="current">All</span>
                                         <ul class="list"id="parentSub">
@@ -61,23 +61,31 @@
                                         </ul>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <div class="select-job-items2">
+                                        <select name="select2" style="display: none;">
+                                        </select>
+                                        <div id="emlak" name="currentList" onChange=";" style="display:none;" class="nice-select" tabindex="0"><span class="current">All Sub</span>
+                                            <ul class="list" id="subCat">
+                                                
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div class="input-form">
+                                    <input type="text" placeholder="Keywords Search">
+                                </div>
                                 <!--  Select job items End-->
                             </div>
 
                             <div class="single-listing">
-                                <!-- Range Slider Start -->
-                                <aside class="left_widgets p_filter_widgets price_rangs_aside sidebar_box_shadow">
-                                    <div class="small-section-tittle2">
-                                        <h4>Price range</h4>
-                                    </div>
-                                </aside>
-                                <!-- Range Slider End -->
                                 <a href="#" class="btn list-btn mt-20">Reset</a>
                             </div>
                         </div>
                     </div>
                     <!-- Right content -->
-                    <div class="col-xl-8 col-lg-8 col-md-6">
+                    <div class="col-xl-9 col-lg-9 col-md-6">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="count mb-35">
@@ -126,6 +134,32 @@
 @endsection
 @section('section-script')
     <script>
+        $('#subcategory').change(function() {
+            var countryID = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "{{ url('/admin/subcategory') }}/" + countryID,
+                dataType: "JSON",
+                success: function(res) {
+                    console.log(res)
+                    if (res) {
+                        $("#subCat").empty();
+                        $.each(res, function(key, value) {
+                            $("#subCat").append('<li data-value="' + value['id'] + '" class="option">' + value['name'] + '</li>');
+                        });
+                    } else {
+                        $("#subCat").empty();
+                    }
+                }
+            });
+        });
+        function getData(dropdown) {
+        var value = dropdown.options[dropdown.selectedIndex].value;
+        if (value = 'emlak'){
+        document.getElementById("emlak").style.display = "block";
+        }
+
+        }
         function showGetResult() {
             var catHtml = "";
             var listHtml = "";
