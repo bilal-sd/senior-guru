@@ -71,13 +71,13 @@
             </li>
             <li>
                 <a class="" href="{{ Route("admin.categories") }}" aria-expanded="false">
-                    <i class="flaticon-025-dashboard"></i>
+                    <i class="flaticon-086-star"></i>
                     <span class="nav-text">Categories</span>
                 </a>
             </li>
             <li>
                 <a class="has-arrow " href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-025-dashboard"></i>
+                    <i class="flaticon-043-menu"></i>
                     <span class="nav-text">Listing</span>
                 </a>
                 <ul aria-expanded="false">
