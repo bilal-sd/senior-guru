@@ -37,6 +37,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/categories/delete/{id}','CategoryController@destroy')->name('admin.categories.destroy');
     Route::get('/categories/status/{id}','CategoryController@status')->name('admin.categories.status');
     Route::post('/submit-categories','CategoryController@store')->name('Submit-Categories');
+    Route::get("/subcategory/{id}",'frontend\CategoryController@subcategory')->name('getdrop');
+
     //...............listing..................//
     Route::get('/listing','ListingController@view')->name('admin.listing');
     Route::get('/listing/show','ListingController@index')->name('admin.listing.show');
@@ -47,6 +49,7 @@ Route::prefix('admin')->group(function () {
     Route::get("/location/getcountry",'ListingController@getcountry')->name('getcountry');
     Route::get("/location/getstates/{c_id}",'ListingController@getstates')->name('getstates');
     Route::get("/location/getcities/{s_id}",'ListingController@getcities')->name('getcities');
+
 
     Route::get('/logs',function(){
         return view('admin.audit-listing');

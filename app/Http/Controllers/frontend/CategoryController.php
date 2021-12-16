@@ -27,4 +27,8 @@ class CategoryController extends Controller
         $home = Category::where('parent_id','=',0)->get(); 
         return view('home',compact('home'));
     }
+    public function subcategory($id){
+        $listing = Category::where("parent_id",$id)->get();
+        return response()->json($listing);
+    }
 }
