@@ -4,10 +4,11 @@ use App\Category;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Route::get('/', 'frontend\CategoryController@home');
-Route::get('/Listingajax', 'frontend\CategoryController@listingajax');
-Route::get('/directory/{cat}', 'frontend\CategoryController@index');
-Route::get('/showListing/{id}', 'frontend\CategoryController@Listincategory');
+Route::get('/', 'FrontController@home');
+Route::get('/ParentNav', 'FrontController@ParentNav');
+Route::get('/{cat?}', 'FrontController@index');
+Route::get("/subCategory/{id}",'FrontController@subcategory');
+Route::post('/search-listing', 'FrontController@Listings');
 
 //  ..................... Authentication Routes .....................
 Route::get('/login', function () {
@@ -16,7 +17,7 @@ Route::get('/login', function () {
 Auth::routes();
 
 // Route::get('/listing-show','frontend\listingController@listingindex')->name('listingshow');
-Route::get('/listing-details/{id}','frontend\listingController@listingdetails')->name('listing.details');
+Route::get('/listing-details/{id}','FrontController@listingdetails')->name('listing.details');
 Route::prefix('user')->group(function(){
     Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
     Route::get('/home', 'HomeController@index')->name('home');
@@ -32,8 +33,6 @@ Route::prefix('admin')->group(function () {
     Route::get('/categories/delete/{id}','CategoryController@destroy')->name('admin.categories.destroy');
     Route::get('/categories/status/{id}','CategoryController@status')->name('admin.categories.status');
     Route::post('/submit-categories','CategoryController@store')->name('Submit-Categories');
-    Route::get("/subcategory/{id}",'frontend\CategoryController@subcategory')->name('getdrop');
-
     //...............listing..................//
     Route::get('/listing','ListingController@view')->name('admin.listing');
     Route::get('/listing/show','ListingController@index')->name('admin.listing.show');

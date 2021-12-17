@@ -49,38 +49,39 @@
                             <div class="single-listing">
                                 <!-- input -->
                                 <div class="input-form">
-                                    <input type="text" placeholder="Location">
+                                    <input type="text" id="location" placeholder="Location">
                                 </div>
                                 <!-- Select job items start -->
                                 <div class="select-job-items1">
-                                    <select name="select1" id="subcategory" onChange="getData(this);" style="display: none">
+                                    <select name="select1" id="parentCat" style="display: none">
                                     </select>
                                     <div class="nice-select" tabindex="0"><span class="current">All</span>
-                                        <ul class="list"id="parentSub">
+                                        <ul class="list" id="parentSub">
 
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="sub3Show" style="display: none">
                                     <div class="select-job-items2">
                                         <select name="select2" style="display: none;">
                                         </select>
-                                        <div id="emlak" name="currentList" onChange=";" style="display:none;" class="nice-select" tabindex="0"><span class="current">All Sub</span>
+                                        <div name="currentList" class="nice-select" tabindex="0"><span
+                                                class="current">All Sub</span>
                                             <ul class="list" id="subCat">
-                                                
+
                                             </ul>
                                         </div>
                                     </div>
                                 </div>
-                               
+
                                 <div class="input-form">
-                                    <input type="text" placeholder="Keywords Search">
+                                    <input type="text" id="keyword" placeholder="Keywords Search">
                                 </div>
                                 <!--  Select job items End-->
                             </div>
 
                             <div class="single-listing">
-                                <a href="#" class="btn list-btn mt-20">Reset</a>
+                                <a href="javascript:void(0)" id="reset" class="btn list-btn mt-20">Reset</a>
                             </div>
                         </div>
                     </div>
@@ -97,28 +98,7 @@
                         <div class="listing-details-area">
                             <div class="container">
                                 <div class="row" id="listingShow">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="pagination-area pt-70 text-center">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-xl-12">
-                                        <div class="single-wrap d-flex justify-content-center">
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination justify-content-start">
-                                                    <li class="page-item active"><a class="page-link" href="#">01</a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">02</a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#">03</a>
-                                                    </li>
-                                                    <li class="page-item"><a class="page-link" href="#"><span
-                                                                class="ti-angle-right"></span></a></li>
-                                                </ul>
-                                            </nav>
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -134,37 +114,65 @@
 @endsection
 @section('section-script')
     <script>
-        $('#subcategory').change(function() {
-            var countryID = $(this).val();
-            $.ajax({
-                type: "GET",
-                url: "{{ url('/admin/subcategory') }}/" + countryID,
-                dataType: "JSON",
-                success: function(res) {
-                    console.log(res)
-                    if (res) {
-                        $("#subCat").empty();
-                        $.each(res, function(key, value) {
-                            $("#subCat").append('<li data-value="' + value['id'] + '" class="option">' + value['name'] + '</li>');
-                        });
-                    } else {
-                        $("#subCat").empty();
-                    }
-                }
-            });
-        });
-        function getData(dropdown) {
-        var value = dropdown.options[dropdown.selectedIndex].value;
-        if (value = 'emlak'){
-        document.getElementById("emlak").style.display = "block";
-        }
-
-        }
-        function showGetResult() {
-            var catHtml = "";
+        function listingsmaker(listingArr) {
             var listHtml = "";
+            $.each(listingArr, function(index, value) {
+                listHtml += '<div class="col-lg-6" data-category="' + value['category'] + '" data-keyword="' + value['title'] + '">' +
+                    '<div class="single-listing mb-30">' +
+                    '<div class="list-img">' +
+                    '<img src="{{ asset('assets/frontend/img/gallery/list1.png') }}" alt="">' +
+                    '</div>' +
+                    '<div class="list-caption">' +
+                    '<span style="font-size:12px">' + value['category'].replace("_", " ").toUpperCase() +
+                    '</span>' +
+                    '<h3><a href="{{ url('/listing-details/') }}/' + value['slug'] + '">' + value['title'] +
+                    '</a></h3>' +
+                    '<p>' + value['address'] + '</p>' +
+                    '<div class="list-footer">' +
+                    '<ul>' +
+                    '<li>' + value['phone'] + '</li>' +
+                    '<li>' + value['email'] + '</li>' +
+                    '</ul>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>' +
+                    '</div>';
+            });
+            return listHtml;
+        }
+        $('#parentCat').change(function() {
+            var subCat2 = $('#parentSub').children("li.selected").data('value');
+            if (subCat2 != "all") {
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('/"$cat"/search/location//category/"+subCat2+"/keyword/') }}/",
+                    dataType: "JSON",
+                    success: function(res) {
+                        if (res.cats.length > 0) {
+                            $("#subCat").empty();
+                            $("#sub3Show").show();
+                            $.each(res.cats, function(key, value) {
+                                $("#subCat").append('<li data-value="' + value['slug'] +
+                                    '" class="option">' + value['name'] + '</li>');
+                            });
+                        } else {
+                            $("#sub3Show").hide();
+                            $("#subCat").empty();
+                        }
+                    }
+                });
+            } else {
+                $("#sub3Show").hide();
+                $("#subCat").empty();
+                showGetResult();
+            }
+        });
+
+        
+        function showSubcats() {
+            var catHtml = "";
             jQuery.ajax({
-                url: "{{ url('/showListing') }}/" + $('#parentSlug').val(),
+                url: "{{ url('/subCategory') }}/" + $('#parentSlug').val(),
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
@@ -174,26 +182,47 @@
                             '</li>';
                     });
                     $("#parentSub").html(catHtml);
-                    $.each(data.listing, function(index, value) {
-                       listHtml += '<div class="col-lg-6 ">'+
-                        '<div class="single-listing mb-30">'+
-                            '<div class="list-img">'+
-                                '<img src="{{ asset("assets/frontend/img/gallery/list1.png") }}" alt="">'+
-                            '</div>'+
-                            '<div class="list-caption">'+
-                                '<span style="font-size:12px">'+value['category'].replace("_"," ").toUpperCase()+'</span>'+
-                                '<h3><a href="{{ url("/listing-details/") }}/'+value['slug']+'">'+value['title']+'</a></h3>'+
-                                '<p>'+value['address']+'</p>'+
-                                '<div class="list-footer">'+
-                                    '<ul>'+
-                                        '<li>'+value['phone']+'</li>'+
-                                        '<li>'+value['email']+'</li>'+
-                                    '</ul>'+
-                                '</div>'+
-                            '</div>'+
-                        '</div>'+
-                        '</div>';
-                    });
+                }
+            });
+        }
+        showSubcats();
+        function checkUndefined(val){
+            if(val == undefined){
+                return "";
+            }else{
+                return val;
+            }
+        }
+
+        $("#location").on("change",showGetResult)
+        $("#parentCat").on("change",showGetResult)
+        $("#keyword").on("change",showGetResult)
+        $("#reset").on("click",function(){
+            window.location.href = "{{ url('/'.$cat) }}";
+            showGetResult();
+        });
+        function showGetResult() {
+            var cat = checkUndefined($('#parentSlug').val());
+            var location = checkUndefined($("#location").val());
+            var subCat = checkUndefined($('#parentSub').children("li.selected").data('value'));
+            var keyword = checkUndefined($("#keyword").val());
+            if(subCat == "all"){
+                subCat = "";
+            }
+            var obj = {
+                "_token": "{{ csrf_token() }}",
+                cat:cat,
+                loc:location,
+                subcat:subCat,
+                keyword:keyword
+            };
+            jQuery.ajax({
+                url: '/search-listing',
+                type: 'POST',
+                data: obj,
+                dataType: 'JSON',
+                success: function(data) {
+                    let listHtml = listingsmaker(data.listing);
                     $("#listCounts").html(data.listing.length + " Listings are available");
                     $("#listingShow").html(listHtml);
                 }

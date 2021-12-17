@@ -1,8 +1,6 @@
 @extends('layouts.main')
 @section('main-section')
     @include('layouts.top-navbar')
-
-
     <main>
         <!-- Hero Area Start-->
         <div class="slider-area hero-overly">
@@ -24,10 +22,6 @@
                                     <div class="select-itms">
                                         <select name="name" id="cat-type" class="form-control form-control-lg wide mb-3">
                                             <option value="">Select Category</option>
-                                            @foreach ($home as  $homes)
-                                                <option value="{{$homes->id}}" {{$homes->name == $homes->id ? 'selected':''}}>{{ $homes->name }}</option>
-
-                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

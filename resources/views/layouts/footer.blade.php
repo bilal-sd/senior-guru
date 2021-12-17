@@ -36,12 +36,12 @@
     function navCat() {
         var html = "";
         jQuery.ajax({
-            url: '{{ url("/Listingajax") }}',
+            url: '{{ url("/ParentNav") }}',
             type: 'GET',
             dataType: 'JSON',
             success: function(data) {
                 $.each(data, function(index, value) {
-                    html += '<li><a href="{{url("/directory/")}}/'+value['slug']+'">'+value['name']+'</a></li>';
+                    html += '<li><a href="/'+value['slug']+'">'+value['name']+'</a></li>';
                 });
                 $("#category").html(html);
             }
