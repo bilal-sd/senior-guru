@@ -6,8 +6,9 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', 'FrontController@home');
 Route::get('/ParentNav', 'FrontController@ParentNav');
-Route::get('/{cat?}', 'FrontController@index');
+Route::get('category/{cat}', 'FrontController@index');
 Route::get("/subCategory/{id}",'FrontController@subcategory');
+Route::get("/subCategory2/{id}",'FrontController@subcategory');
 Route::post('/search-listing', 'FrontController@Listings');
 
 //  ..................... Authentication Routes .....................
@@ -33,7 +34,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/categories/delete/{id}','CategoryController@destroy')->name('admin.categories.destroy');
     Route::get('/categories/status/{id}','CategoryController@status')->name('admin.categories.status');
     Route::post('/submit-categories','CategoryController@store')->name('Submit-Categories');
-    //...............listing..................//
+    //...............listing..................
     Route::get('/listing','ListingController@view')->name('admin.listing');
     Route::get('/listing/show','ListingController@index')->name('admin.listing.show');
     Route::get('/listing/delete/{id}','ListingController@destroy')->name('admin.listing.delete');
@@ -44,11 +45,10 @@ Route::prefix('admin')->group(function () {
     Route::get("/location/getstates/{c_id}",'ListingController@getstates')->name('getstates');
     Route::get("/location/getcities/{s_id}",'ListingController@getcities')->name('getcities');
 
-
     Route::get('/logs',function(){
         return view('admin.audit-listing');
     })->name('admin.listing.audit');
-
+    
     Route::get('/listing-form/{id?}',function($id){
         return view('admin.listing-form',['catId'=>$id]);
     })->name('admin.listing-form');

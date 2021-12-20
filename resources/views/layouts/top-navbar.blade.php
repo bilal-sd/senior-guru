@@ -36,7 +36,7 @@
                                         </li>
                                         <li><a href="javascript:void(0)">Contact</a></li>
                                         <li class="add-list"><a href="javascript:void(0)"><i class="ti-plus"></i> add Listing</a></li>
-                                        <li class="login"><a href="login">
+                                        <li class="login"><a href="/login">
                                             <i class="ti-user"></i> Sign in or Register</a>
                                         </li>
                                     </ul>

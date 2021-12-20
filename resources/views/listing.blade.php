@@ -145,7 +145,7 @@
             if (subCat2 != "all") {
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('/"$cat"/search/location//category/"+subCat2+"/keyword/') }}/",
+                    url: "{{ url('/subCategory2') }}/"+subCat2,
                     dataType: "JSON",
                     success: function(res) {
                         if (res.cats.length > 0) {
@@ -164,7 +164,6 @@
             } else {
                 $("#sub3Show").hide();
                 $("#subCat").empty();
-                showGetResult();
             }
         });
 
@@ -198,7 +197,7 @@
         $("#parentCat").on("change",showGetResult)
         $("#keyword").on("change",showGetResult)
         $("#reset").on("click",function(){
-            window.location.href = "{{ url('/'.$cat) }}";
+            window.location.href = "{{ url('/category/'.$cat) }}";
             showGetResult();
         });
         function showGetResult() {

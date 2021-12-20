@@ -41,7 +41,7 @@
             dataType: 'JSON',
             success: function(data) {
                 $.each(data, function(index, value) {
-                    html += '<li><a href="/'+value['slug']+'">'+value['name']+'</a></li>';
+                    html += '<li><a href="/category/'+value['slug']+'">'+value['name']+'</a></li>';
                 });
                 $("#category").html(html);
             }
