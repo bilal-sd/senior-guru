@@ -52,4 +52,5 @@ Route::prefix('admin')->group(function () {
     Route::get('/listing-form/{slug?}',function($slug){
         return view('admin.listing-form',['catSlug'=>$slug]);
     })->name('admin.listing-form');
+    
 });
