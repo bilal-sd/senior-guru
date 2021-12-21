@@ -37,6 +37,10 @@ class CategoryController extends Controller
 
     public function show($level=0,$parent_id=0,$arr = [])
     {
+        if(gettype($parent_id)=="string"){
+            $find = Category::where('slug',$parent_id)->get();
+            $parent_id = $find[0]->id;   
+        }
         $categories = Category::where('parent_id',$parent_id)->get();
         foreach ($categories as $category) {
             $arr[] = [

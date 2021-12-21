@@ -1,16 +1,4 @@
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img src="{{asset('assets/frontend/img/logo/loder.jpg')}}" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Preloader Start -->
-<header>
-    <!-- Header Start -->
+{{-- <header>
    <div class="header-area header-transparent">
         <div class="main-header">
            <div class="header-bottom  header-sticky">
@@ -52,5 +40,22 @@
            </div>
         </div>
    </div>
-    <!-- Header End -->
-</header>
+</header> --}}
+{{-- =========== Old ========= --}}
+<header class="custom-header">
+    <nav class="navbar navbar-expand-lg">
+       <div class="container">
+          <a class="navbar-brand" href="/">
+             <img src="{{asset('assets/frontend/images/logo.svg')}}" class="img-fluid Seniorguru-logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="toggle-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 submenu" id="category">
+                 
+             </ul>
+          </div>
+       </div>
+    </nav>
+ </header>

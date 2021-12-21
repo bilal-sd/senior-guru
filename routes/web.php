@@ -10,19 +10,19 @@ Route::get('category/{cat}', 'FrontController@index');
 Route::get("/subCategory/{id}",'FrontController@subcategory');
 Route::get("/subCategory2/{id}",'FrontController@subcategory');
 Route::post('/search-listing', 'FrontController@Listings');
+Route::get('/listing-details/{id}','FrontController@listingdetails')->name('listing.details');
 
 //  ..................... Authentication Routes .....................
 Route::get('/login', function () {
     return view('Auth.login');
 });
-Auth::routes();
 
-// Route::get('/listing-show','frontend\listingController@listingindex')->name('listingshow');
-Route::get('/listing-details/{id}','FrontController@listingdetails')->name('listing.details');
+Auth::routes();
 Route::prefix('user')->group(function(){
     Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
     Route::get('/home', 'HomeController@index')->name('home');
 });
+
 Route::prefix('admin')->group(function () {
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
@@ -49,7 +49,7 @@ Route::prefix('admin')->group(function () {
         return view('admin.audit-listing');
     })->name('admin.listing.audit');
     
-    Route::get('/listing-form/{id?}',function($id){
-        return view('admin.listing-form',['catId'=>$id]);
+    Route::get('/listing-form/{slug?}',function($slug){
+        return view('admin.listing-form',['catSlug'=>$slug]);
     })->name('admin.listing-form');
 });

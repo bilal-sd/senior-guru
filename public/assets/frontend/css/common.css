@@ -1,0 +1,242 @@
+:root {
+    --black: #333333;
+    --white: #ffffff;
+    --skyblue: #00ADEE;
+    --yellow: #FFF093;
+    --pink: #F7DFFB;
+    --green: #C7EFBA;
+    --peach: #FED6DE;
+    --purple: #D6DDFF;
+    --light-grey: #FCFCFC;
+    --bg-dark-grey: #424A54;
+    --bg-light-skyblue: #B1DAF6;
+    --border-color-grey: #DBD8D8;
+    --hover-btn: #088bbd;
+    --peach: #FEDEC1;
+    --grey: #DBD8D8;
+}
+body {
+    font-family: 'Euclid Circular A';
+    font-size: 16px;
+    font-weight:300;
+}
+body,
+html {
+    scroll-behavior: smooth;
+    max-width: 100%;
+}
+.btn{
+    font-weight: 300;
+}
+p{
+    margin-bottom: 0;
+}
+a {
+    text-decoration: none;
+    -webkit-transition: all ease-in-out .2s;
+    transition: all ease-in-out .2s;
+    color: inherit;
+    cursor: pointer;
+}
+a:focus, a:hover, button:focus {
+    text-decoration: none;
+    outline: 0!important;
+    color: inherit;
+    cursor: pointer;
+    box-shadow: none!important;
+}
+/*a:active {
+    color: var(--skyblue)!important;
+}*/
+li, ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-Bold"), local("EuclidCircularA Bold"), url('../fonts/EuclidCircularA-Bold.woff2') format('woff2'), url('../fonts/EuclidCircularA-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-Light"), local("EuclidCircularA Light"), url('../fonts/EuclidCircularA-Light.woff2') format('woff2'), url('../fonts/EuclidCircularA-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-Medium"), local("EuclidCircularA Medium"), url('../fonts/EuclidCircularA-Medium.woff2') format('woff2'), url('../fonts/EuclidCircularA-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-MediumItalic"), local("EuclidCircularA MediumItalic"), url('../fonts/EuclidCircularA-MediumItalic.woff2') format('woff2'), url('../fonts/EuclidCircularA-MediumItalic.woff') format('woff');
+    font-weight: 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-SemiBoldItalic"), local("EuclidCircularA SemiBoldItalic"), url('../fonts/'EuclidCircularA-SemiBoldItalic.woff2') format('woff2'), url('../fonts/'EuclidCircularA-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-BoldItalic"), local("EuclidCircularA BoldItalic"), url('../fonts/'EuclidCircularA-BoldItalic.woff2') format('woff2'), url('../fonts/'EuclidCircularA-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-Regular"), local("EuclidCircularA Regular"), url('../fonts/'EuclidCircularA-Regular.woff2') format('woff2'), url('../fonts/'EuclidCircularA-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-Italic"), local("EuclidCircularA Italic"), url('../fonts/'EuclidCircularA-Italic.woff2') format('woff2'), url('../fonts/'EuclidCircularA-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-LightItalic"), local("EuclidCircularA LightItalic"), url('../fonts/'EuclidCircularA-LightItalic.woff2') format('woff2'), url('../fonts/'EuclidCircularA-LightItalic.woff') format('woff');
+    font-weight: 300;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Euclid Circular A';
+    src: local("EuclidCircularA-SemiBold"), local("EuclidCircularA SemiBold"), url('../fonts/'EuclidCircularA-SemiBold.woff2') format('woff2'), url('../fonts/'EuclidCircularA-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+.slick-dots li button:before {
+    font-family: 'slick';
+    font-size: 0px;
+    line-height: 20px;
+    position: absolute;
+    background-color: #ffffff;
+    border-radius: 100px;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 8px;
+    content: '•';
+    text-align: center;
+    opacity: .25;
+    color: black;
+    margin: 2px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.slick-dots li button{
+    height: 8px;
+    width: 8px;
+}
+.slick-dots {
+    bottom: 20px!important;
+}
+.slick-dotted.slick-slider {
+    margin-bottom: 0px;
+}
+.slick-dots li {
+    width: 8px!important;
+    height: 8px!important;
+}
+
+
+
+input[type=checkbox]:after {
+    font-family: "Font Awesome 5 Pro";
+    font-weight: 100;
+    content: '\f00c';
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0px;
+    position: absolute;
+    position:absolute;
+    box-shadow:none;
+}
+input[type=checkbox]:checked:after {
+    display: block
+    box-shadow:none;
+}
+
+input[type=checkbox] {
+    appearance: none;
+    -webkit-appearance: none;
+    height: 26px;
+    width: 26px;
+    border: 1px solid #D3D3D3;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: none;
+    margin-right: 20px;
+
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 0;
+    box-shadow:none;
+}
+input[type=checkbox]:checked {
+    background-color: #345EA8;
+    border: none;
+    border: 1px solid #345EA8;
+    box-shadow:none;
+    background-image: none;
+    position:relative;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color:#878787!important;
+    opacity: 1; /* Firefox */
+    font-size: 16px!important;
+    font-weight: 300;
+}
+
+.button-orange{
+    background-color: #FF7D4E;
+    color: #ffffff;
+    min-width: 176px;
+    min-height: 50px;
+    font-size:18px;
+    border:none;
+    margin-top: 16px;
+}
+
+.breadcrumb-item+.breadcrumb-item::before {
+   
+  color: #d3d3d3;
+
+}
+.form-control:focus{
+    box-shadow: none;
+    
+}
+.vert-move {
+    -webkit-animation: mover 1s infinite  alternate;
+    animation: mover 1s infinite  alternate;
+}
+@keyframes mover {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-10px); }
+}

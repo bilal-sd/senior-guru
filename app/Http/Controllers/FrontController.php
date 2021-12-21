@@ -24,9 +24,7 @@ class FrontController extends Controller
     }
     // ========== Filtering Listings ==============
     public function Listings(Request $req){
-        $findcat = Category::where('slug',$req->cat)->get();
-        $catType = $findcat[0]['id'];
-        $listingshow = Listing::where("type",$catType);
+        $listingshow = Listing::where("type",$req->cat);
         
         if($req->loc != null){
             $loc = strtolower($req->loc);
@@ -52,15 +50,7 @@ class FrontController extends Controller
         $listingdetails =Listing::where("slug",$slug)->get();
         $catdetails =Listing::all();
         return view('listing-detail',['detail'=>$listingdetails],['catdetails'=>$catdetails]);
-
     }
 
-
-
 }
-
-
-
-
-
 ?>

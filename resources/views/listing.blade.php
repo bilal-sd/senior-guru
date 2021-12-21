@@ -1,173 +1,244 @@
 @extends('layouts.main')
 @section('main-section')
     @include('layouts.top-navbar')
-    <main>
-        <div class="hero-area3 hero-overly2 d-flex align-items-center ">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-8 col-lg-9">
-                        <div class="hero-cap text-center pt-50 pb-20">
-                            <h2>Our Listing</h2>
-                        </div>
-                        <form action="#" class="search-box search-box2">
-                            <div class="input-form">
-                                <input type="text" placeholder="What are you looking for?">
-                            </div>
-                            <div class="select-form">
-                                <div class="select-itms">
-                                    <select name="select" id="select1" style="display: none;">
-                                        <option value="">Select Category</option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="search-form">
-                                <a href="#">Search</a>
-                            </div>
-                        </form>
+    <section class="map-section">
+        <div class="container map-section-left">
+            <!-- left section start from here -->
+            <div class="left-listing">
+                <h1 id="listCounts">50 Assisted Living Facilities</h1>
+                <div class="d-flex justify-content-between list-small-head">
+                    <p>2,780 units available </p>
+                    <div class="dropdown top-selction">
+                        <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="{{ asset('assets/frontend/images/sortby.svg') }}"><span>Sort by : </span><span
+                                class="toggle-list">Relevance
+                                <i class="far fa-chevron-down"></i></span>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                        </ul>
                     </div>
+                    <!-- <p class="top-selction"><img src="{{ asset('assets/frontend/images/sortby.svg') }}" class="mr-2"><span>Sort by :</span> <a href="">Relevance<i class="far fa-chevron-down"></i></a></p> -->
                 </div>
-            </div>
-        </div>
-        <!--Hero End -->
-        <!-- listing Area Start -->
-        <div class="listing-area pt-120 pb-120">
-            <div class="container-fluid">
-                <div class="row">
-                    <!-- Left content -->
-                    <div class="col-xl-3 col-lg-3 col-md-6">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="small-section-tittle2 mb-45">
-                                    <h4>Advanced Filter</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Job Category Listing start -->
-                        <div class="category-listing mb-50">
-                            <!-- single one -->
-                            <div class="single-listing">
-                                <!-- input -->
-                                <div class="input-form">
-                                    <input type="text" id="location" placeholder="Location">
-                                </div>
-                                <!-- Select job items start -->
-                                <div class="select-job-items1">
-                                    <select name="select1" id="parentCat" style="display: none">
-                                    </select>
-                                    <div class="nice-select" tabindex="0"><span class="current">All</span>
-                                        <ul class="list" id="parentSub">
+                <form class="row prty-secrh">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="location" placeholder="Search by location">
+                        <button class="btn"><i class="far fa-search"></i></button>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="keyword" placeholder="Search by keyword">
+                        <button class="btn"><i class="far fa-search"></i></button>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control budget-selct form-select" id="parentSub">
 
+                        </select>
+                        {{-- <button class="btn"><i class="far fa-dollar-sign"></i></button> --}}
+                    </div>
+                    <button type="submit" class="btn search-btn"><i class="far fa-search"></i></button>
+                </form>
+                <section>
+                    <div class="row" id="listingShow">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="card card-main">
+                                <div class="slider-card slick-carousel">
+                                    <!-- Inside the containing div, add one div for each slide -->
+                                    <a href="javascript:void(0);" class="slider-card-inner">
+                                        <!-- You can put an image or text inside each slide div -->
+                                        <img src="{{ asset('assets/frontend/images/slide-card.svg') }}"
+                                            class="img-fluid">
+                                    </a>
+                                    <a href="javascript:void(0);" class="slider-card-inner">
+                                        <!-- You can put an image or text inside each slide div -->
+                                        <img src="{{ asset('assets/frontend/images/slide-card.svg') }}"
+                                            class="img-fluid">
+                                    </a>
+                                    <a href="javascript:void(0);" class="slider-card-inner">
+                                        <!-- You can put an image or text inside each slide div -->
+                                        <img src="{{ asset('assets/frontend/images/slide-card.svg') }}"
+                                            class="img-fluid">
+                                    </a>
+                                    <a href="javascript:void(0);" class="slider-card-inner">
+                                        <!-- You can put an image or text inside each slide div -->
+                                        <img src="{{ asset('assets/frontend/images/slide-card.svg') }}"
+                                            class="img-fluid">
+                                    </a>
+                                    <a href="javascript:void(0);" class="slider-card-inner">
+                                        <!-- You can put an image or text inside each slide div -->
+                                        <img src="{{ asset('assets/frontend/images/slide-card.svg') }}"
+                                            class="img-fluid">
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <p class="price-tag">$8,384.00 <sub>per month</sub></p>
+                                    <a href="javascript:void(0);">
+                                        <h5 class="text-truncate"><a href="javascript:void(0);">Rocky Mountain Assisted
+                                                Living -
+                                                Sil Living - Sil</a></h5>
+                                    </a>
+                                    <div class="d-flex align-items-center">
+                                        <ul class="reviews-list">
+                                            <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+                                            <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+                                            <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+                                            <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+
+                                            <li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>
                                         </ul>
+                                        <span class="rating-count"> 4 reviews</span>
                                     </div>
+                                    <p class="text-truncate">9970 Silver Maple Road, Highlands Ranch, CO</p>
                                 </div>
-                                <div class="form-group" id="sub3Show" style="display: none">
-                                    <div class="select-job-items2">
-                                        <select name="select2" style="display: none;">
-                                        </select>
-                                        <div name="currentList" class="nice-select" tabindex="0"><span
-                                                class="current">All Sub</span>
-                                            <ul class="list" id="subCat">
-
-                                            </ul>
-                                        </div>
-                                    </div>
+                                <div class="Promotion-tag">
+                                    Special Promotion!
                                 </div>
-
-                                <div class="input-form">
-                                    <input type="text" id="keyword" placeholder="Keywords Search">
-                                </div>
-                                <!--  Select job items End-->
-                            </div>
-
-                            <div class="single-listing">
-                                <a href="javascript:void(0)" id="reset" class="btn list-btn mt-20">Reset</a>
                             </div>
                         </div>
                     </div>
-                    <!-- Right content -->
-                    <div class="col-xl-9 col-lg-9 col-md-6">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="count mb-35">
-                                    <span id="listCounts">5432 Listings are available</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- listing Details Stat-->
-                        <div class="listing-details-area">
-                            <div class="container">
-                                <div class="row" id="listingShow">
-
-                                </div>
-                            </div>
-                        </div>
-                        <!--Pagination End  -->
-                    </div>
-                </div>
+                </section>
             </div>
+            <!-- left section end from here -->
+        </div>
+        <div class="map-section-right">
+            <iframe class="map-listing"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113874.29338087818!2d75.72051791246248!3d26.88534659541186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57e281%3A0xce1c63a0cf22e09!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1636519106251!5m2!1sen!2sin"
+                allowfullscreen="" loading="lazy"></iframe>
+            <button type="button" class="btn map-toggle-box" tabindex="0"><i class="far fa-chevron-double-left"></i>
+            </button>
         </div>
         <input type="hidden" value="{{ $cat }}" id="parentSlug">
-        <!-- listing-area Area End -->
-    </main>
+    </section>
     @include('layouts.bottom-footer')
 @endsection
 @section('section-script')
+    {{-- <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap&libraries=places&v=weekly"
+        defer></script> --}}
+
+    <script>
+        // function initMap() {
+        //     const map = new google.maps.Map(document.getElementById("map"), {
+        //         zoom: 12,
+        //         center: {
+        //             lat: 34.84555,
+        //             lng: -111.8035
+        //         },
+        //     });
+        //     // Set LatLng and title text for the markers. The first marker (Boynton Pass)
+        //     // receives the initial focus when tab is pressed. Use arrow keys to
+        //     // move between markers; press tab again to cycle through the map controls.
+        //     const tourStops = [
+        //         [{
+        //             lat: 34.8791806,
+        //             lng: -111.8265049
+        //         }, "Boynton Pass"],
+        //         [{
+        //             lat: 34.8559195,
+        //             lng: -111.7988186
+        //         }, "Airport Mesa"],
+        //         [{
+        //             lat: 34.832149,
+        //             lng: -111.7695277
+        //         }, "Chapel of the Holy Cross"],
+        //         [{
+        //             lat: 34.823736,
+        //             lng: -111.8001857
+        //         }, "Red Rock Crossing"],
+        //         [{
+        //             lat: 34.800326,
+        //             lng: -111.7665047
+        //         }, "Bell Rock"],
+        //     ];
+        //     // Create an info window to share between markers.
+        //     const infoWindow = new google.maps.InfoWindow();
+
+        //     // Create the markers.
+        //     tourStops.forEach(([position, title], i) => {
+        //         const marker = new google.maps.Marker({
+        //             position,
+        //             map,
+        //             title: `${i + 1}. ${title}`,
+        //             label: `${i + 1}`,
+        //             optimized: false,
+        //         });
+
+        //         // Add a click listener for each marker, and set up the info window.
+        //         marker.addListener("click", () => {
+        //             infoWindow.close();
+        //             infoWindow.setContent(marker.getTitle());
+        //             infoWindow.open(marker.getMap(), marker);
+        //         });
+        //     });
+        // }
+    </script>
+
     <script>
         function listingsmaker(listingArr) {
             var listHtml = "";
             $.each(listingArr, function(index, value) {
-                listHtml += '<div class="col-lg-6" data-category="' + value['category'] + '" data-keyword="' + value['title'] + '">' +
-                    '<div class="single-listing mb-30">' +
-                    '<div class="list-img">' +
-                    '<img src="{{ asset('assets/frontend/img/gallery/list1.png') }}" alt="">' +
-                    '</div>' +
-                    '<div class="list-caption">' +
-                    '<span style="font-size:12px">' + value['category'].replace("_", " ").toUpperCase() +
-                    '</span>' +
-                    '<h3><a href="{{ url('/listing-details/') }}/' + value['slug'] + '">' + value['title'] +
-                    '</a></h3>' +
-                    '<p>' + value['address'] + '</p>' +
-                    '<div class="list-footer">' +
-                    '<ul>' +
-                    '<li>' + value['phone'] + '</li>' +
-                    '<li>' + value['email'] + '</li>' +
+                listHtml += '<div class="col-lg-4 col-md-6 col-sm-6">'+
+                '<div class="card card-main">' +
+                '<div class="slider-card slick-carousel">' +
+                '<a href="javascript:void(0);" class="slider-card-inner">' +
+                '<img src="{{ asset('assets/frontend/images/slide-card.svg') }}" class="img-fluid">' +
+                '</a>' +
+                '</div>' +
+                '<div class="card-body">' +
+                '<p class="price-tag">$8,384.00 <sub>per month</sub></p>' +
+                '<a href="{{ url('/listing-details/') }}/' + value['slug'] + '">' +
+                    '<h5 class="text-truncate"><a href="{{ url('/listing-details/') }}/' + value['slug'] + '">' +
+                    value['title'] + '</a></h5>' +
+                    '</a>' +
+                    '<div class="d-flex align-items-center">' +
+                    '<ul class="reviews-list">' +
+                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
+                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
+                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
+                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
+                    '<li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>' +
                     '</ul>' +
+                    '<span class="rating-count"> 4 reviews</span>' +
                     '</div>' +
+                    '<p class="text-truncate">' + value['address'] + value['city'] + ',' + value['state'] + '</p>' +
                     '</div>' +
+                    '<div class="Promotion-tag">Special Promotion!</div>' +
                     '</div>' +
                     '</div>';
+
             });
             return listHtml;
         }
-        $('#parentCat').change(function() {
-            var subCat2 = $('#parentSub').children("li.selected").data('value');
-            if (subCat2 != "all") {
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('/subCategory2') }}/"+subCat2,
-                    dataType: "JSON",
-                    success: function(res) {
-                        if (res.cats.length > 0) {
-                            $("#subCat").empty();
-                            $("#sub3Show").show();
-                            $.each(res.cats, function(key, value) {
-                                $("#subCat").append('<li data-value="' + value['slug'] +
-                                    '" class="option">' + value['name'] + '</li>');
-                            });
-                        } else {
-                            $("#sub3Show").hide();
-                            $("#subCat").empty();
-                        }
-                    }
-                });
-            } else {
-                $("#sub3Show").hide();
-                $("#subCat").empty();
-            }
-        });
+        // $('#parentSub').change(function() {
+        //     var subCat2 = $('#parentSub').val();
+        //     if (subCat2 != "all") {
+        //         $.ajax({
+        //             type: "GET",
+        //             url: "{{ url('/subCategory2') }}/" + subCat2,
+        //             dataType: "JSON",
+        //             success: function(res) {
+        //                 if (res.cats.length > 0) {
+        //                     $("#subCat").empty();
+        //                     $("#sub3Show").show();
+        //                     $.each(res.cats, function(key, value) {
+        //                         $("#subCat").append('<li data-value="' + value['slug'] +
+        //                             '" class="option">' + value['name'] + '</li>');
+        //                     });
+        //                 } else {
+        //                     $("#sub3Show").hide();
+        //                     $("#subCat").empty();
+        //                 }
+        //             }
+        //         });
+        //     } else {
+        //         $("#sub3Show").hide();
+        //         $("#subCat").empty();
+        //     }
+        // });
 
-        
+
         function showSubcats() {
             var catHtml = "";
             jQuery.ajax({
@@ -175,45 +246,47 @@
                 type: 'GET',
                 dataType: 'JSON',
                 success: function(data) {
-                    catHtml += '<li data-value="all" class="option selected">All</li>';
+                    catHtml += '<option value="all" selected>All</option>';
                     $.each(data.cats, function(index, value) {
-                        catHtml += '<li data-value="' + value['slug'] + '" class="option">' + value['name'] +
-                            '</li>';
+                        catHtml += '<option value="' + value['slug'] + '">' + value['name'] +
+                            '</option>';
                     });
                     $("#parentSub").html(catHtml);
                 }
             });
         }
         showSubcats();
-        function checkUndefined(val){
-            if(val == undefined){
+
+        function checkUndefined(val) {
+            if (val == undefined) {
                 return "";
-            }else{
+            } else {
                 return val;
             }
         }
 
-        $("#location").on("change",showGetResult)
-        $("#parentCat").on("change",showGetResult)
-        $("#keyword").on("change",showGetResult)
-        $("#reset").on("click",function(){
-            window.location.href = "{{ url('/category/'.$cat) }}";
+        $("#location").on("change", showGetResult)
+        $("#parentSub").on("change", showGetResult)
+        $("#keyword").on("change", showGetResult)
+        $("#reset").on("click", function() {
+            window.location.href = "{{ url('/category/' . $cat) }}";
             showGetResult();
         });
+
         function showGetResult() {
             var cat = checkUndefined($('#parentSlug').val());
             var location = checkUndefined($("#location").val());
-            var subCat = checkUndefined($('#parentSub').children("li.selected").data('value'));
+            var subCat = checkUndefined($('#parentSub').val());
             var keyword = checkUndefined($("#keyword").val());
-            if(subCat == "all"){
+            if (subCat == "all") {
                 subCat = "";
             }
             var obj = {
                 "_token": "{{ csrf_token() }}",
-                cat:cat,
-                loc:location,
-                subcat:subCat,
-                keyword:keyword
+                cat: cat,
+                loc: location,
+                subcat: subCat,
+                keyword: keyword
             };
             jQuery.ajax({
                 url: '/search-listing',

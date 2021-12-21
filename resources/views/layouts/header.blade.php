@@ -1,25 +1,21 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <!-- Required meta tags -->
+    <title>Senior Guru</title>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Senior Guru - Home</title>
-    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {{-- <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico"> --}}
-    <!-- CSS here -->
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/slicknav.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/magnific-popup.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/fontawesome-all.min.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/themify-icons.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/slick.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/nice-select.css') }}">
-    <link rel="stylesheet" href="{{ URL::asset('assets/frontend/css/stylee.css') }}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/fontawsome.min.css')}}" />
+    <link rel="icon" href="{{asset('assets/frontend/images/fav.png')}}" type="image/gif" sizes="16x16">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/slick.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/slick-theme.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/common.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/header.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/footer.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/login.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/style.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/responsive.css')}}" />
 </head>
-
 <body>

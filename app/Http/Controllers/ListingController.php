@@ -99,7 +99,7 @@ class ListingController extends Controller
     public function edit($id)
     {
         $listing = Listing::find($id);
-        return view('admin.listing-form',['catId'=>$listing->type,'listing'=>$listing]);
+        return view('admin.listing-form',['catSlug'=>$listing->type,'listing'=>$listing]);
     }
 
     public function update(Request $request, Listing $listing)

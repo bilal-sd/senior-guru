@@ -156,7 +156,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="getId" value="{{ $catId }}">
+                                                <input type="hidden" id="getId" value="{{ $catSlug }}">
                                                 <input type="hidden" id="last_id" value="@if(isset($listing)){{$listing->id}}@endif">
                                                 <input type="submit" value="Save" class="btn btn-success">
                                             </form>
