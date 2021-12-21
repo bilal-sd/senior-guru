@@ -1,16 +1,4 @@
-<div id="preloader-active">
-    <div class="preloader d-flex align-items-center justify-content-center">
-        <div class="preloader-inner position-relative">
-            <div class="preloader-circle"></div>
-            <div class="preloader-img pere-text">
-                <img src="assets/img/logo/loder.jpg" alt="">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Preloader Start -->
-<header>
-    <!-- Header Start -->
+{{-- <header>
    <div class="header-area header-transparent">
         <div class="main-header">
            <div class="header-bottom  header-sticky">
@@ -19,7 +7,7 @@
                         <!-- Logo -->
                         <div class="col-xl-2 col-lg-2 col-md-1">
                             <div class="logo">
-                              <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                              <a href="/"><img src="{{asset('assets/frontend/img/logo/logo.png')}}" alt=""></a>
                             </div>
                         </div>
                         <div class="col-xl-10 col-lg-10 col-md-8">
@@ -28,21 +16,15 @@
                                 <nav>
                                     <ul id="navigation">                                                                                                                                     
                                         <li><a href="{{url('/')}}">Home</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Catagories</a></li>
-                                        <li><a href="{{url('Listing')}}">Listing</a></li>
-                                        <li><a href="{{url('listing-detail')}}">Listing Page</a></li>
-                                        <li><a href="#">Page</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Element</a></li>
-                                                <li><a href="listing_details.html">Listing details</a></li>
+                                        <li><a href="javascript:void(0)">About</a></li>
+                                        <li><a href="javascript:void(0)">Categories</a>
+                                            <ul class="submenu" id="category">
+                                                
                                             </ul>
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                        <li class="add-list"><a href="listing_details.html"><i class="ti-plus"></i> add Listing</a></li>
-                                        <li class="login"><a href="#">
+                                        <li><a href="javascript:void(0)">Contact</a></li>
+                                        <li class="add-list"><a href="javascript:void(0)"><i class="ti-plus"></i> add Listing</a></li>
+                                        <li class="login"><a href="/login">
                                             <i class="ti-user"></i> Sign in or Register</a>
                                         </li>
                                     </ul>
@@ -58,5 +40,22 @@
            </div>
         </div>
    </div>
-    <!-- Header End -->
-</header>
+</header> --}}
+{{-- =========== Old ========= --}}
+<header class="custom-header">
+    <nav class="navbar navbar-expand-lg">
+       <div class="container">
+          <a class="navbar-brand" href="/">
+             <img src="{{asset('assets/frontend/images/logo.svg')}}" class="img-fluid Seniorguru-logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="toggle-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 submenu" id="category">
+                 
+             </ul>
+          </div>
+       </div>
+    </nav>
+ </header>

@@ -47,14 +47,14 @@
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="mb-3">
                                                             <label class="text-label form-label">Business Name*</label>
-                                                            <input type="text" name="business" class="form-control"
+                                                            <input type="text" id="Input-title" name="business" class="form-control"
                                                                 required value="@if(isset($listing)){{$listing->title}}@endif">
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6 mb-2">
                                                         <div class="mb-3">
                                                             <label class="text-label form-label">Business Slug*</label>
-                                                            <input type="text" value="@if(isset($listing)){{$listing->slug}}@endif" name="slug" class="form-control" required>
+                                                            <input type="text" id="Input-slug" value="@if(isset($listing)){{$listing->slug}}@endif" name="slug" class="form-control" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-4">
@@ -101,22 +101,30 @@
                                                     </div>
                                                     <div class="col-lg-6 mb-3">
                                                         <div class="mb-3"><br>
-                                                            <label class="text-label form-label">Address 2*</label>
-                                                            <input type="text" name="address2" class="form-control"
-                                                                required>
+                                                            <label class="text-label form-label">Address 2</label>
+                                                            <input type="text" name="address2" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-lg-4 mb-3">
                                                         <div class="mb-3"><br>
-                                                            <label class="text-label form-label">State*</label>
-                                                            <select class="form-select" name="state" required
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select State</option>
+                                                            <label class="text-label form-label">County*</label>
+                                                            <select class="form-select" required name="country"
+                                                                aria-label="Default select example" id="country">
+                                                                <option selected disabled>Select Country</option>
                                                                 <option value="1">One</option>
                                                                 <option value="2">Two</option>
                                                                 <option value="3">Three</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 mb-3">
+                                                        <div class="mb-3"><br>
+                                                            <label class="text-label form-label">State*</label>
+                                                            <select class="form-select" name="state" required
+                                                                aria-label="Default select example" id="state">
+                                                                <option selected disabled>Select State</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -124,23 +132,8 @@
                                                         <div class="mb-3"><br>
                                                             <label class="text-label form-label">City*</label>
                                                             <select class="form-select" name="city" required
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select City</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-lg-4 mb-3">
-                                                        <div class="mb-3"><br>
-                                                            <label class="text-label form-label">County*</label>
-                                                            <select class="form-select" required name="country"
-                                                                aria-label="Default select example">
-                                                                <option selected>Open this select County</option>
-                                                                <option value="1">One</option>
-                                                                <option value="2">Two</option>
-                                                                <option value="3">Three</option>
+                                                                aria-label="Default select example" id="city">
+                                                                <option selected disabled>Select City</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -163,7 +156,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" id="getId" value="{{ $catId }}">
+                                                <input type="hidden" id="getId" value="{{ $catSlug }}">
                                                 <input type="hidden" id="last_id" value="@if(isset($listing)){{$listing->id}}@endif">
                                                 <input type="submit" value="Save" class="btn btn-success">
                                             </form>
@@ -396,6 +389,11 @@
 
 @section('section-script')
     <script>
+        $(document).on('keyup', '#Input-title', function() {
+            var name = $(this).val();
+            var slug = name.toLowerCase().trim().replace(/ /g, '-');
+            $("#Input-slug").val(slug);
+        });
         function childmaker(child, level = 1, html = "") {
             child = child.original;
             let dash = '';
@@ -429,6 +427,52 @@
             });
         }
         loaddata();
+
+        function getcountry() {  
+            $.ajax({
+                type: "GET",
+                url: "{{ URL::to('admin/location/getcountry') }}",
+                dataType: "JSON",
+                success: function(response) {
+                    let html = "";
+                    $.each(response, function(index, value) {
+                        html += '<option value="' + value['id'] + '">' + value['name'] + '</option>';
+                    });
+                    $("#country").html(html);
+                }
+            });
+        }
+        getcountry();
+        $(document).on("change","#country",function(){
+            let country_id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "{{ URL::to('admin/location/getstates/') }}" + "/" + country_id,
+                dataType: "JSON",
+                success: function(response) {
+                    let html = "";
+                    $.each(response, function(index, value) {
+                        html += '<option value=' + value['id'] + '>' + value['name'] + '</option>';
+                    });
+                    $("#state").html(html);
+                }
+            });
+        });
+        $(document).on("change","#state",function(){
+            let state_id = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: "{{ URL::to('admin/location/getcities/') }}" + "/" + state_id,
+                dataType: "JSON",
+                success: function(response) {
+                    let html = "";
+                    $.each(response, function(index, value) {
+                        html += '<option value=' + value['id'] + '>' + value['name'] + '</option>';
+                    });
+                    $("#city").html(html);
+                }
+            });
+        });
 
         $(document).ready(function() {
             // Smart Wizard        
@@ -496,7 +540,7 @@
                     formData.append('id', $("#last_id").val());
                 }
                 $.ajax({
-                    url: "{{ URL::to('admin/listing/insert') }}",
+                    url: "{{ Route('admin.listing.insert') }}",
                     type: 'POST',
                     data: formData,
                     success: function(data) {
