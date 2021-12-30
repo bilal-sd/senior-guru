@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.frontend.main')
 @section('main-section')
-    @include('layouts.top-navbar')
+    @include('layouts.frontend.top-navbar')
     <section class="map-section">
         <div class="container map-section-left">
             <!-- left section start from here -->
@@ -111,7 +111,7 @@
         </div>
         <input type="hidden" value="{{ $cat }}" id="parentSlug">
     </section>
-    @include('layouts.bottom-footer')
+    @include('layouts.frontend.bottom-footer')
 @endsection
 @section('section-script')
     {{-- <script

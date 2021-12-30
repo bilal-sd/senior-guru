@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Listing;
-use App\Countries;
-use App\States;
-use App\Cities;
+use App\Models\Listing;
+use App\Models\Countries;
+use App\Models\States;
+use App\Models\Cities;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -13,7 +13,7 @@ class ListingController extends Controller
 
     public function view()
     {
-        return view('admin.listing');
+        return view('admin.listing.listing');
     }
     public function index()
     {
@@ -28,72 +28,98 @@ class ListingController extends Controller
 
     public function store(Request $request)
     {   
-        if ($request->step == '1') {
-            $country = Countries::find($request->country);
-            $state = States::find($request->state);
-            $city = Cities::find($request->city);
-            $country = $country->sortname;
-            $state = $state->name;
-            $city = $city->name;
-            if (!isset($request->id)) {
-                $listing = new Listing();
-                $listing->title = $request->business;
-                $listing->slug = $request->slug;
-                $listing->type = $request->type;
-                $listing->category = $request->category;
-                $listing->email = $request->email;
-                $listing->phone = $request->phone;
-                $listing->website = $request->website;
-                $listing->address = str_replace(",","",$request->address1) . ', ' . str_replace(",","",$request->address2);
-                $listing->state = $state;
-                $listing->city = $city;
-                $listing->country = $country;
-                $listing->zip = $request->zip;
-                $listing->lati = $request->lati;
-                $listing->longi = $request->longi;
-                $listing->save();
-                $id = $listing->id;
-                return response()->json(['last_id' => $id, 'status' => 'success']);
-            } else {
-                $listing = Listing::find($request->id);
-                $listing->title = $request->business;
-                $listing->slug = $request->slug;
-                $listing->type = $request->type;
-                $listing->category = $request->category;
-                $listing->email = $request->email;
-                $listing->phone = $request->phone;
-                $listing->website = $request->website;
-                $listing->address = $request->address1 . ' ' . $request->address2;
-                $listing->state = $state;
-                $listing->city = $city;
-                $listing->country = $country;
-                $listing->zip = $request->zip;
-                $listing->lati = $request->lati;
-                $listing->longi = $request->longi;
-                $listing->save();
-                return response()->json(['last_id' => $request->id, 'status' => 'success']);
-            }
+        $country = Countries::find($request->country);
+        $state = States::find($request->state);
+        $city = Cities::find($request->city);
+        $country = $country->sortname;
+        $state = $state->name;
+        $city = $city->name;
+        if (!isset($request->id)) {
+            $listing = new Listing();
+            $listing->title = $request->business;
+            $listing->slug = $request->slug;
+            $listing->type = $request->type;
+            $listing->category = $request->category;
+            $listing->email = $request->email;
+            $listing->phone = $request->phone;
+            $listing->website = $request->web;
+            $listing->address = str_replace(",", "", $request->address1) . ', ' . str_replace(",", "", $request->address2);
+            $listing->state = $state;
+            $listing->city = $city;
+            $listing->country = $country;
+            $listing->zip = $request->zip;
+            $listing->lati = $request->lati;
+            $listing->longi = $request->longi;
+            $listing->aminities = implode(",",$request->pf).",".implode(",",$request->ps).",".implode(",",$request->lhc);
+            $listing->save();
+            return response()->json(['status' => 'success']);
         }
-        if ($request->step == '2') {
-            if (!isset($request->id)) {
-                $listing = new Listing();
-                $listing->status = $request->status;
-                $listing->keywords = $request->keywords;
-                $listing->package = $request->package;
-                $listing->description = $request->description;
-                $listing->save();
-                $id = $listing->id;
-                return response()->json(['last_id' => $id, 'status' => 'success']);
-            }else{
-                $listing = Listing::find($request->id);
-                $listing->status = $request->status;
-                $listing->keywords = $request->keywords;
-                $listing->package = $request->package;
-                $listing->description = $request->description;
-                $listing->save();
-                return response()->json(['last_id' => $request->id, 'status' => 'success']);
-            }
-        }
+        // if ($request->step == '1') {
+        //     $country = Countries::find($request->country);
+        //     $state = States::find($request->state);
+        //     $city = Cities::find($request->city);
+        //     $country = $country->sortname;
+        //     $state = $state->name;
+        //     $city = $city->name;
+        //     if (!isset($request->id)) {
+        //         $listing = new Listing();
+        //         $listing->title = $request->business;
+        //         $listing->slug = $request->slug;
+        //         $listing->type = $request->type;
+        //         $listing->category = $request->category;
+        //         $listing->email = $request->email;
+        //         $listing->phone = $request->phone;
+        //         $listing->website = $request->website;
+        //         $listing->address = str_replace(",","",$request->address1) . ', ' . str_replace(",","",$request->address2);
+        //         $listing->state = $state;
+        //         $listing->city = $city;
+        //         $listing->country = $country;
+        //         $listing->zip = $request->zip;
+        //         $listing->lati = $request->lati;
+        //         $listing->longi = $request->longi;
+        //         $listing->save();
+        //         $id = $listing->id;
+        //         return response()->json(['last_id' => $id, 'status' => 'success']);
+        //     } else {
+        //         $listing = Listing::find($request->id);
+        //         $listing->title = $request->business;
+        //         $listing->slug = $request->slug;
+        //         $listing->type = $request->type;
+        //         $listing->category = $request->category;
+        //         $listing->email = $request->email;
+        //         $listing->phone = $request->phone;
+        //         $listing->website = $request->website;
+        //         $listing->address = $request->address1 . ' ' . $request->address2;
+        //         $listing->state = $state;
+        //         $listing->city = $city;
+        //         $listing->country = $country;
+        //         $listing->zip = $request->zip;
+        //         $listing->lati = $request->lati;
+        //         $listing->longi = $request->longi;
+        //         $listing->save();
+        //         return response()->json(['last_id' => $request->id, 'status' => 'success']);
+        //     }
+        // }
+        // if ($request->step == '2') {
+        //     if (!isset($request->id)) {
+        //         $listing = new Listing();
+        //         $listing->status = $request->status;
+        //         $listing->keywords = $request->keywords;
+        //         $listing->package = $request->package;
+        //         $listing->description = $request->description;
+        //         $listing->save();
+        //         $id = $listing->id;
+        //         return response()->json(['last_id' => $id, 'status' => 'success']);
+        //     }else{
+        //         $listing = Listing::find($request->id);
+        //         $listing->status = $request->status;
+        //         $listing->keywords = $request->keywords;
+        //         $listing->package = $request->package;
+        //         $listing->description = $request->description;
+        //         $listing->save();
+        //         return response()->json(['last_id' => $request->id, 'status' => 'success']);
+        //     }
+        // }
     }
 
     public function edit($id)

@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.frontend.main')
 @section('main-section')
-    @include('layouts.top-navbar')
+    @include('layouts.frontend.top-navbar')
     <section class="login-sec">
         <div class="login-form">
             <div class="text-center header-form">
@@ -39,7 +39,7 @@
                     </li>
                 </ul>
 
-                <button type="submit" class="btn submit-login button-orange w-100">{{ __('Login') }}</button>
+                <button type="submit" class="btn submit-login button-orange w-100">{{ __('Log in') }}</button>
 
 
                 <p class="text-center small-txt-login">Don't have an account? <a href="{{ route('register') }}"
