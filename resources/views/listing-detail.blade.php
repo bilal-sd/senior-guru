@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.frontend.main')
 @section('main-section')
-    @include('layouts.top-navbar')
+    @include('layouts.frontend.top-navbar')
     <section class="breadcrumb-nav">
         <div class="container">
             <nav aria-label="breadcrumb">
@@ -719,5 +719,5 @@
             </div>
         </div>
     </section>
-    @include('layouts.bottom-footer')
+    @include('layouts.frontend.bottom-footer')
 @endsection

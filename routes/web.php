@@ -1,56 +1,70 @@
 <?php
 
-use App\Category;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use App\Http\Controllers\Admin\RegisteredAdminController;
+use App\Http\Controllers\Admin\AuthenticatedSessionController;
+use Illuminate\Auth\Events\Verified;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontController;
+use App\Http\Controllers\ListingController;
+use App\Models\Ameniti;
 
-Route::get('/', 'FrontController@home');
-Route::get('/ParentNav', 'FrontController@ParentNav');
-Route::get('category/{cat}', 'FrontController@index');
-Route::get("/subCategory/{id}",'FrontController@subcategory');
-Route::get("/subCategory2/{id}",'FrontController@subcategory');
-Route::post('/search-listing', 'FrontController@Listings');
-Route::get('/listing-details/{id}','FrontController@listingdetails')->name('listing.details');
-
-//  ..................... Authentication Routes .....................
+Route::redirect('/admin', '/admin/login');
+Route::get('/', [FrontController::class, 'home']);
+Route::get('/ParentNav', [FrontController::class, 'ParentNav']);
+Route::get('category/{cat}', [FrontController::class, 'index']);
+Route::get("/subCategory/{id}", [FrontController::class, 'subcategory']);
+Route::get("/subCategory2/{id}", [FrontController::class, 'subcategory']);
+Route::post('/search-listing', [FrontController::class, 'Listings']);
+Route::get('/listing-details/{id}', [FrontController::class, 'listingdetails'])->name('listing.details');
+// ========== Auth Jetstream =============
 Route::get('/login', function () {
     return view('Auth.login');
-});
-
-Auth::routes();
-Route::prefix('user')->group(function(){
-    Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
-    Route::get('/home', 'HomeController@index')->name('home');
+})->name('login');
+Route::get('/register', function () {
+    return view('Auth.register');
+})->name('register');
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 });
 
 Route::prefix('admin')->group(function () {
-    Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
-    Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
-    Route::get('logout/', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    Route::get('/', 'Auth\AdminController@index')->name('admin.dashboard');
-    // ....................categories....................
-    Route::get('/categories','CategoryController@index')->name('admin.categories');
-    Route::get('/categories/show/{level?}/{parent_id?}','CategoryController@show')->name('admin.categories.show');
-    Route::get('/categories/delete/{id}','CategoryController@destroy')->name('admin.categories.destroy');
-    Route::get('/categories/status/{id}','CategoryController@status')->name('admin.categories.status');
-    Route::post('/submit-categories','CategoryController@store')->name('Submit-Categories');
-    //...............listing..................
-    Route::get('/listing','ListingController@view')->name('admin.listing');
-    Route::get('/listing/show','ListingController@index')->name('admin.listing.show');
-    Route::get('/listing/delete/{id}','ListingController@destroy')->name('admin.listing.delete');
-    Route::post('/listing/insert','ListingController@store')->name('admin.listing.insert');
-    Route::get('/listing/edit/{id}','ListingController@edit')->name('admin.listing.edit');
-    Route::get('/listing-create','CategoryController@catChildAll')->name('admin.listing.create');
-    Route::get("/location/getcountry",'ListingController@getcountry')->name('getcountry');
-    Route::get("/location/getstates/{c_id}",'ListingController@getstates')->name('getstates');
-    Route::get("/location/getcities/{s_id}",'ListingController@getcities')->name('getcities');
+    Route::post('/register', [RegisteredAdminController::class, 'store']);
+    Route::get('/register', [RegisteredAdminController::class, 'create'])->name('admin-register');
+    Route::get('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('admin-logout');
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('admin-login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->name('admin-login-submit');
 
-    Route::get('/logs',function(){
-        return view('admin.audit-listing');
-    })->name('admin.listing.audit');
-    
-    Route::get('/listing-form/{slug?}',function($slug){
-        return view('admin.listing-form',['catSlug'=>$slug]);
-    })->name('admin.listing-form');
-    
+    Route::group(['middleware' => ['auth:admin']], function () {
+        Route::view('/dashboard', 'admin.dashboard.default')->name('index');
+        Route::view('index-02', 'admin.dashboard.dashboard-02')->name('index-02');
+        // ........................... categories ...................
+        Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
+        Route::get('/categories/show/{parent_id?}', [CategoryController::class, 'catChildAll'])->name('admin.categories.show');
+        Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
+        Route::post('/submit-categories', [CategoryController::class, 'store'])->name('Submit-Categories');
+        Route::get('/categories/status/{id}', [CategoryController::class, 'status'])->name('admin.categories.status');
+        Route::get('/categories/reverse/{id}', [CategoryController::class, 'reverse'])->name('admin.categories.reverse');
+        Route::get('/categories/select/', [CategoryController::class, 'show'])->name('admin.categories.select');
+        // ............................. Listings ......................
+        Route::get('/listing', [ListingController::class, 'view'])->name('admin.listing');
+        Route::get('/listing/show', [ListingController::class, 'index'])->name('admin.listing.show');
+        Route::get('/listing/edit/{id}', [ListingController::class, 'edit'])->name('admin.listing.edit');
+        Route::get('listing/delete/{id}', [ListingController::class, 'destroy'])->name('admin.listing.delete');
+        Route::get('/categories/show-form/{level?}/{parent_id?}', [CategoryController::class, 'show'])->name('admin.categories.show-form');
+        Route::get('/listing-create', [CategoryController::class, 'catChildAll'])->name('listing-create');
+        Route::post("/listing/insert", [ListingController::class, 'store'])->name('insert');
+        Route::get("/location/getcountry", [ListingController::class, 'getcountry'])->name('getcountry');
+        Route::get("/location/getstates/{c_id}", [ListingController::class, 'getstates'])->name('getstates');
+        Route::get("/location/getcities/{s_id}", [ListingController::class, 'getcities'])->name('getcities');
+        
+        Route::get('/listing-form/{slug?}', function ($slug) {
+            $ami = Ameniti::all();
+            return view('admin.listing.listing-form', ['catSlug' => $slug, "aminities" => $ami]);
+        })->name('listing-form');
+    });
 });

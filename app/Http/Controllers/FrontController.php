@@ -2,8 +2,8 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Category;
-use App\Listing;
+use App\Models\Category;
+use App\Models\Listing;
 
 class FrontController extends Controller
 {   

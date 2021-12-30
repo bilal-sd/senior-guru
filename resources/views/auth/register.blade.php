@@ -1,6 +1,6 @@
-@extends('layouts.main')
+@extends('layouts.frontend.main')
 @section('main-section')
-    @include('layouts.top-navbar')
+    @include('layouts.frontend.top-navbar')
     <section class="login-sec">
         <div class="sign-up">
             <div class="text-center header-form">
