@@ -28,7 +28,7 @@ Route::get('/register', function () {
 })->name('register');
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return view('user-dashboard');
     });
 });
 
