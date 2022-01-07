@@ -6,16 +6,6 @@
 <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
 
 <script>
-    $(document).ready(function() {
-        $('.slick-carousel').slick({
-            infinite: true,
-            slidesToShow: 1,
-            slidesToScroll: 1,
-            arrows: false,
-            dots: true
-        });
-    });
-
     function navCat() {
         var html = "";
         jQuery.ajax({

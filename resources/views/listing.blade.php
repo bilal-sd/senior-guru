@@ -7,7 +7,7 @@
             <div class="left-listing">
                 <h1 id="listCounts">50 Assisted Living Facilities</h1>
                 <div class="d-flex justify-content-between list-small-head">
-                    <p>2,780 units available </p>
+                    {{-- <p>2,780 units available </p> --}}
                     <div class="dropdown top-selction">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -179,16 +179,27 @@
         function listingsmaker(listingArr) {
             var listHtml = "";
             $.each(listingArr, function(index, value) {
-                listHtml += '<div class="col-lg-4 col-md-6 col-sm-6">'+
-                '<div class="card card-main">' +
-                '<div class="slider-card slick-carousel">' +
-                '<a href="javascript:void(0);" class="slider-card-inner">' +
-                '<img src="{{ asset('assets/frontend/images/slide-card.svg') }}" class="img-fluid">' +
-                '</a>' +
-                '</div>' +
-                '<div class="card-body">' +
-                '<p class="price-tag">$8,384.00 <sub>per month</sub></p>' +
-                '<a href="{{ url('/listing-details/') }}/' + value['slug'] + '">' +
+                let images = "";
+                if (value['imgs'] != null) {
+                    $.each(value['imgs'], function(index, val) {
+                        images += '<a href="javascript:void(0);" class="slider-card-inner">' +
+                            '<img src="{{ asset('storage/files/') }}/' + val["filename"] +
+                            '" class="img-fluid">' +
+                            '</a>';
+                    });
+                } else {
+                    images += '<a href="javascript:void(0);" class="slider-card-inner">' +
+                        '<img src="{{ asset('storage/files/') }}/default.jpg" class="img-fluid">' +
+                        '</a>';
+                }
+                listHtml += '<div class="col-lg-4 col-md-6 col-sm-6">' +
+                    '<div class="card card-main">' +
+                    '<div class="slider-card slick-carousel-list">' +
+                    images +
+                    '</div>' +
+                    '<div class="card-body">' +
+                    '<p class="price-tag">$8,384.00 <sub>per month</sub></p>' +
+                    '<a href="{{ url('/listing-details/') }}/' + value['slug'] + '">' +
                     '<h5 class="text-truncate"><a href="{{ url('/listing-details/') }}/' + value['slug'] + '">' +
                     value['title'] + '</a></h5>' +
                     '</a>' +
@@ -204,7 +215,7 @@
                     '</div>' +
                     '<p class="text-truncate">' + value['address'] + value['city'] + ',' + value['state'] + '</p>' +
                     '</div>' +
-                    '<div class="Promotion-tag">Special Promotion!</div>' +
+                    // '<div class="Promotion-tag">Special Promotion!</div>' +
                     '</div>' +
                     '</div>';
 
@@ -265,14 +276,6 @@
             }
         }
 
-        $("#location").on("change", showGetResult)
-        $("#parentSub").on("change", showGetResult)
-        $("#keyword").on("change", showGetResult)
-        $("#reset").on("click", function() {
-            window.location.href = "{{ url('/category/' . $cat) }}";
-            showGetResult();
-        });
-
         function showGetResult() {
             var cat = checkUndefined($('#parentSlug').val());
             var location = checkUndefined($("#location").val());
@@ -288,18 +291,36 @@
                 subcat: subCat,
                 keyword: keyword
             };
-            jQuery.ajax({
+            $.ajax({
                 url: '/search-listing',
                 type: 'POST',
                 data: obj,
                 dataType: 'JSON',
                 success: function(data) {
+                    // console.log(data);
                     let listHtml = listingsmaker(data.listing);
                     $("#listCounts").html(data.listing.length + " Listings are available");
                     $("#listingShow").html(listHtml);
+                    if (listHtml != "") {
+                        slickCarousel();
+                    }
                 }
             });
-        }
+        };
         showGetResult();
+        function slickCarousel() {
+            $('.slick-carousel-list').slick({
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                arrows: false,
+                dots: true
+            });
+        }
+        $(document).ready(function() {
+            $("#location").on("change", showGetResult)
+            $("#parentSub").on("change", showGetResult)
+            $("#keyword").on("change", showGetResult)
+        });
     </script>
 @endsection

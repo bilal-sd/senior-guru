@@ -9,32 +9,35 @@ use Illuminate\Support\Facades\Route;
 
 class CategoryController extends Controller
 {
-    public function index($id=0)
-    {   
-        $categories = $this->catChildAll($id);
-        $bread = $this->reverse($id);
-        return view('admin.category.categories',compact('categories','bread'));
+    public function index()
+    {
+        return view('admin.category.categories');
     }
 
     public function store(Request $request)
     {
         if ($request->has('id')) {
             $category = Category::find($request->id);
+            $category->name = $request->name;
+            $category->slug = $request->slug;
+            $category->parent_id = $request->parent_id;
+            $category->save();
         } else {
-            $category = new Category();
-            $category->status = 1;
+            $contact = new Category();
+            $contact->name = $request->name;
+            $contact->slug = $request->slug;
+            $contact->status = 1;
+            $contact->parent_id = $request->parent_id;
+            $contact->save();
         }
-        $category->name = $request->name;
-        $category->slug = $request->slug;
-        $category->parent_id = $request->parent_id;
-        $category->save();
         return response()->json("['status' => 'success']");
     }
-   
+
     public function show($level = 0, $parent_id = 0, $arr = [])
     {
-        if (gettype(json_decode($parent_id)) != "integer") {
-            $parent_id = Category::where('slug', $parent_id)->get()[0]->id;
+        if (gettype($parent_id) == "string") {
+            $find = Category::where('slug', $parent_id)->get();
+            $parent_id = $find[0]->id;
         }
         $categories = Category::where('parent_id', $parent_id)->get();
         foreach ($categories as $category) {
@@ -58,7 +61,7 @@ class CategoryController extends Controller
             array_push($send, $category);
             $id = $category->parent_id;
         }
-        return $send;
+        return response()->json(array_reverse($send));
     }
 
     public function catChildAll($parent_id = 0, $check = false)
@@ -67,21 +70,17 @@ class CategoryController extends Controller
             $count = Category::where('parent_id', $parent_id)->count();
             return $count;
         } else {
+            $categories = Category::where('parent_id', $parent_id)->get();
+            foreach ($categories as $category) {
+                $category->subcount = $this->catChildAll($category->id, true);
+                $category->listcount = Listing::where("type",$category->slug)->count();
+            }
             $route = Route::current();
             $name = $route->getName();
-            $categories = Category::where('parent_id', $parent_id);
-            if($name!="admin.categories"){
-                $categories->where('status',1);
-            }
-            $categories = $categories->get();
-            foreach ($categories as $category) {
-                $category->listcount = Listing::where("type",$category->id)->count();
-                $category->subcount = Category::where('parent_id', $category->id)->count();
-            }
             if($name=="listing-create"){
                 return view('admin.listing.listing-create',['childCat'=>$categories]);
             }else{
-                return $categories;
+                return response()->json($categories);
             }
         }
     }

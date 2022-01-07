@@ -48,9 +48,21 @@
                 <div class="card">
                     <div class="card-header pb-0 d-flex justify-content-between">
                         <div class="col-10">
-                            <h5 id="Heading">Categories</h5>
+                            @php
+                                $bread = array_reverse($bread);
+                            @endphp
+                            <h5 id="Heading">
+                                @if (count($bread)>0)
+                                    {{end($bread)->name}}
+                                @else
+                                    {{"Home"}}
+                                @endif
+                            </h5>
                             <ol class="breadcrumb pt-3" id="bread">
-                                <li class="breadcrumb-item" data-pId="0"><a type="button">Home</a></li>
+                                <li class="breadcrumb-item"><a type="button" href="{{Route('admin.categories')}}">Home</a></li>
+                                @foreach ($bread as $b)
+                                <li class="breadcrumb-item"><a type="button" href="{{Route('admin.categories',$b->id)}}">{{$b->name}}</a></li>
+                                @endforeach
                                 {{-- <li class="breadcrumb-item active">Breadcrumb</li> --}}
                             </ol>
                         </div>
@@ -60,8 +72,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive container-fluid">
-                            <table class="display datatables" id="ajax-data-object">
+                        <div class="">
+                            <table class="display dataTable" id="basic-3">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -72,6 +84,51 @@
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
+                                <tbody>
+                                    @php
+                                        $i = 1;
+                                    @endphp
+                                    @foreach ($categories as $category)
+                                    <tr>
+                                        <td>{{$i}}</td>
+                                        <td>{{$category->name}}</td>
+                                        <td>{{$category->subcount}}</td>
+                                        <td>{{$category->slug}}</td>
+                                        <td>
+                                            @php
+                                            if ($category->status==1){
+                                                $html = "Active";
+                                                $status = "checked";
+                                            }else{
+                                                $html = "Inactive";
+                                                $status = "";
+                                            }
+                                            @endphp
+                                            <div class="media-body text-center switch-sm">
+                                                <span class="me-2">{{$html}}</span>
+                                                <label class="switch">
+                                                    <input type="checkbox" class="status" data-id="{{$category->id}}" {{$status}}>
+                                                    <span class="switch-state"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-between px-3">
+                                                <a type="button" class="edit-cat" data-bs-toggle="modal" data-bs-target="#CategoryForm" data-id="{{$category->id}}"><i class="icon-pencil-alt"></i></a>
+                                                @if ($category->subcount == 0)
+                                                <a type="button" class="del-cat" data-id="{{$category->id}}"><i class="icon-trash text-danger"></i></a>
+                                                @endif
+                                                @if ($category->subcount > 0)
+                                                    <a type="button" href="{{Route('admin.categories',$category->id)}}" class="view-sub"><i class="fa fa-eye"></i></a>                                                    
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @php
+                                        $i++;
+                                    @endphp
+                                    @endforeach
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -94,16 +151,16 @@
                                 <input class="form-control" id="InputCat_name" name="cat_name" type="text" value="">
                             </div>
                             <div class="mb-3">
-                                <label class="col-form-label" for="recipient-name">Select Category:</label>
-                                <input class="form-control" readonly id="Inputparent_id" name="parent_id" type="text"
-                                    data-val="0" value="Parent">
-                                {{-- <label class="col-form-label" for="recipient-name">Select Sub Category:</label>
-                                <select name="parent_id" class="form-control" id="selectCat">
+                                <label class="col-form-label" for="recipient-name">Select Sub Category:</label>
+                                <select name="parent_id" id="Inputparent_id" class="form-control">
                                     <option value="0">Parent</option>
-                                </select> --}}
-                                <div id="select-list" class="">
-
-                                </div>
+                                    @foreach ($bread as $b)
+                                    <option value="{{$b->id}}" @if (end($bread)->id==$b->id) selected @endif>- {{$b->name}}</option>
+                                    @endforeach
+                                    @foreach ($categories as $option)
+                                    <option value="{{$option->id}}">{{$option->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label class="col-form-label" for="recipient-name">Slug:</label>
@@ -125,148 +182,10 @@
         <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script>
-            // <li><a class="list-group-item list-group-item-action active" href="javascript:void(0)"><span class="icon-angle-left"></span> <span>Parent</span></a></li>
-            // sessionStorage.setItem("parent_id",0)
-            function loaddata() {
-                let html = "";
-                let status = "";
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/categories/show/') }}/" + sessionStorage.getItem("parent_id"),
-                    dataType: "JSON",
-                    success: function(response) {
-                        let serial = 1;
-                        $.each(response, function(index, val) {
-                            let valpush = {};
-                            response[index]["count"] = serial;
-                            if (val["status"] == 1) {
-                                response[index]["status"] =
-                                    '<div class="media-body text-center switch-sm"><span class="me-2">Active</span><label class="switch"><input type="checkbox" class="status" data-id="' +
-                                    val["id"] +
-                                    '" checked><span class="switch-state"></span></label></div>';
-                            } else {
-                                response[index]["status"] =
-                                    '<div class="media-body text-center switch-sm"><span class="me-2">Inactive</span><label class="switch"> <input type="checkbox"class="status" data-id="' +
-                                    val["id"] + '" ><span class="switch-state"></span></label></div>';
-                            }
-                            if (val["subcount"] > 0) {
-                                response[index]["actions"] =
-                                    '<div class="d-flex justify-content-between px-3">' +
-                                    '<a type="button" class="edit-cat" data-bs-toggle="modal" data-bs-target="#CategoryForm" data-pid="' +
-                                    val["parent_id"] + '" data-id="' + val["id"] +
-                                    '"><i class="icon-pencil-alt"></i></a>' +
-                                    '<a type="button" class="del-cat" data-id="' + val["id"] +
-                                    '"><i class="icon-trash text-danger"></i></a>' +
-                                    '<a type="button" data-pid="' + val["id"] + '" class="view-sub"><i class="fa fa-eye"></i></a>' +
-                                    '</div>';
-                            } else {
-                                response[index]["actions"] =
-                                    '<div class="d-flex justify-content-between px-3">' +
-                                    '<a type="button" class="edit-cat" data-bs-toggle="modal" data-bs-target="#CategoryForm" data-pid="' +
-                                    val["parent_id"] + '" data-id="' + val["id"] +
-                                    '"><i class="icon-pencil-alt"></i></a>' +
-                                    '<a type="button" class="del-cat" data-id="' + val["id"] +
-                                    '"><i class="icon-trash text-danger"></i></a>' +
-                                    '</div>';
-                            }
-                            serial++;
-                        });
-                        $('#ajax-data-object').DataTable({
-                            destroy: true,
-                            data: response,
-                            "paging": true,
-                            "columns": [{
-                                "data": "count",
-                                "width": "2%"
-                            }, {
-                                "data": "name"
-                            }, {
-                                "data": "subcount",
-                                "width": "10%"
-                            }, {
-                                "data": "slug"
-                            }, {
-                                "data": "status"
-                            }, {
-                                "data": "actions",
-                            }]
-                        });
-                    }
-                });
-            }
-            loaddata();
-
-            function breadMaker() {
-                let find = sessionStorage.getItem("parent_id");
-                let html = "";
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/categories/reverse/') }}/" + find,
-                    dataType: "JSON",
-                    success: function(response) {
-                        html += '<li class="breadcrumb-item" data-jump="0"><a type="button">Home</a></li>';
-                        $.each(response, function (index, val) { 
-                            html +='<li class="breadcrumb-item"><a type="button" data-jump="' + val['id'] + '">' + val["name"] + '</a></li>';
-                        });
-                        if(response.length > 0){
-                            $("#Heading").html(response[response.length-1]["name"]);
-                        }else{
-                            $("#Heading").html("Categories");
-                        }
-                        // $("#Heading").html(response[response.length-1]["name"]);
-                        $("#bread").html(html);
-                    }
-                });
-            }
-            breadMaker();
-
-            function selectmaker(arr, back, old) {
-                let html = "";
-                html += '<ul class="list-group" id="currentList">';
-                // if (arr[0]['parent_id'] != 0) {
-                    html += '<li><a class="list-group-item list-group-item-action active" data-pid="' + back +
-                        '" id="current-heading" href="javascript:void(0)"><span>' + old +
-                        '</span></a></li>';
-                // }
-                $.each(arr, function(index, val) {
-                    if (val["subcount"] > 0) {
-                        html +=
-                            '<li class="d-flex justify-content-between align-items-center" style="border: 1px solid rgba(0, 0, 0, 0.125);border-top:0;">' +
-                            '<a href="javascript:void(0)" class="list-group-item border-0 list-group-item-action selected-val" data-pid="' +
-                            val["id"] + '" style="width:90%">' + val["name"] + '</a>' +
-                            '<a href="javascript:void(0)" data-pid="' + val["id"] + '" data-id="' + val["parent_id"] +
-                            '" data-selecthead="' + val["name"] +
-                            '" class="list-group-item border-0 list-group-item-action selectSub" style="width:10%"><span class="icon-angle-right"></span></a>' +
-                            '</li>';
-                    } else {
-                        html +=
-                            '<li class="d-flex justify-content-between align-items-center" style="border: 1px solid rgba(0, 0, 0, 0.125);border-top:0;">' +
-                            '<a href="javascript:void(0)" class="list-group-item border-0 list-group-item-action selected-val" data-pid="' +
-                            val["id"] + '">' + val["name"] + '</a>' +
-                            '</li>';
-                    }
-                });
-                '</ul>';
-                return html;
-            }
-            function loadselectCat(pId = 0, back = "", old = "Home") {
-                let html = "";
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/categories/show/') }}/" + sessionStorage.getItem("parent_id"),
-                    dataType: "JSON",
-                    success: function(response) {
-                        html = selectmaker(response, back, old);
-                        $('#select-list').html(html);
-                        $('#Inputparent_id').data("val", sessionStorage.getItem("parent_id"));
-                        $("#Inputparent_id").val($("#bread > li:last-child > a").html());
-                    }
-                });
-            }
-            loadselectCat();
-            $("#select-list").hide();
-            $("#Inputparent_id").on("dblclick", function() {
-                $("#select-list").toggle(0500);
+            $('#basic-3').DataTable({
+                "paging":   true,
+                "ordering": true,
+                "info":     true
             });
             $(document).ready(function() {
                 $(document).on('keyup', '#InputCat_name', function() {
@@ -276,6 +195,7 @@
                 });
                 $(document).on('click', 'tbody .del-cat', function(e) {
                     e.preventDefault();
+                    var $this =  $(this);
                     var id = $(this).data('id');
                     swal({
                         title: "Are you sure?",
@@ -293,9 +213,7 @@
                                         swal("Poof! Your Data has been deleted!", {
                                             icon: "success",
                                         });
-                                        sessionStorage.setItem("parent_id", "0");
-                                        breadMaker();
-                                        loaddata();
+                                        $($this).parent().parent().parent().hide(1000);
                                     } else {
                                         swal("Oops", "ERROR : " + data.message,
                                             "error");
@@ -307,13 +225,19 @@
                 });
                 $(document).on('click', ".status", function() {
                     let id = $(this).data("id");
+                    let text = $(this).parent().prev();
+
+                    if ($(text).html() == "Active") {
+                        $(text).html("Inactive")
+                    }else if ($(text).html() == "Inactive") {
+                        $(text).html("Active");
+                    }
                     $.ajax({
                         type: "GET",
                         url: "{{ URL::to('admin/categories/status') }}" + "/" + id,
                         dataType: "JSON",
                         success: function(response) {
                             if (response.status == 1) {
-                                loaddata();
                             }
                         }
                     });
@@ -322,7 +246,7 @@
                     e.preventDefault();
                     let cat_name = $('#InputCat_name').val();
                     let slug = $('#InputSlug').val();
-                    let parent_id = $('#Inputparent_id').data('val');
+                    let parent_id = $('#Inputparent_id').val();
                     let id = $('#id').val();
                     let dataobj = {
                         "_token": "{{ csrf_token() }}",
@@ -356,41 +280,26 @@
                             }
                             if ($('#id').length) {
                                 $('#id').remove();
-                                $('#Inputparent_id').data('val',0);
+                                $('#Inputparent_id').data('val', 0);
                             }
-                            loaddata();
+                            location.reload();
                             $("#SubmitForm")[0].reset();
                             $('#CategoryForm').modal('toggle');
                         }
                     });
                 });
-                $(document).on("click", ".view-sub", function() {
-                    let id = $(this).data('pid');
-                    sessionStorage.setItem('parent_id', id);
-                    breadMaker();
-                    loaddata();
-                    loadselectCat();
-                });
-                $(document).on("click", "#bread .breadcrumb-item", function() {
-                    let pId = $(this).children()[0];
-                    pId = $(pId).data("jump");
-                    sessionStorage.setItem('parent_id', pId);
-                    loaddata();
-                    breadMaker();
-                });
                 var myModalEl = document.getElementById('CategoryForm')
                 myModalEl.addEventListener('hidden.bs.modal', function(event) {
+                    $(".modal-title").html("Add New Category");
                     $("#SubmitForm")[0].reset();
                     if ($('#id').length) {
                         $('#id').remove();
                     }
-                    $("#select-list").hide();
-                });
-                myModalEl.addEventListener('show.bs.modal', function(event) {
-                    loadselectCat();
+                    $("#Inputparent_id > option").removeAttr("disabled");
                 });
                 $(document).on('click', '.edit-cat', function(e) {
                     e.preventDefault();
+                    $(".modal-title").html("Edit Category");
                     var pid = $(this).attr('data-pid');
                     var id = $(this).attr('data-id');
                     let ele = $(this).parent().parent().parent();
@@ -399,27 +308,7 @@
                     $('#InputCat_name').val($(name).html());
                     $('#InputSlug').val($(slug).html());
                     $('#InputCat_name').after('<input type="hidden" id="id" value="' + id + '">');
-                    // $('#Inputparent_id').data("val", pid);
-                    // $("#Inputparent_id").val($("#bread > li:last-child > a").html());
-                    // loadselectCat(pid);
-                    sessionStorage.setItem('parent_id', pid);
-                    loadselectCat();
-                });
-                $(document).on("click", ".selectSub", function() {
-                    let back = $(this).data('id');
-                    let pId = $(this).data('pid');
-                    sessionStorage.setItem("parent_id", pId);
-                    loadselectCat();
-                });
-                $(document).on("click", "#current-heading", function() {
-                    let back = $(this).data('pid');
-                    sessionStorage.setItem("parent_id", back);
-                    loadselectCat();
-                });
-                $(document).on("click", ".selected-val", function() {
-                    let pId = $(this).data('pid');
-                    $("#Inputparent_id").val($(this).html());
-                    $("#Inputparent_id").data("val", pId);
+                    $("#Inputparent_id").find('option[value="'+id+'"]').attr("disabled","disabled");
                 });
             });
         </script>

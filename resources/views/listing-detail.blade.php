@@ -6,10 +6,11 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item"><a href="#">{{ ucwords(str_replace(["-","_"]," ",$detail[0]->type)) }}</a></li>
-                    <li class="breadcrumb-item"><a href="#">{{ $detail[0]->state }}</a></li>
-                    <li class="breadcrumb-item"><a href="#">{{ $detail[0]->city }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $detail[0]->title }}</li>
+                    <li class="breadcrumb-item"><a href="#">{{ ucwords(str_replace(['-', '_'], ' ', $detail->type)) }}</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#">{{ $detail->state }}</a></li>
+                    <li class="breadcrumb-item"><a href="#">{{ $detail->city }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $detail->title }}</li>
                 </ol>
             </nav>
         </div>
@@ -19,18 +20,19 @@
             <div class="row">
                 <div class="left-image">
                     <div class="left-image-banner">
-                        <img src="{{asset('assets/frontend/images/Pinehurst/frame-1.svg')}}" class="img-fluid">
+                        <img src="{{ asset('storage/files')."/default.jpg" }}" class="w-100">
                     </div>
                 </div>
                 <div class="right-img">
                     <div class="right-img-top">
-                        <img src="{{asset('assets/frontend/images/Pinehurst/frame-small-2.svg')}}" class="img-fluid">
-                        <a href="javascript:void(0);"><img src="{{asset('assets/frontend/images/Pinehurst/upload.svg')}}"
+                        <img src="{{ asset('storage/files')."/default.jpg" }}" class="img-fluid">
+                        <a href="javascript:void(0);"><img src="{{ asset('assets/frontend/images/Pinehurst/upload.svg') }}"
                                 class="img-fluid">share</a>
                     </div>
                     <div class="right-img-btm">
-                        <img src="{{asset('assets/frontend/images/Pinehurst/frame-small-3.svg')}}" class="img-fluid">
-                        <a href="javascript:void(0);"><img src="{{asset('assets/frontend/images/Pinehurst/pics-count.svg')}}"
+                        <img src="{{ asset('storage/files')."/default.jpg" }}" class="img-fluid">
+                        <a href="javascript:void(0);"><img
+                                src="{{ asset('assets/frontend/images/Pinehurst/pics-count.svg') }}"
                                 class="img-fluid">10</a>
                     </div>
                 </div>
@@ -45,8 +47,9 @@
                     <section>
                         <div class="d-flex main-sunrise-div justify-content-between">
                             <div class="left-head">
-                                <h1>{{ $detail[0]->title }}</h1>
-                                <p>{{ $detail[0]->address }} - {{ $detail[0]->city }}, {{ $detail[0]->state }} {{ $detail[0]->zip }}</p>
+                                <h1>{{ $detail->title }}</h1>
+                                <p>{{ $detail->address }} - {{ $detail->city }}, {{ $detail->state }}
+                                    {{ $detail->zip }}</p>
                                 <div class="d-flex align-items-center">
                                     <ul class="reviews-list">
                                         <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
@@ -65,8 +68,8 @@
                         </div>
                     </section>
                     <section class="about-sec">
-                        <h2 class="sub-heading-inner">About {{ $detail[0]->title }}</h2>
-                        <p class="read_more">{{ $detail[0]->description }}
+                        <h2 class="sub-heading-inner">About {{ $detail->title }}</h2>
+                        <p class="read_more">{{ $detail->description }}
                         </p>
                     </section>
                     <section class="tabs-card-sec">
@@ -256,25 +259,25 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-6 main-m-div">
                                 <a class="card">
-                                    <img src="{{asset('assets/frontend/images/Pinehurst/Laundry.svg')}}">
+                                    <img src="{{ asset('assets/frontend/images/Pinehurst/Laundry.svg') }}">
                                     <p>Laundry Service</p>
                                 </a>
                             </div>
                             <div class="col-lg-3 col-md-6 main-m-div">
                                 <a class="card">
-                                    <img src="{{asset('assets/frontend/images/Pinehurst/vehicle-service.svg')}}">
+                                    <img src="{{ asset('assets/frontend/images/Pinehurst/vehicle-service.svg') }}">
                                     <p>Vehicle Service</p>
                                 </a>
                             </div>
                             <div class="col-lg-3 col-md-6 main-m-div">
                                 <a class="card">
-                                    <img src="{{asset('assets/frontend/images/Pinehurst/sport.svg')}}">
+                                    <img src="{{ asset('assets/frontend/images/Pinehurst/sport.svg') }}">
                                     <p>Sports & Recreation</p>
                                 </a>
                             </div>
                             <div class="col-lg-3 col-md-6 main-m-div">
                                 <a class="card">
-                                    <img src="{{asset('assets/frontend/images/Pinehurst/Clubhouse.svg')}}">
+                                    <img src="{{ asset('assets/frontend/images/Pinehurst/Clubhouse.svg') }}">
                                     <p>Clubhouse</p>
                                 </a>
                             </div>
@@ -284,7 +287,15 @@
                         <div class="Unique-feat">
                             <h2 class="sub-heading-inner">Property Services</h2>
                             <ul>
-                                <li>Package Service</li>
+                                @php
+                                    $pf = explode(',', $detail->pf);
+                                @endphp
+                                @foreach ($pf as $key => $item)
+                                    @if ($item != '')
+                                        <li>{{ $item }}</li>
+                                    @endif
+                                @endforeach
+                                {{-- <li>Package Service</li>
                                 <li>Wi-Fi at Pool and Clubhouse</li>
                                 <li>Controlled Access</li>
                                 <li>Planned Social Activities</li>
@@ -292,16 +303,17 @@
                                 <li>24 Hour Availability</li>
                                 <li>Renters Insurance Program</li>
                                 <li>Property Manager on Site</li>
-                                <li>Public Transportation</li>
+                                <li>Public Transportation</li> --}}
                             </ul>
                         </div>
                     </section>
                     <section class="location-sec">
                         <h2 class="sub-heading-inner">Location</h2>
                         <div class="d-flex justify-content-between locate-txet">
-                            <p class="mb-0">{{ $detail[0]->address }} - {{ $detail[0]->city }}, {{ $detail[0]->state }} {{ $detail[0]->zip }}</p>
+                            <p class="mb-0">{{ $detail->address }} - {{ $detail->city }},
+                                {{ $detail->state }} {{ $detail->zip }}</p>
                             <a href="javascript:void(0);" class="get-dir">Get Directions<img
-                                    src="{{asset('assets/frontend/images/Pinehurst/directions.svg')}}"></a>
+                                    src="{{ asset('assets/frontend/images/Pinehurst/directions.svg') }}"></a>
                         </div>
                         <div>
                             <iframe
@@ -310,7 +322,7 @@
                         </div>
                     </section>
                     <section class="Property-rating">
-                        <h2 class="sub-heading-inner">Property Ratings at {{ $detail[0]->title }}</h2>
+                        <h2 class="sub-heading-inner">Property Ratings at {{ $detail->title }}</h2>
                         <div class="row">
                             <div class="col-lg-2 main-m-div">
                                 <div class="card rate-card-left text-center">
@@ -351,7 +363,8 @@
                             <div class="col-lg-1 col-md-2 left-clint-img">
                                 <div class="text-center">
                                     <div class="client-img">
-                                        <img src="{{asset('assets/frontend/images/Pinehurst/client.svg')}}" class="img-fluid">
+                                        <img src="{{ asset('assets/frontend/images/Pinehurst/client.svg') }}"
+                                            class="img-fluid">
                                     </div>
                                     <p>Maureen Biologist</p>
                                 </div>
@@ -388,7 +401,8 @@
                             <div class="col-lg-1 col-md-2 left-clint-img">
                                 <div class="text-center">
                                     <div class="client-img">
-                                        <img src="{{asset('assets/frontend/images/Pinehurst/client.svg')}}" class="img-fluid">
+                                        <img src="{{ asset('assets/frontend/images/Pinehurst/client.svg') }}"
+                                            class="img-fluid">
                                     </div>
                                     <p>Maureen Biologist</p>
                                 </div>
@@ -423,10 +437,10 @@
                         </div>
                     </section>
                     <!--   <section>
-                           <div class="row">
-                              <div class="col-lg-"></div>
-                           </div>
-                        </section> -->
+                               <div class="row">
+                                  <div class="col-lg-"></div>
+                               </div>
+                            </section> -->
                 </div>
                 <!-- end here -->
                 <div class="col-xxl-3 col-xl-4">
@@ -473,249 +487,53 @@
     <section class="like-cards-bottm">
         <div class="container">
             <h2 class="sub-heading-inner">You May Also Like</h2>
-            <div class="row justify-content-center">
-                <div class="col">
-                    <div class="card card-main">
-                        <div class="slider-card slick-carousel">
-                            <!-- Inside the containing div, add one div for each slide -->
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <p class="price-tag">$8,384.00 <sub>per month</sub></p>
-                            <a href="javascript:void(0);">
+            <div class="row justify-content-start">
+                @foreach ($catdetails as $like)
+                    <div class="col-md-3">
+                        <div class="card card-main">
+                            <div class="slider-card slick-carousel">
+                                <!-- Inside the containing div, add one div for each slide -->
+                                @if ($like->imgs!="")
+                                    @foreach ($like->imgs as $img)
+                                        <a class="slider-card-inner">
+                                            <!-- You can put an image or text inside each slide div -->
+                                            <img src="{{ asset('storage/files')."/".$img['filename'] }}" class="img-fluid">
+                                        </a>
+                                    @endforeach
+                                @else
+                                    <a class="slider-card-inner">
+                                        <!-- You can put an image or text inside each slide div -->
+                                        <img src="{{ asset('storage/files')."/default.jpg" }}" class="img-fluid">
+                                    </a>
+                                @endif
+                            </div>
+                            <div class="card-body">
+                                <p class="price-tag">$8,384.00 <sub>per month</sub></p>
                                 <a href="javascript:void(0);">
-                                    <h5 class="text-truncate">Rocky Mountain Assisted Living - Sil Rocky Mountain Assisted
-                                        Living
-                                        - SilRocky Mountain Assisted Living - SilRocky Mountain Assisted Living - SilRocky
-                                        Mountain Assisted Living - Sil</h5>
+                                    <a href="{{ url('listing-details/') }}/{{$like->slug}}">
+                                        <h5 class="text-truncate">{{ $like->title }}</h5>
+                                    </a>
                                 </a>
-                            </a>
-                            <div class="d-flex align-items-center">
-                                <ul class="reviews-list">
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>
-                                </ul>
-                                <span class="rating-count"> 4 reviews</span>
+                                <div class="d-flex align-items-center">
+                                    <ul class="reviews-list">
+                                        <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
+                                        <li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>
+                                    </ul>
+                                    <span class="rating-count"> 4 reviews</span>
+                                </div>
+                                <p class="text-truncate">{{ $like->address }} {{ $like->state }}, {{ $like->country }}
+                                    ({{ $like->zip }})</p>
                             </div>
-                            <p class="text-truncate">9970 Silver Maple Road, Highlands Ranch, CO</p>
-                        </div>
-                        <!--  <div class="Promotion-tag">
-                              Special Promotion!
-                           </div> -->
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card card-main">
-                        <div class="slider-card slick-carousel">
-                            <!-- Inside the containing div, add one div for each slide -->
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <p class="price-tag">$8,384.00 <sub>per month</sub></p>
-                            <a href="javascript:void(0);">
-                                <h5 class="text-truncate">Rocky Mountain Assisted Living - Sil Rocky Mountain Assisted
-                                    Living -
-                                    SilRocky Mountain Assisted Living - SilRocky Mountain Assisted Living - SilRocky
-                                    Mountain
-                                    Assisted Living - Sil</h5>
-                            </a>
-                            <div class="d-flex align-items-center">
-                                <ul class="reviews-list">
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>
-                                </ul>
-                                <span class="rating-count"> 4 reviews</span>
-                            </div>
-                            <p class="text-truncate">9970 Silver Maple Road, Highlands Ranch, CO</p>
+                            <!--  <div class="Promotion-tag">
+                                  Special Promotion!
+                               </div> -->
                         </div>
                     </div>
-                </div>
-                <div class="col">
-                    <div class="card card-main">
-                        <div class="slider-card slick-carousel">
-                            <!-- Inside the containing div, add one div for each slide -->
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <div>
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </div>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <p class="price-tag">$8,384.00 <sub>per month</sub></p>
-                            <a href="javascript:void(0);">
-                                <h5 class="text-truncate">Rocky Mountain Assisted Living - Sil Rocky Mountain Assisted
-                                    Living -
-                                    SilRocky Mountain Assisted Living - SilRocky Mountain Assisted Living - SilRocky
-                                    Mountain
-                                    Assisted Living - Sil</h5>
-                            </a>
-                            <div class="d-flex align-items-center">
-                                <ul class="reviews-list">
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>
-                                </ul>
-                                <span class="rating-count"> 4 reviews</span>
-                            </div>
-                            <p class="text-truncate">9970 Silver Maple Road, Highlands Ranch, CO</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card card-main">
-                        <div class="slider-card slick-carousel">
-                            <!-- Inside the containing div, add one div for each slide -->
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <div>
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </div>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <p class="price-tag">$8,384.00 <sub>per month</sub></p>
-                            <a href="javascript:void(0);">
-                                <h5 class="text-truncate">Rocky Mountain Assisted Living - Sil Rocky Mountain Assisted
-                                    Living -
-                                    SilRocky Mountain Assisted Living - SilRocky Mountain Assisted Living - SilRocky
-                                    Mountain
-                                    Assisted Living - Sil</h5>
-                            </a>
-                            <div class="d-flex align-items-center">
-                                <ul class="reviews-list">
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>
-                                </ul>
-                                <span class="rating-count"> 4 reviews</span>
-                            </div>
-                            <p class="text-truncate">9970 Silver Maple Road, Highlands Ranch, CO</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card card-main">
-                        <div class="slider-card slick-carousel">
-                            <!-- Inside the containing div, add one div for each slide -->
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                            <a class="slider-card-inner">
-                                <!-- You can put an image or text inside each slide div -->
-                                <img src="{{asset('assets/frontend/images/slide-card.svg')}}" class="img-fluid">
-                            </a>
-                        </div>
-                        <div class="card-body">
-                            <p class="price-tag">$8,384.00 <sub>per month</sub></p>
-                            <a href="javascript:void(0);">
-                                <h5 class="text-truncate">Rocky Mountain Assisted Living - Sil Rocky Mountain Assisted
-                                    Living -
-                                    SilRocky Mountain Assisted Living - SilRocky Mountain Assisted Living - SilRocky
-                                    Mountain
-                                    Assisted Living - Sil</h5>
-                            </a>
-                            <div class="d-flex">
-                                <ul class="reviews-list">
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>
-                                    <li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>
-                                </ul>
-                                <span class="rating-count"> 4 reviews</span>
-                            </div>
-                            <p class="text-truncate">9970 Silver Maple Road, Highlands Ranch, CO</p>
-                        </div>
-                    </div>
-                </div>
+
+                @endforeach
             </div>
         </div>
     </section>
