@@ -43,28 +43,26 @@ Route::prefix('admin')->group(function () {
         Route::view('/dashboard', 'admin.dashboard.default')->name('index');
         Route::view('index-02', 'admin.dashboard.dashboard-02')->name('index-02');
         // ........................... categories ...................
-        Route::get('/categories', [CategoryController::class, 'index'])->name('admin.categories');
-        Route::get('/categories/show/{parent_id?}', [CategoryController::class, 'catChildAll'])->name('admin.categories.show');
+        Route::get('/categories/{parent_id?}', [CategoryController::class, 'index'])->name('admin.categories');
+        // Route::get('/categories/show/{parent_id?}', [CategoryController::class, 'catChildAll'])->name('admin.categories.show');
         Route::get('/categories/delete/{id}', [CategoryController::class, 'destroy'])->name('admin.categories.destroy');
         Route::post('/submit-categories', [CategoryController::class, 'store'])->name('Submit-Categories');
         Route::get('/categories/status/{id}', [CategoryController::class, 'status'])->name('admin.categories.status');
-        Route::get('/categories/reverse/{id}', [CategoryController::class, 'reverse'])->name('admin.categories.reverse');
+        // Route::get('/categories/reverse/{id}', [CategoryController::class, 'reverse'])->name('admin.categories.reverse');
         Route::get('/categories/select/', [CategoryController::class, 'show'])->name('admin.categories.select');
         // ............................. Listings ......................
         Route::get('/listing', [ListingController::class, 'view'])->name('admin.listing');
         Route::get('/listing/show', [ListingController::class, 'index'])->name('admin.listing.show');
         Route::get('/listing/edit/{id}', [ListingController::class, 'edit'])->name('admin.listing.edit');
         Route::get('listing/delete/{id}', [ListingController::class, 'destroy'])->name('admin.listing.delete');
+        Route::get('listing/img-delete/{id?}', [ListingController::class, 'filedelete'])->name('admin.listing.img-del');
         Route::get('/categories/show-form/{level?}/{parent_id?}', [CategoryController::class, 'show'])->name('admin.categories.show-form');
         Route::get('/listing-create', [CategoryController::class, 'catChildAll'])->name('listing-create');
         Route::post("/listing/insert", [ListingController::class, 'store'])->name('insert');
+        Route::get('/listing/status/{id}', [ListingController::class, 'status'])->name('admin.listing.status');
         Route::get("/location/getcountry", [ListingController::class, 'getcountry'])->name('getcountry');
         Route::get("/location/getstates/{c_id}", [ListingController::class, 'getstates'])->name('getstates');
         Route::get("/location/getcities/{s_id}", [ListingController::class, 'getcities'])->name('getcities');
-        
-        Route::get('/listing-form/{slug?}', function ($slug) {
-            $ami = Ameniti::all();
-            return view('admin.listing.listing-form', ['catSlug' => $slug, "aminities" => $ami]);
-        })->name('listing-form');
+        Route::get('/listing-form/{slug?}', [ListingController::class, 'create'])->name('listing-form');
     });
 });
