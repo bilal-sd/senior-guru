@@ -19,11 +19,16 @@
         @slot('breadcrumb_title')
             <h3>Listing Show</h3>
         @endslot
+        <li class="breadcrumb-item"><a href="{{ route('index') }}">Home</a></li>
         <li class="breadcrumb-item">Listing</li>
         <li class="breadcrumb-item active">Listing Show</li>
+
+        @slot('right_button')
+        <a class="btn btn-primary" href="{{Route('listing-create')}}">Add Listing</a>
+        @endslot
     @endcomponent
     <div class="container-fluid">
-        <div class="row">
+        <div class="row"> 
             <!-- Zero Configuration  Starts-->
             <div class="col-sm-12">
                 <div class="card">
@@ -35,7 +40,7 @@
                                         <th></th>
                                         <th>S. No.</th>
                                         <th>Title</th>
-                                        <th>Address</th>
+                                        <th>Category</th>
                                         <th>City</th>
                                         <th>Country</th>
                                         <th>Status</th>
@@ -67,6 +72,8 @@
                     success: function(response) {
                         let serial = 1;
                         $.each(response, function(index, val) {
+                            let url = "{{Route('admin.listing.edit',":id")}}";
+                            url = url.replace(':id', val['id']);
                             response[index]["count"] = serial;
                             let status = "",
                                 op = "",
@@ -84,7 +91,7 @@
                                 val["id"] + '" ' + status + '><span class="switch-state"></span></label></div>';
                             response[index]["actions"] =
                                 '<div class="d-flex justify-content-between px-3">' +
-                                '<a class="edit-cat me-3" href="listing/edit/' + val['id'] +
+                                '<a class="edit-cat me-3" href="' + url +
                                 '"><i class="icon-pencil-alt"></i></a>' +
                                 '<a href="javascript:void(0)" type="button" class="del-cat" data-id=' + val[
                                     'id'] + '><i class="icon-trash text-danger"></i></a>' +
@@ -96,12 +103,12 @@
                             // `d` is the original data object for the row
                             return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">' +
                                 '<tr>' +
-                                '<td>Type:</td>' +
-                                '<td>' + d.cat_type + '</td>' +
+                                '<td>Address:</td>' +
+                                '<td>' + d.address + '</td>' +
                                 '</tr>' +
                                 '<tr>' +
-                                '<td>Category:</td>' +
-                                '<td>' + d.cat_sub + '</td>' +
+                                '<td>Category Type:</td>' +
+                                '<td>' + d.cat_type + '</td>' +
                                 '</tr>' +
                                 '<tr>' +
                                 '<td>Email:</td>' +
@@ -135,7 +142,7 @@
                             }, {
                                 "data": "title"
                             }, {
-                                "data": "address"
+                                "data": "cat_sub"
                             }, {
                                 "data": "city"
                             }, {
@@ -174,8 +181,10 @@
                         dangerMode: true,
                     }).then((willDelete) => {
                         if (willDelete) {
+                            let url = "{{Route('admin.listing.delete',":id")}}";
+                            url = url.replace(':id', id);
                             $.ajax({
-                                url: "{{ url('/admin/listing/delete') }}" + '/' + id,
+                                url: url,
                                 type: "GET",
                                 success: function(data) {
                                     swal("Poof! Your Data has been deleted!", {
@@ -201,9 +210,11 @@
                     }else if ($(text).html() == "Inactive") {
                         $(text).html("Active");
                     }
+                    let url = "{{Route('admin.listing.status',":id")}}";
+                    url = url.replace(':id', id);
                     $.ajax({
                         type: "GET",
-                        url: "{{ URL::to('admin/listing/status') }}" + "/" + id,
+                        url: url,
                         dataType: "JSON",
                         success: function(response) {
                         }

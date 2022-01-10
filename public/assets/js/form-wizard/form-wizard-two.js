@@ -1,5 +1,14 @@
 (function($) {
     "use strict";
+    function tapping() {  
+        let allWells = $('.setup-content');
+        allWells.hide();
+        let target = window.location.href.split("#")[1];
+        if(target=="" || target==null || target==undefined){
+            target = "step-1";
+        }
+        $(document).find("#"+target).show();
+    }
     var fomr_wizard_two = {
         init: function() {
             var navListItems = $('div.setup-panel div a'),
@@ -7,16 +16,16 @@
                 allNextBtn = $('.nextBtn');
             allWells.hide();
             navListItems.click(function (e) {
-                e.preventDefault();
-                var $target = $($(this).attr('href')),
-                    $item = $(this);
-                if (!$item.hasClass('disabled')) {
-                    navListItems.removeClass('btn btn-light').addClass('btn btn-primary');
-                    $item.addClass('btn btn-light');
-                    allWells.hide();
-                    $target.show();
-                    $target.find('input:eq(0)').focus();
-                }
+                tapping();
+                // var $target = $($(this).attr('href')),
+                //     $item = $(this);
+                // if (!$item.hasClass('disabled')) {
+                //     navListItems.removeClass('btn btn-light').addClass('btn btn-primary');
+                //     $item.addClass('btn btn-light');
+                //     allWells.hide();
+                //     $target.show();
+                //     $target.find('input:eq(0)').focus();
+                // }
             }), allNextBtn.click(function(){
                 var curStep = $(this).closest(".setup-content"),
                     curStepBtn = curStep.attr("id"),

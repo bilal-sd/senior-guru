@@ -69,8 +69,7 @@
                     </section>
                     <section class="about-sec">
                         <h2 class="sub-heading-inner">About {{ $detail->title }}</h2>
-                        <p class="read_more">{{ $detail->description }}
-                        </p>
+                        <p class="read_more"><?php echo $detail->description; ?> </p>
                     </section>
                     <section class="tabs-card-sec">
                         <h2 class="sub-heading-inner">Pricing & Floor Plans</h2>

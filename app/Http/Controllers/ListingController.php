@@ -22,7 +22,7 @@ class ListingController extends Controller
     }
     public function index()
     {
-        $listing = Listing::join('categories', 'listings.type', '=', 'categories.id')->select('listings.*', 'categories.name as cat_type')->get();
+        $listing = Listing::join('categories', 'listings.type', '=', 'categories.id')->select('listings.*', 'categories.name as cat_type')->orderBy('id', 'desc')->get();
         foreach($listing as $key=>$val){
             $listing[$key]->cat_sub = Category::find($val['category'])->name;
         }
@@ -52,41 +52,56 @@ class ListingController extends Controller
             $listing = new Listing();
         } else {
             $listing = Listing::find($request->id);
+            $id = $request->id;
         }
-        $listing->title = $request->business;
-        $listing->slug = $request->slug;
-        $listing->type = $request->type;
-        $listing->category = $request->category;
-        $listing->email = $request->email;
-        $listing->phone = $request->phone;
-        $listing->website = $request->web;
-        $listing->address = str_replace(",", "", $request->address1) . ', ' . str_replace(",", "", $request->address2);
-        $listing->state = $request->state;
-        $listing->city = $request->city;
-        $listing->country = $request->country;
-        $listing->zip = $request->zip;
-        $listing->lati = $request->latitude;
-        $listing->longi = $request->longitude;
-        $listing->status = $request->status;
-        $listing->keywords = $request->keywords;
-        $listing->package = $request->package;
-        $listing->description = $request->description;
-        $listing->aminities = $ami;
-        $listing->save();
-        if ($request->hasFile('image')) {
-            $id = $listing->id;
-            $files = $request->file('image');
-            foreach ($files as $file) {
-                $fname = str_replace('-', ' ', $file->getClientOriginalName());
-                $newfilename = pathinfo($fname, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientoriginalExtension();
-                $file->storeAs('public/files', $newfilename);
-                $fileimg = new File;
-                $fileimg->list_id = $id;
-                $fileimg->filename = $newfilename;
-                $fileimg->save();
+        if($request->form == "step1"){
+            $slug = Listing::where("slug",$request->slug)->count();
+            if($slug > 0){
+                $request->slug = $request->slug."-".rand(1,100);
             }
+            $listing->title = $request->business;
+            $listing->slug = $request->slug;
+            $listing->type = $request->type;
+            $listing->category = $request->category;
+            $listing->email = $request->email;
+            $listing->phone = $request->phone;
+            $listing->website = $request->web;
+            $listing->address = str_replace(",", "", $request->address1) . ', ' . str_replace(",", "", $request->address2);
+            $listing->state = $request->state;
+            $listing->city = $request->city;
+            $listing->country = $request->country;
+            $listing->zip = $request->zip;
+            $listing->lati = $request->latitude;
+            $listing->longi = $request->longitude;
+            $listing->save();
+            $id = (!isset($request->id)) ? $listing->id : $request->id;
+            return redirect()->route('admin.listing.edit', [$id,"#step-2"])->with('message', 'State saved correctly!!!');
         }
-        return response()->json(['status' => 'success']);
+        if($request->form == "step2"){
+            $listing->status = $request->status;
+            $listing->keywords = $request->keywords;
+            $listing->package = $request->package;
+            $listing->description = $request->description;
+            if ($request->hasFile('image')) {
+                $files = $request->file('image');
+                foreach ($files as $file) {
+                    $fname = str_replace('-', ' ', $file->getClientOriginalName());
+                    $newfilename = pathinfo($fname, PATHINFO_FILENAME) . '_' . time() . '.' . $file->getClientoriginalExtension();
+                    $file->storeAs('public/files', $newfilename);
+                    $fileimg = new File;
+                    $fileimg->list_id = $id;
+                    $fileimg->filename = $newfilename;
+                    $fileimg->save();
+                }
+            }
+            $listing->save();
+            return redirect()->route('admin.listing.edit', [$id,"#step-3"])->with('message', 'State saved correctly!!!');
+        }
+        if($request->form == "step3"){
+            $listing->aminities = $ami;
+            $listing->save();
+            return redirect()->route('admin.listing.edit', [$id,"#step-3"])->with('message', 'State saved correctly!!!');
+        }
     }
     
     public function edit($id)
@@ -105,6 +120,13 @@ class ListingController extends Controller
     {
         try {
             $list = Listing::find($id);
+            $files = File::where("list_id",$id)->get();
+            if(count($files)>0){
+                foreach ($files as $key => $value) {
+                    Storage::delete('public/files/' . $value["filename"]);
+                }
+                $files->delete();
+            }
             $list->delete();
             return response()->json("['status' => 'success']");
         } catch (\Throwable $th) {

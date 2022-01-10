@@ -51,18 +51,19 @@ Route::prefix('admin')->group(function () {
         // Route::get('/categories/reverse/{id}', [CategoryController::class, 'reverse'])->name('admin.categories.reverse');
         Route::get('/categories/select/', [CategoryController::class, 'show'])->name('admin.categories.select');
         // ............................. Listings ......................
-        Route::get('/listing', [ListingController::class, 'view'])->name('admin.listing');
-        Route::get('/listing/show', [ListingController::class, 'index'])->name('admin.listing.show');
+        Route::get('/listing/create', [CategoryController::class, 'catChildAll'])->name('listing-create');
+        Route::get('/listing/create-form/{slug?}', [ListingController::class, 'create'])->name('listing-form');
+        Route::get('/categories/show-form/{level?}/{parent_id?}', [CategoryController::class, 'show'])->name('admin.listing-form.cats');
+        Route::get('/listing/show', [ListingController::class, 'view'])->name('admin.listing');
+        Route::get('/listing/get', [ListingController::class, 'index'])->name('admin.listing.show');
         Route::get('/listing/edit/{id}', [ListingController::class, 'edit'])->name('admin.listing.edit');
         Route::get('listing/delete/{id}', [ListingController::class, 'destroy'])->name('admin.listing.delete');
         Route::get('listing/img-delete/{id?}', [ListingController::class, 'filedelete'])->name('admin.listing.img-del');
-        Route::get('/categories/show-form/{level?}/{parent_id?}', [CategoryController::class, 'show'])->name('admin.categories.show-form');
-        Route::get('/listing-create', [CategoryController::class, 'catChildAll'])->name('listing-create');
-        Route::post("/listing/insert", [ListingController::class, 'store'])->name('insert');
+        Route::post("/listing/insert", [ListingController::class, 'store'])->name('admin.listing.insert');
         Route::get('/listing/status/{id}', [ListingController::class, 'status'])->name('admin.listing.status');
+        // ..................... Locations ..................
         Route::get("/location/getcountry", [ListingController::class, 'getcountry'])->name('getcountry');
         Route::get("/location/getstates/{c_id}", [ListingController::class, 'getstates'])->name('getstates');
         Route::get("/location/getcities/{s_id}", [ListingController::class, 'getcities'])->name('getcities');
-        Route::get('/listing-form/{slug?}', [ListingController::class, 'create'])->name('listing-form');
     });
 });
