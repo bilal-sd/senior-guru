@@ -49,6 +49,9 @@
                     <li class="sidebar-main-title">
                         <a class="nav-link {{routeActive('cat-sample')}}" href="{{route('admin.categories')}}"><i data-feather="grid"></i><span>Categories</span></a>  
                     </li>
+                    <li class="sidebar-main-title">
+                        <a class="nav-link {{routeActive('cat-sample')}}" href="{{route('admin.amenities')}}"><i data-feather="home"></i><span>Amenities</span></a>  
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

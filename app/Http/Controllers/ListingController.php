@@ -38,7 +38,20 @@ class ListingController extends Controller
     }
 
     public function store(Request $request)
-    {   $ami = "";
+    { 
+          $request->validate([
+              'business' => 'required',
+              'slug' => 'required',
+              'category' => 'required',
+              'email' => 'required',
+              'phone' => 'required',
+              'address1' => 'required',
+              'country' => 'required',
+              'state' => 'required',
+              'city' => 'required',
+              'zip' => 'required',
+          ]);   
+          $ami = "";
         if(isset($request->pf)){
             $ami .= implode(",", $request->pf) . ",";
         } 

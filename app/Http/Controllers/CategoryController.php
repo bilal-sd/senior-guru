@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Listing;
+use App\Models\Ameniti;
 use Illuminate\Support\Facades\Route;
 
 class CategoryController extends Controller
@@ -18,6 +19,10 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'slug'         => 'required', 
+            'name'         => 'required', 
+        ]);
         if ($request->has('id')) {
             $category = Category::find($request->id);
         } else {
@@ -121,5 +126,39 @@ class CategoryController extends Controller
         }
         $category->save();
         return response()->json(['status' => '1']);
+    }
+     public function amenities(){
+        $sum = Ameniti::sum('type');
+         $ameniti = Ameniti::orderBy('id', 'DESC')->get();
+         return view('admin.amenities.amenities-list',compact('ameniti','sum'));
+     }
+    
+     
+     public function aminitiesStore(Request $request){
+        $request->validate([
+            'type'          => 'required',
+            'aminities'         => 'required', 
+        ]);
+         try { 
+             if ($request->has('id')) {
+                 $AminitiesStore = Ameniti::find($request->id);
+             } 
+             else{
+                $AminitiesStore = new Ameniti();
+             }    
+             $AminitiesStore->type = $request->type;
+             $AminitiesStore->aminities = $request->aminities;
+             $AminitiesStore->save();
+             return response()->json(['success' => 'success']);
+         } catch (\Throwable $th) {  
+             return response()->json(['error' => $th]);
+         }   
+     }
+     
+     public function aminitiesdelete($id){
+        Ameniti::find($id)->delete($id);
+        return response()->json([
+            'success' => 'success'
+        ]);
     }
 }

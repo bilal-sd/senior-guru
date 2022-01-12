@@ -30,7 +30,9 @@
         #select-list::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-
+        .error{
+            margin: 0px !important;
+        }
     </style>
 @endpush
 
@@ -167,7 +169,7 @@
                                 <input class="form-control" id="InputSlug" name="slug" type="text" value="">
                             </div>
                             <div class="mb-3">
-                                <button class="btn btn-primary" id="submit" type="button">Save</button>
+                                <button class="btn btn-primary" id="submit" type="submit">Save</button>
                                 <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
                             </div>
                         </form>
@@ -181,6 +183,7 @@
     @push('scripts')
         <script src="{{ asset('assets/js/sweet-alert/sweetalert.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
         <script>
             $('#basic-3').DataTable({
                 "paging":   true,
@@ -242,7 +245,7 @@
                         }
                     });
                 });
-                $('#submit').on('click', function(e) {
+                $('#SubmitForm').on('submit', function(e) {
                     e.preventDefault();
                     let cat_name = $('#InputCat_name').val();
                     let slug = $('#InputSlug').val();
@@ -310,6 +313,28 @@
                     $('#InputCat_name').after('<input type="hidden" id="id" value="' + id + '">');
                     $("#Inputparent_id").find('option[value="'+id+'"]').attr("disabled","disabled");
                 });
+            });
+            jQuery(document).ready(function() {
+                $("#SubmitForm").validate({
+                    rules: {
+                        slug: {
+                            required: true,
+                        }, 
+                        cat_name: {
+                            required: true,
+                        },
+                    },
+                    messages: {
+                        slug: {
+                            required: "This slug field is required"
+                       
+                        },
+                        cat_name: {
+                            required: "This Category field is required"
+                        },
+                      
+                    }
+                })
             });
         </script>
     @endpush

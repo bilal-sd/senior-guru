@@ -10,12 +10,20 @@
             border-bottom: 1px solid #d1d1d1 !important;
             padding-bottom: 15px;
         }
-        .img-card{
-            position:relative;border:1px dashed gray; height: 150px;background:#ebebeb;
+
+        .img-card {
+            position: relative;
+            border: 1px dashed gray;
+            height: 150px;
+            background: #ebebeb;
         }
-        .img-card img{
-            width:100%;height:100%;object-fit:scale-down;
+
+        .img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: scale-down;
         }
+
         .img-btn {
             width: 25px;
             height: 25px;
@@ -39,6 +47,10 @@
 
         .img-options i {
             font-size: 11px;
+        }
+
+        .error {
+            margin: 0px !important;
         }
 
     </style>
@@ -71,7 +83,8 @@
                                     <p>General Information</p>
                                 </div>
                                 <div class="f1-step">
-                                    <div class="f1-step-icon"><i class="fa fa-key"></i></div>
+                                    <div class="f1-step-icon"><i class="fa fa-key">
+                                        </i></div>
                                     <p>Listing Detail</p>
                                 </div>
                                 <div class="f1-step">
@@ -102,7 +115,7 @@
                                             <div class="form-group">
                                                 <label class="form-label" for="cat-type">Category *</label>
                                                 @if (isset($listing)) <input type="hidden" id="category" value="{{ $listing->category }}"> @else {{ old('category') }}@endif
-                                                <select id="cat-type" name="category"
+                                                <select id="cat-type" name="category" required=""
                                                     class="form-control form-control-lg wide mb-3">
                                                 </select>
                                             </div>
@@ -118,7 +131,7 @@
                                             <div class="form-group">
                                                 <label for="pnumber" class="form-label">Phone Number *</label>
                                                 <input class="form-control" value="@if (isset($listing)){{ $listing->phone }} @else {{ old('phone') }}@endif" id="pnumber"
-                                                    type="text" name="phone" maxlength="14" minlength="12"
+                                                    type="number" name="phone" maxlength="14" minlength="12"
                                                     placeholder="Phone Number" required="">
                                             </div>
                                         </div>
@@ -188,22 +201,22 @@
                                             <div class="form-group">
                                                 <label class="text-label form-label" for="zip">Zip*</label>
                                                 <input class="form-control" id="zip" value="@if (isset($listing)){{ $listing->zip }} @else {{ old('zip') }}@endif"
-                                                    type="text" name="zip" placeholder="Zip Code" required="">
+                                                    type="number" name="zip" placeholder="Zip Code" required="">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mb-3">
                                             <div class="form-group">
-                                                <label class="text-label form-label" for="Latitude">Latitude*</label>
+                                                <label class="text-label form-label" for="Latitude">Latitude</label>
                                                 <input class="form-control" id="latitude" value="@if (isset($listing)){{ $listing->lati }} @else {{ old('zip') }}@endif"
-                                                    name="latitude" type="text" placeholder="Latitude" required>
+                                                    name="latitude" type="text" placeholder="Latitude">
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mb-3">
                                             <div class="form-group">
-                                                <label class="text-label form-label" for="Longitude">Longitude*</label>
+                                                <label class="text-label form-label" for="Longitude">Longitude</label>
                                                 <input class="form-control" id="longitude"
                                                     value="@if (isset($listing)){{ $listing->longi }} @else {{ old('zip') }}@endif" type="text" name="longitude"
-                                                    placeholder="Longitude" required="">
+                                                    placeholder="Longitude">
                                             </div>
                                         </div>
                                     </div>
@@ -211,6 +224,7 @@
                                 @if (isset($listing)) <input type="hidden" name="id" value="{{ $listing->id }}"> @endif
                                 <input type="hidden" id="getId" name="type" value="{{ $catSlug }}">
                                 <div class="f1-buttons">
+                                    <input type="submit" class="btn btn-success">
                                     <button class="btn btn-primary btn-next" type="button">Next</button>
                                 </div>
                             </fieldset>
@@ -222,11 +236,16 @@
                                             <div class="row">
                                                 @if (isset($listing->imgs))
                                                     @foreach ($listing->imgs as $items)
-                                                        <div class="col-2 mx-2 rounded p-0 img-card" >
-                                                            <img src="{{ asset('storage/files/' . $items['filename']) }}" alt="" />
+                                                        <div class="col-2 mx-2 rounded p-0 img-card">
+                                                            <img src="{{ asset('storage/files/' . $items['filename']) }}"
+                                                                alt="" />
                                                             <div class="img-options">
-                                                                <a href="javascript:void(0);" class="img-btn me-2"><i class="icon-eye text-white"></i></a>
-                                                                <a href="javascript:void(0);" data-imgid="{{ $items['id'] }}" class="img-btn img-del"><i class="icon-trash text-white"></i></a>
+                                                                <a href="javascript:void(0);" class="img-btn me-2"><i
+                                                                        class="icon-eye text-white"></i></a>
+                                                                <a href="javascript:void(0);"
+                                                                    data-imgid="{{ $items['id'] }}"
+                                                                    class="img-btn img-del"><i
+                                                                        class="icon-trash text-white"></i></a>
                                                             </div>
                                                         </div>
                                                     @endforeach
@@ -236,7 +255,8 @@
                                         <div class="col">
                                             <div class="mb-3 row">
                                                 <div class="col">
-                                                    <input class="form-control" name="image[]" id="img" type="file" multiple />
+                                                    <input class="form-control" name="image[]" id="img" type="file"
+                                                        multiple />
                                                 </div>
                                             </div>
                                         </div>
@@ -269,7 +289,7 @@
                                         <div class="form-group col-lg-4 mb-3">
                                             <label class="text-label form-label" for="package">Package*</label>
                                             @if (isset($listing)) <input type="hidden" id="packedit" value="{{ $listing->package }}"> @endif
-                                            <select class="form-select" name="package"
+                                            <select class="form-select" name="package" required=""
                                                 aria-label="Default select example" id="package">
                                                 <option selected value="0">Free Listing</option>
                                                 <option value="1">Premium AD Package</option>
@@ -285,11 +305,13 @@
                                         <label class="form-label" for="exampleFormControlTextarea4"
                                             for="descr">Description</label>
                                         <textarea class="form-control" id="description" rows="5" cols="100"
-                                            name="description">@if (isset($listing)){{ $listing->description }} @else {{ old('zip') }}@endif</textarea>
+                                            name="description" required="">@if (isset($listing)){{ $listing->description }} @else {{ old('zip') }}@endif</textarea>
                                     </div>
                                     <div class="f1-buttons">
+                                        <input type="submit" class="btn btn-success">
                                         <button class="btn btn-primary btn-previous" type="button">Previous</button>
                                         <button class="btn btn-primary btn-next" type="button">Next</button>
+
                                     </div>
                                 </div>
                             </fieldset>
@@ -377,6 +399,7 @@
         <script src="{{ asset('assets/js/editor/ckeditor/ckeditor.js') }}"></script>
         <script src="{{ asset('assets/js/editor/ckeditor/adapters/jquery.js') }}"></script>
         <script src="{{ asset('assets/js/jquery.ui.min.js') }}"></script>
+        <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
         <script>
             function validateform() {
                 var name = document.myform.name.val;
@@ -516,6 +539,8 @@
                             let ok = "";
                             if (editcontry == value['sortname']) {
                                 ok = "selected";
+                            } else if (editcontry == "" && "US" == value['sortname']) {
+                                ok = "selected";
                             } else {
                                 ok = "";
                             }
@@ -558,10 +583,10 @@
                     });
                     // location.reload();
                 });
-                $(document).on("click",".img-del",function () {
+                $(document).on("click", ".img-del", function() {
                     let ele = $(this);
                     let imgID = $(ele).data("imgid");
-                    var url = "{{ Route('admin.listing.img-del',":id") }}";
+                    var url = "{{ Route('admin.listing.img-del', ':id') }}";
                     url = url.replace(':id', imgID);
                     $.ajax({
                         url: url,
@@ -571,7 +596,58 @@
                         },
                     });
                 });
+
             })
+            jQuery(document).ready(function() {
+                $("#SubmitForm").validate({
+                    rules: {
+                        business: {
+                            required: true,
+                        },
+                        slug: {
+                            required: true,
+                        },
+                        email: {
+                            required: true,
+                        },
+                        phone: {
+                            required: true,
+                        },
+                        address1: {
+                            required: true,
+                        },
+                        zip: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 6
+                        },
+                      
+                    },
+                    messages: {
+                        business: {
+                            required: "This business field is required"
+                        },
+                        slug: {
+                            required: "This slug field is required"
+                        },
+                        email: {
+                            required: "This email field is required"
+                        },
+                        phone: {
+                            required: "This number field is required"
+                        },
+                        address1: {
+                            required: "This address1 field is required"
+                        },
+                        zip: {
+                            required: "This zip field is required",
+                            minlength: "Zipcode must be of 6 digits",
+                            maxlength: "Zipcode cannot be more than 6 digits"
+                        },
+                        
+                    }
+                })
+            });
         </script>
     @endpush
 

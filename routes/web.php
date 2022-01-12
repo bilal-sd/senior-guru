@@ -50,6 +50,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/categories/status/{id}', [CategoryController::class, 'status'])->name('admin.categories.status');
         // Route::get('/categories/reverse/{id}', [CategoryController::class, 'reverse'])->name('admin.categories.reverse');
         Route::get('/categories/select/', [CategoryController::class, 'show'])->name('admin.categories.select');
+        // ............................. Amenities ......................
+        Route::get('/amenities', [CategoryController::class, 'amenities'])->name('admin.amenities');
+        Route::post('/amenities-form', [CategoryController::class, 'aminitiesStore'])->name('aminitiesForm');
+        Route::get('/amenities-delete/{id}', [CategoryController::class, 'aminitiesdelete'])->name('aminitiesdelete');
+    
+         
+         
         // ............................. Listings ......................
         Route::get('/listing', [ListingController::class, 'view'])->name('admin.listing');
         Route::get('/listing/show', [ListingController::class, 'index'])->name('admin.listing.show');
