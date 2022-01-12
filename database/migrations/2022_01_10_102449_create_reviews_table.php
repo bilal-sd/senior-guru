@@ -17,7 +17,8 @@ class CreateReviewsTable extends Migration
             $table->id()->autoIncrement();
             $table->integer("user_id");
             $table->integer("list_id");
-            $table->string("message");
+            $table->tinyInteger("rating");
+            $table->text("message");
             $table->timestamps();
         });
     }

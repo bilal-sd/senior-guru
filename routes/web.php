@@ -9,12 +9,13 @@ use Illuminate\Auth\Events\Verified;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\Review;
 use App\Models\Ameniti;
 
 Route::redirect('/admin', '/admin/login');
 Route::get('/', [FrontController::class, 'home']);
 Route::get('/ParentNav', [FrontController::class, 'ParentNav']);
-Route::get('category/{cat}', [FrontController::class, 'index']);
+Route::get('category/{cat}', [FrontController::class, 'index'])->name("listing.page");
 Route::get("/subCategory/{id}", [FrontController::class, 'subcategory']);
 Route::get("/subCategory2/{id}", [FrontController::class, 'subcategory']);
 Route::post('/search-listing', [FrontController::class, 'Listings']);
@@ -31,7 +32,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         return view('user-dashboard');
     });
 });
-
+Route::post('/listing/review/insert', [Review::class, 'store'])->name('listing.review.insert');
 Route::prefix('admin')->group(function () {
     Route::post('/register', [RegisteredAdminController::class, 'store']);
     Route::get('/register', [RegisteredAdminController::class, 'create'])->name('admin-register');

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Listing;
 use App\Models\File;
+use App\Models\Review;
+use App\Models\User;
+use Carbon\Carbon;
 class FrontController extends Controller
 {   
     public function index($cat){
@@ -55,15 +58,93 @@ class FrontController extends Controller
                 $query->where("title","LIKE","%$req->keyword%")->orwhere("description","LIKE","%$req->keyword%")->orwhere("address","LIKE","%$req->keyword%");
             });
         }
-        $listingshow = $listingshow->get();
+        $listingshow = $listingshow->orderBy('id', 'desc')->get();
         $this->imgcreate($listingshow);
+        foreach ($listingshow as $key => $val) {
+            $review = Review::where("list_id",$val['id'])->orderBy('id', 'desc')->get();
+            $one = 0;
+            $two = 0;
+            $three = 0;
+            $four = 0;
+            $five = 0;
+            $listingshow[$key]->reviewcount = count($review);
+            if(count($review)>0){
+                foreach ($review as $value) {
+                    if($value["rating"]==1){
+                        $one += $value["rating"];
+                    }
+                    if($value["rating"]==2){
+                        $two += $value["rating"];
+                    }
+                    if($value["rating"]==3){
+                        $three += $value["rating"];
+                    }
+                    if($value["rating"]==4){
+                        $four += $value["rating"];
+                    }
+                    if($value["rating"]==5){
+                        $five += $value["rating"];
+                    }
+                }
+                $ratings = array(
+                    1 => $one,
+                    2 => $two,
+                    3 => $three,
+                    4 => $four,
+                    5 => $five
+                );
+                $listingshow[$key]->reviewsavg = $this->calcAverageRating($ratings)[0];
+            }
+        }
         return response()->json(['listing'=>$listingshow]);
     }
     // ======== Listing Detail Page ========
     public function listingdetails($slug){
         $listingdetails = Listing::where("slug",$slug)->get()[0];
         $listingdetails->type = Category::find($listingdetails->type)->slug;
-        // $listingdetails->category = Category::find($listingdetails->category)->slug;
+        $review = Review::where("list_id",$listingdetails->id)->orderBy('id', 'desc')->get();
+        $one = 0;
+        $two = 0;
+        $three = 0;
+        $four = 0;
+        $five = 0;
+        if(count($review)>0){
+            $listingdetails->reviews = $review;
+            foreach ($listingdetails->reviews as $key => $value) {
+                $user = User::find($value["user_id"]);
+                if(isset($user)){
+                    $listingdetails->reviews[$key]->user = $user["name"];
+                }else{
+                    $listingdetails->reviews[$key]->user = $value['name'];
+                }
+                $diff = $value["created_at"]->diffForHumans(null, true, true, 2);
+                // Carbon::now()->parse($value["created_at"])->diffForHumans();
+                $listingdetails->reviews[$key]->time = str_replace(['h', 'm'], [' hrs', ' mins'], $diff);
+                if($value["rating"]==1){
+                    $one += $value["rating"];
+                }
+                if($value["rating"]==2){
+                    $two += $value["rating"];
+                }
+                if($value["rating"]==3){
+                    $three += $value["rating"];
+                }
+                if($value["rating"]==4){
+                    $four += $value["rating"];
+                }
+                if($value["rating"]==5){
+                    $five += $value["rating"];
+                }
+            }
+            $ratings = array(
+                1 => $one,
+                2 => $two,
+                3 => $three,
+                4 => $four,
+                5 => $five
+            );
+            $listingdetails->reviews->avgrating = $this->calcAverageRating($ratings)[0];
+        }
         $amikeys = explode(",",$listingdetails->aminities);
         $img = File::select("filename")->where("list_id",$listingdetails->id)->get();
         if(count($img)>0){

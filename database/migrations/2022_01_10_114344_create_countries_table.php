@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddAminitiesToListings extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddAminitiesToListings extends Migration
      */
     public function up()
     {
-        Schema::table('listings', function (Blueprint $table) {
-            $table->string('aminities')->nullable();
+        Schema::create('countries', function (Blueprint $table) {
+            $table->id()->autoIncrement();
+            $table->string("sortname");
+            $table->string("name");
+            $table->string("phonecode");
         });
     }
 
@@ -25,8 +28,6 @@ class AddAminitiesToListings extends Migration
      */
     public function down()
     {
-        Schema::table('listings', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('countries');
     }
 }
