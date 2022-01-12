@@ -42,7 +42,7 @@
                     <li class="dropdown">
                         <a class="nav-link menu-title {{ prefixActive('/listing') }}" href="javascript:void(0)"><i class="fa fa-tasks me-3"></i><span>Listing</span></a>                  
                         <ul class="nav-submenu menu-content" style="display: {{ prefixBlock('/listing') }};">
-                            <li><a href="{{route('admin.listing')}}" class="{{routeActive('admin.listing')}}">listing show</a></li>
+                            <li><a href="{{route('admin.listing')}}" class="{{routeActive('admin.listing')}}">All Listings</a></li>
                             <li><a href="{{ route('listing-create') }}" class="{{ routeActive('listing-create') }}">Create Listing</a></li>
                         </ul>
                     </li>

@@ -36,43 +36,33 @@
     </style>
 @endpush
 
+@php
+$bread = array_reverse($bread);
+@endphp
 @section('content')
     @component('components.breadcrumb')
         @slot('breadcrumb_title')
-            <h3>Categories</h3>
+        <h3 id="Heading">
+            @if (count($bread)>0)
+                {{end($bread)->name}}
+            @else
+                {{"Home"}}
+            @endif
+        </h3>
         @endslot
-        <li class="breadcrumb-item active">Categories</li>
+        <li class="breadcrumb-item"><a type="button" href="{{Route('admin.categories')}}">Home</a></li>
+        @foreach ($bread as $b)
+        <li class="breadcrumb-item"><a type="button" href="{{Route('admin.categories',$b->id)}}">{{$b->name}}</a></li>
+        @endforeach
+        @slot('right_button')
+        <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#CategoryForm" data-bs-original-title="" title="">Add Category</button>
+        @endslot
     @endcomponent
 
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header pb-0 d-flex justify-content-between">
-                        <div class="col-10">
-                            @php
-                                $bread = array_reverse($bread);
-                            @endphp
-                            <h5 id="Heading">
-                                @if (count($bread)>0)
-                                    {{end($bread)->name}}
-                                @else
-                                    {{"Home"}}
-                                @endif
-                            </h5>
-                            <ol class="breadcrumb pt-3" id="bread">
-                                <li class="breadcrumb-item"><a type="button" href="{{Route('admin.categories')}}">Home</a></li>
-                                @foreach ($bread as $b)
-                                <li class="breadcrumb-item"><a type="button" href="{{Route('admin.categories',$b->id)}}">{{$b->name}}</a></li>
-                                @endforeach
-                                {{-- <li class="breadcrumb-item active">Breadcrumb</li> --}}
-                            </ol>
-                        </div>
-                        <div class="col-2">
-                            <button class="btn btn-primary" type="button" data-bs-toggle="modal"
-                                data-bs-target="#CategoryForm" data-bs-original-title="" title="">Add Category</button>
-                        </div>
-                    </div>
                     <div class="card-body">
                         <div class="">
                             <table class="display dataTable" id="basic-3">

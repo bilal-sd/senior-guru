@@ -7,18 +7,18 @@
             <div class="left-listing">
                 <h1 id="listCounts">50 Assisted Living Facilities</h1>
                 <div class="d-flex justify-content-between list-small-head">
-                    {{-- <p>2,780 units available </p> --}}
+                    <p>Listings Show by : Newest - Older</p>
                     <div class="dropdown top-selction">
                         <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
                             aria-expanded="false">
                             <img src="{{ asset('assets/frontend/images/sortby.svg') }}"><span>Sort by : </span><span
                                 class="toggle-list">Relevance
                                 <i class="far fa-chevron-down"></i></span>
-                        </button>
+                        </button> 
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="javascript:void(0);">Action</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Another action</a></li>
-                            <li><a class="dropdown-item" href="javascript:void(0);">Something else here</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);">Newest Listings</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);">Oldest Listings</a></li>
+                            <li><a class="dropdown-item" href="javascript:void(0);">Best Listings</a></li>
                         </ul>
                     </div>
                     <!-- <p class="top-selction"><img src="{{ asset('assets/frontend/images/sortby.svg') }}" class="mr-2"><span>Sort by :</span> <a href="">Relevance<i class="far fa-chevron-down"></i></a></p> -->
@@ -176,6 +176,20 @@
     </script>
 
     <script>
+        function getStars(rating,ele="") {
+            // Round to nearest half
+            rating = Math.round(rating * 2) / 2;
+            let output = [];
+            // Append all the filled whole stars
+            for (var i = rating; i >= 1; i--)
+            output.push('<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>');
+            // If there is a half a star, append it
+            if (i == .5) output.push('<li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>');
+            // Fill the empty stars
+            for (let i = (5 - rating); i >= 1; i--)
+            output.push('<li><a href="javascript:void(0)"><i class="far fa-star"></i></a></li>');
+            $(ele).html(output.join(''));
+        }
         function listingsmaker(listingArr) {
             var listHtml = "";
             $.each(listingArr, function(index, value) {
@@ -192,6 +206,8 @@
                         '<img src="{{ asset('storage/files/') }}/default.jpg" class="img-fluid">' +
                         '</a>';
                 }
+                let reviewcount = (value['reviewcount']>0) ? value['reviewcount'] + " Reviews" : "No Reviews";
+                let Avg = (typeof(value['reviewsavg'])=="number") ? Number(value['reviewsavg']).toFixed(1) : Number(0.0);
                 listHtml += '<div class="col-lg-4 col-md-6 col-sm-6">' +
                     '<div class="card card-main">' +
                     '<div class="slider-card slick-carousel-list">' +
@@ -204,21 +220,16 @@
                     value['title'] + '</a></h5>' +
                     '</a>' +
                     '<div class="d-flex align-items-center">' +
-                    '<ul class="reviews-list">' +
-                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
-                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
-                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
-                    '<li><a href="javascript:void(0)"><i class="fas fa-star"></i></a></li>' +
-                    '<li><a href="javascript:void(0)"><i class="fas fa-star-half-alt"></i></a></li>' +
+                    '<ul class="reviews-list starsreview" data-per="'+value['reviewsavg']+'">' +
                     '</ul>' +
-                    '<span class="rating-count"> 4 reviews</span>' +
+                    '<span class="rating-count">( '+ Avg +' )</span>' +
+                    '<span class="rating-count">'+ reviewcount +'</span>' +
                     '</div>' +
                     '<p class="text-truncate">' + value['address'] + value['city'] + ',' + value['state'] + '</p>' +
                     '</div>' +
                     // '<div class="Promotion-tag">Special Promotion!</div>' +
                     '</div>' +
                     '</div>';
-
             });
             return listHtml;
         }
@@ -303,6 +314,18 @@
                     $("#listingShow").html(listHtml);
                     if (listHtml != "") {
                         slickCarousel();
+                        $.each($(".starsreview"),function (key,val) {  
+                            if($(val).data("per")!="undefined"){
+                                getStars($(val).data("per"),$(val));
+                            }else{
+                                let stars = '<li><a href="javascript:void(0)"><i class="far fa-star"></i></a></li>'+
+                                '<li><a href="javascript:void(0)"><i class="far fa-star"></i></a></li>'+
+                                '<li><a href="javascript:void(0)"><i class="far fa-star"></i></a></li>'+
+                                '<li><a href="javascript:void(0)"><i class="far fa-star"></i></a></li>'+
+                                '<li><a href="javascript:void(0)"><i class="far fa-star"></i></a></li>';
+                                $(val).html(stars);
+                            }
+                        });
                     }
                 }
             });

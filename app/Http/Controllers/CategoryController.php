@@ -23,12 +23,17 @@ class CategoryController extends Controller
             'slug'         => 'required', 
             'name'         => 'required', 
         ]);
+        $slug = Category::where("slug",$request->slug)->count();
+        if($slug > 0){
+            $request->slug = $request->slug."-".rand(1,100);
+        }
         if ($request->has('id')) {
             $category = Category::find($request->id);
         } else {
             $category = new Category();
             $category->status = 1;
         }
+
         $category->name = $request->name;
         $category->slug = $request->slug;
         $category->parent_id = $request->parent_id;
@@ -94,12 +99,18 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $check = $this->catChildAll($id, true);
+        $list = Listing::where('type', $id)->orwhere("category", $id)->count();
         if ($check > 0) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'This category has child category, please delete child category first'
             ]);
-        } else {
+        } else if($list > 0){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'This category has '.$list.' Listings, please delete Listings first'
+            ]);
+        }else {
             try {
                 $category = Category::find($id);
                 $category->delete();

@@ -16,23 +16,23 @@ class CreateListingsTable extends Migration
         Schema::create('listings', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('type');
-            $table->string('category');
+            $table->smallInteger('type');
+            $table->integer('category');
+            $table->string('slug')->unique();
             $table->string('address');
             $table->string('state');
             $table->string('city');
             $table->string('country');
             $table->string('zip');
-            $table->string('lati');
-            $table->string('longi');
-            $table->string('package');
-            $table->string('status');
-            $table->string('keywords');
+            $table->string('lati')->nullable();
+            $table->string('longi')->nullable();
+            $table->boolean('status')->default(0);
+            $table->string('keywords')->nullable();
             $table->string('email');
             $table->string('phone');
-            $table->string('website');
-            $table->string('description');
-            $table->string('slug');
+            $table->string('website')->nullable();
+            $table->string('package')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
