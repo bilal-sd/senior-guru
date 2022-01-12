@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\RegisteredAdminController;
 use App\Http\Controllers\Admin\AuthenticatedSessionController;
 use Illuminate\Auth\Events\Verified;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FloorController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ListingController;
 use App\Models\Ameniti;
@@ -61,6 +62,8 @@ Route::prefix('admin')->group(function () {
         Route::get('listing/img-delete/{id?}', [ListingController::class, 'filedelete'])->name('admin.listing.img-del');
         Route::post("/listing/insert", [ListingController::class, 'store'])->name('admin.listing.insert');
         Route::get('/listing/status/{id}', [ListingController::class, 'status'])->name('admin.listing.status');
+        Route::post('/listing/floor',[FloorController::class,'store'])->name('admin.listing.floor');
+        Route::any('/listing/floor/delete/{id}/{list_id}',[FloorController::class,'destroy'])->name('admin.listing.delete');
         // ..................... Locations ..................
         Route::get("/location/getcountry", [ListingController::class, 'getcountry'])->name('getcountry');
         Route::get("/location/getstates/{c_id}", [ListingController::class, 'getstates'])->name('getstates');
