@@ -17,12 +17,14 @@
             height: 150px;
             background: #ebebeb;
         }
-        .add-img{
+
+        .add-img {
             border: 3px dashed #e8e8f7 !important;
             border-radius: 10px;
             background-color: #fff;
             cursor: pointer;
         }
+
         .img-card img {
             width: 100%;
             height: 100%;
@@ -229,35 +231,43 @@
                                         @if (isset($listing)) <input type="hidden" name="id" value="{{ $listing->id }}"> @endif
                                         <input type="hidden" id="getId" name="type" value="{{ $catSlug }}">
                                         <input type="hidden" name="form" value="step1">
-                                        <input class="btn btn-primary" type="submit" value="Save & Next"/>
+                                        <input class="btn btn-primary" type="submit" value="Save & Next" />
                                     </div>
                                 </form>
                             </fieldset>
                             <fieldset class="setup-content" id="step-2">
-                                <form action="{{ Route('admin.listing.insert') }}" id="form2" method="POST" role="form" enctype="multipart/form-data">
+                                <form action="{{ Route('admin.listing.insert') }}" id="form2" method="POST" role="form"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-md-12">
                                         <h6 class="b-b-dark2">Images And Videos</h6><br>
                                         <div class="row">
                                             <div class="col-md-12 mb-3">
                                                 <div class="row">
-                                                    <label for="img" class="col-2 mx-2 p-0 img-card add-img d-flex justify-content-center align-items-center">
+                                                    <label for="img"
+                                                        class="col-2 mx-2 p-0 img-card add-img d-flex justify-content-center align-items-center">
                                                         <i class="fa fa-camera fs-2"></i>
                                                     </label>
                                                     @if (isset($listing->imgs))
                                                         @foreach ($listing->imgs as $items)
                                                             <div class="col-2 mx-2 rounded p-0 img-card">
-                                                                <img src="{{ asset('storage/files/' . $items['filename']) }}" alt="" />
+                                                                <img src="{{ asset('storage/files/' . $items['filename']) }}"
+                                                                    alt="" />
                                                                 <div class="img-options">
-                                                                    <a href="javascript:void(0);" class="img-btn me-2"><i class="icon-eye text-white"></i></a>
-                                                                    <a href="javascript:void(0);" data-imgid="{{ $items['id'] }}" class="img-btn img-del"><i class="icon-trash text-white"></i></a>
+                                                                    <a href="javascript:void(0);" class="img-btn me-2"><i
+                                                                            class="icon-eye text-white"></i></a>
+                                                                    <a href="javascript:void(0);"
+                                                                        data-imgid="{{ $items['id'] }}"
+                                                                        class="img-btn img-del"><i
+                                                                            class="icon-trash text-white"></i></a>
                                                                 </div>
                                                             </div>
                                                         @endforeach
                                                     @endif
                                                 </div>
                                             </div>
-                                            <input class="form-control" hidden name="image[]" id="img" type="file" multiple />
+                                            <input class="form-control" hidden name="image[]" id="img" type="file"
+                                                multiple />
                                         </div>
                                     </div>
                                     <div class="col-md-12 mt-4">
@@ -309,7 +319,7 @@
                                             @if (isset($listing)) <input type="hidden" name="id" value="{{ $listing->id }}"> @endif
                                             <a href="#step-1" class="btn btn-primary btn-previous">Previous</a>
                                             <input type="hidden" name="form" value="step2">
-                                            <input class="btn btn-primary" type="submit" value="Save & Next"/>
+                                            <input class="btn btn-primary" type="submit" value="Save & Next" />
                                         </div>
                                     </div>
                                 </form>
@@ -367,7 +377,7 @@
                                         <div class="row">
                                             @foreach ($aminities as $item)
                                                 @if ($item['type'] == 'lhc')
-                                                    <div class="col-md-4">
+                                                    <div class="col-md-3">
                                                         <div class="form-group m-t-15 m-checkbox-inline mb-0">
                                                             <div class="checkbox checkbox-dark">
                                                                 <input id="inline{{ $item->id }}" type="checkbox"
@@ -382,6 +392,48 @@
                                             @endforeach
                                         </div>
                                     </div>
+                                    @if (isset($floor[0]->id))
+                                        <table class="table  table-hover table-sm">
+                                            <thead>
+                                                <tr>
+                                                    <th>Bed Room</th>
+                                                    <th>BathRoom</th>
+                                                    <th colspan="5">Size</th>
+
+                                                </tr>
+                                            </thead>
+                                            @foreach ($floor as $item)
+                                                <tbody>
+                                                    <tr>
+                                                        <td> BedRoom X {{ $item->bed_room }}</td>
+                                                        <td>BathRoom X {{ $item->bath_room }}</td>
+                                                        <td>{{ $item->floor_area }}</td>
+                                                        <td><a
+                                                                href="{{ Route('admin.listing.delete', ['id' => $item->id, 'list_id' => $item->listing_id]) }}">Delete
+                                                        </td></a>
+
+                                                    </tr>
+                                                </tbody>
+
+                                            @endforeach
+                                        </table>
+                                    @endif
+
+
+
+                                    @if (isset($listing->id))
+
+                                        <div class="container mt-3">
+                                            <h6 class="b-b-dark2">Floor Space and Type </h6>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#myModal">
+                                                Add Floor information
+                                            </button>
+                                        </div>
+
+                                    @endif
+
+
                                     <div class="f1-buttons">
                                         @if (isset($listing)) <input type="hidden" name="id" value="{{ $listing->id }}"> @endif
                                         <a href="#step-2" class="btn btn-primary btn-previous">Previous</a>
@@ -393,6 +445,123 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form action="{{ Route('admin.listing.floor') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Floor Plans and Pricing</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="container mt-2">
+                        <label for="" class="form-label">Select BedRoom</label>
+                        <select class="form-select" name="bedroom" aria-label="Default select example">
+                            <option selected>Select BedRoom </option>
+                            <option value="1">BedRoom x 01</option>
+                            <option value="2">BedRoom x 02</option>
+                            <option value="3">BedRoom x 03</option>
+                            <option value="4">BedRoom x 04</option>
+                            <option value="5">BedRoom x 05</option>
+                        </select>
+                    </div>
+                    <div class="row container mt-2">
+                        <div class="col-md-6">
+                            <label for="" class="form-label">BedRoom Length &
+                                Width</label>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-text">L & W</span>
+                                <input type="text" aria-label="First name" class="form-control" name="length">
+                                <input type="text" class="form-control" name="width"><span
+                                    class="form-control">sq.f.</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <label for="" class="form-label">Select Bathroom</label>
+                            <select class="form-select" name="bathroom" aria-label="Default select example">
+                                <option selected>Select Bathroom </option>
+                                <option value="1">Bathroom x 01</option>
+                                <option value="2">Bathroom x 02</option>
+                                <option value="3">Bathroom x 03</option>
+                                <option value="4">Bathroom x 04</option>
+                                <option value="5">Bathroom x 05</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row container">
+                        <p class="modal-title mb-2">Select Image</p>
+                        <div class="mb-3 draggable">
+                            <input id="input-file-1" name="img" type="file">                           
+                        </div>
+                    </div>
+                    {{-- <div class="row container mt-2">
+                        <div class="col-md-6">
+                            <h6 class="b-b-dark2"> Plans </h6>
+                            <select class="form-select"
+                                aria-label="Default select example">
+                                <option selected>Select Plans </option>
+                                <option value="1">Gold</option>
+                                <option value="2">Silver</option>
+                                <option value="3">Gold+Silver</option>
+                                <option value="4">Basic</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="b-b-dark2">Pricing </h6>
+                            <select class="form-select"
+                                aria-label="Default select example">
+                                <option selected>Select Amount </option>
+                                <option value="1">10000$</option>
+                                <option value="2">10000-15000$</option>
+                                <option value="3">15000-30000$</option>
+                                <option value="4">30000-50000$</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row container mt-2">
+                        <div class="col-md-6">
+                            <h6 class="b-b-dark2">Month & Year </h6>
+                            <select class="form-select"
+                                aria-label="Default select example">
+                                <option selected>Select Month & Year </option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                                <option value="4">Four</option>
+                                <option value="5">Five</option>
+                                <option value="6">SIx</option>
+                                <option value="7">Seven</option>
+                                <option value="8">Eight</option>
+                                <option value="9">Nine</option>
+                                <option value="10">Ten</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="b-b-dark2"> Session </h6>
+                            <select class="form-select"
+                                aria-label="Default select example">
+                                <option selected>Select Session </option>
+                                <option value="1">Month</option>
+                                <option value="2">Year</option>
+                            </select>
+                        </div>
+
+                    </div> --}}
+
+                    <!-- Modal footer -->
+                    @if (isset($listing)) <input type="hidden" name="id" value="{{ $listing->id }}"> @endif
+                    <div class="modal-footer mt-2">
+                        <button class="btn btn-success" type="submit">Submit</button>
+
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

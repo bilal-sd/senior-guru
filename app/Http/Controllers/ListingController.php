@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Models\Ameniti;
 use App\Models\Category;
 use App\Models\File;
+use App\Models\Floor;
 use Illuminate\Support\Facades\Storage;
 
 
@@ -113,7 +114,8 @@ class ListingController extends Controller
             $listing->imgs = $img;
         }
         $ami = Ameniti::all();
-        return view('admin.listing.listing-form', ['catSlug' =>$id, 'listing' => $listing, "aminities" => $ami]);
+        $floor = Floor::where("listing_id",$listing->id)->get();
+        return view('admin.listing.listing-form', ['catSlug' =>$id, 'listing' => $listing, "aminities" => $ami,"floor" =>$floor]);
     }
 
     public function destroy($id)
